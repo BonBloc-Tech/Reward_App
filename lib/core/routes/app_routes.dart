@@ -3,7 +3,8 @@ enum AppRoutes {
   login,
   dashboard,
   home,
-  otp_verification
+  otp_verification,
+  otp1
 
 }
 

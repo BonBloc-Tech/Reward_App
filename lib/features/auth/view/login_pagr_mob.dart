@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sm_reward_app/features/auth/controller/login_page_c.dart';
+import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
 
 class LoginPageMobile extends StatelessWidget {
   LoginPageMobile({super.key});
@@ -17,93 +19,126 @@ class LoginPageMobile extends StatelessWidget {
         child: Column(
           children: [
             /// MAIN CONTENT
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 40),
-
-                    /// LOGO
-                    Center(
-                      child: Image.asset(
-                        'assets/logo/logo_sm.png',
-                        height: 120,
-                      ),
+          Expanded(
+  child: SingleChildScrollView(
+    padding: const EdgeInsets.symmetric(horizontal: 24),
+    child: ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: MediaQuery.of(context).size.height - 24 * 2, // full height minus padding
+      ),
+      child: IntrinsicHeight(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // CENTER VERTICALLY
+          children: [
+            /// MAIN CONTAINER WITH SHADOW
+            Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(255, 14, 14, 14).withOpacity(0.1),
+      blurRadius: 10,      // makes the shadow soft
+      spreadRadius: 2,     // spreads the shadow evenly
+      offset: const Offset(0, 0),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  /// LOGO
+                  Center(
+                    child: Image.asset(
+                      'assets/logo/logo_sm.png',
+                      height: 120,
                     ),
-                    const SizedBox(height: 30),
+                  ),
+                  const SizedBox(height: 30),
 
-                    /// TITLE
-                    Text(
-                      'Login',
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.headlineMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                  /// TITLE
+                  Text(
+                    'Login',
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.headlineMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+
+                  /// DESCRIPTION
+                  Text(
+                    'Please enter your email and you will receive an OTP.',
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 30),
+
+                  /// EMAIL LABEL
+                  Text(
+                    'Email Address',
+                    style: theme.textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 8),
+
+                  /// EMAIL FIELD
+                  TextFormField(
+                    controller: controller.emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: 'example@gmail.com',
+                      border: OutlineInputBorder(),
                     ),
-                    const SizedBox(height: 12),
+                  ),
+                  const SizedBox(height: 25),
 
-                    /// DESCRIPTION
-                    Text(
-                      'Please enter your email and you will receive an OTP.',
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 30),
+                  /// SEND OTP BUTTON
+                  Obx(
+                    () => SizedBox(
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: controller.isLoading.value
+                            ? null
+                            : () async {
+                                await controller.sendOtp();
 
-                    /// EMAIL LABEL
-                    Text(
-                      'Email Address',
-                      style: theme.textTheme.bodyMedium
-                          ?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(height: 8),
-
-                    /// EMAIL FIELD
-                    TextFormField(
-                      controller: controller.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        hintText: 'example@gmail.com',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 25),
-
-                    /// SEND OTP BUTTON
-                    Obx(
-                      () => SizedBox(
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: controller.isLoading.value
-                              ? null
-                              : () async {
-                                  await controller.sendOtp();
-                                  if (controller.isOtpSent.value) {
-                                    Get.toNamed('/OtpPage');
-                                  }
-                                },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF0A2FB6),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                                if (controller.isOtpSent.value) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const OtpMobileView(),
+                                    ),
+                                  );
+                                }
+                              },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0A2FB6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: controller.isLoading.value
-                              ? const CircularProgressIndicator(
-                                  color: Colors.white,
-                                )
-                              : const Text(
-                                  'Send OTP',
-                                  style: TextStyle(fontSize: 16),
-                                ),
                         ),
+                        child: controller.isLoading.value
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : Text(
+                                'Send OTP',
+                                  style: theme.textTheme.bodyLarge
+                              ?.copyWith(fontWeight: FontWeight.w500,color: Colors.white)                             ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
 
             /// FOOTER
             Container(

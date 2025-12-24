@@ -30,7 +30,7 @@ class LoginController extends GetxController {
       return;
     }
 
-    generatedOtp = (100000 + Random().nextInt(900000)).toString();
+    generatedOtp = (1000 + Random().nextInt(9000)).toString();
     isLoading.value = true;
 
     final smtpServer = SmtpServer(

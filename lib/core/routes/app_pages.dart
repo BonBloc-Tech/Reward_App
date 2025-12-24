@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:sm_reward_app/features/auth/view/login_page.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard.dart';
 import 'package:sm_reward_app/features/otp_verification/otp.dart';
+
+import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -17,6 +19,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.otp_verification.toName,  // ✅ FIX
       page: () => OtpPage(),
+    ),
+     GetPage(
+      name: AppRoutes.otp1.toName,  // ✅ FIX
+      page: () => OtpMobileView(),
     ),
   ];
 }

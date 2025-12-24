@@ -9,78 +9,103 @@ class OtpMobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final theme = Theme.of(context);
     final LoginController controller = Get.find();
     final otpController = TextEditingController();
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Image.asset('assets/logo/logo_sm.png', height: 120),
-              const SizedBox(height: 20),
-
-              const Text(
-                'OTP Verification',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 22, fontWeight: FontWeight.bold),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 0),
+                  ),
+                ],
               ),
-
-              const SizedBox(height: 10),
-
-              const Text(
-                'Enter the OTP sent to your email',
-                textAlign: TextAlign.center,
-              ),
-
-              const SizedBox(height: 30),
-
-              OtpTextField(
-                numberOfFields: 6,
-                showFieldAsBox: true,
-                onSubmit: (code) => otpController.text = code,
-              ),
-
-              const SizedBox(height: 20),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text("Didn't receive the code? "),
-                  GestureDetector(
-                    onTap: controller.sendOtp,
-                    child: const Text(
-                      "Resend OTP",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                  Image.asset('assets/logo/logo_sm.png', height: 120),
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    'OTP Verification',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+
+                  const Text(
+                    'Enter the OTP sent to your email',
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+OtpTextField(
+  numberOfFields: 4,
+  showFieldAsBox: true,
+  fieldWidth: 45, // width of each box
+  borderRadius: BorderRadius.circular(8),
+  textStyle: const TextStyle(fontSize: 20),
+  margin: const EdgeInsets.symmetric(horizontal: 8), // spacing between boxes
+  keyboardType: TextInputType.number,
+  onSubmit: (code) => otpController.text = code,
+),
+
+
+                  const SizedBox(height: 20),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Didn't receive the code? "),
+                      GestureDetector(
+                        onTap: controller.sendOtp,
+                        child: const Text(
+                          "Resend OTP",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+
+                  SizedBox(
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (otpController.text == controller.generatedOtp) {
+                          Get.offAll(() => const DashboardPage());
+                        } else {
+                          Get.snackbar("Error", "Invalid OTP");
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0A2FB6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text('Submit',  style: theme.textTheme.bodyLarge
+                              ?.copyWith(fontWeight: FontWeight.w500,color: Colors.white)  ),
                     ),
                   ),
                 ],
               ),
-
-              const SizedBox(height: 30),
-
-              SizedBox(
-                height: 45,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (otpController.text ==
-                        controller.generatedOtp) {
-                      Get.offAll(() => const DashboardPage());
-                    } else {
-                      Get.snackbar("Error", "Invalid OTP");
-                    }
-                  },
-                  child: const Text('Submit'),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
