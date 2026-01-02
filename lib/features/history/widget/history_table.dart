@@ -15,7 +15,7 @@ class HistoryTable extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(top: 60),
             child: Text(
-              "No history found",
+              "No history found.",
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.grey,
