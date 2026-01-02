@@ -21,6 +21,7 @@ dependencies:
   mailer: ^6.0.1
   percent_indicator: ^4.2.5
   syncfusion_flutter_charts: ^32.1.19
+  fl_chart: ^0.66.2
 
 
 dev_dependencies:
