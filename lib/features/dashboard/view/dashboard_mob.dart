@@ -25,26 +25,33 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  drawer: const Side_Menu(),
-  appBar: AppBar(
-    leading: Builder(
-      builder: (context) => IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () => Scaffold.of(context).openDrawer(),
+      drawer: const Side_Menu(),
+      appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+        title: const Text("Dashboard"),
       ),
-    ),
-  ),
 
-      body: ReorderableListView(
+      body: ReorderableListView.builder(
         padding: const EdgeInsets.all(16),
+        itemCount: sections.length,
         onReorder: reorder,
-        children: sections.map((id) {
-          return Padding(
+        itemBuilder: (context, index) {
+          final id = sections[index];
+
+          return ReorderableDragStartListener(
             key: ValueKey(id),
-            padding: const EdgeInsets.only(bottom: 16),
-            child: _buildSection(id),
+            index: index,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: _buildSection(id),
+            ),
           );
-        }).toList(),
+        },
       ),
     );
   }
@@ -53,10 +60,13 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
     switch (id) {
       case 'points':
         return _pointsSection();
+
       case 'donut':
         return _donutCard();
+
       case 'recent':
         return _recentActivityCard();
+
       default:
         return const SizedBox();
     }
