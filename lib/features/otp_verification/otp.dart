@@ -52,17 +52,16 @@ class OtpPage extends StatelessWidget {
                         const SizedBox(height: 30),
 
                         /// OTP FIELD
-                        OtpTextField(
-                          numberOfFields: 6,
-                          borderColor: Colors.blue,
-                          showFieldAsBox: true,
-                          onCodeChanged: (String code) {
-                            otpController.text = code; // store OTP
-                          },
-                          onSubmit: (String code) {
-                            otpController.text = code;
-                          },
-                        ),
+                       OtpTextField(
+  numberOfFields: 4,
+  showFieldAsBox: true,
+  fieldWidth: 45, // width of each box
+  borderRadius: BorderRadius.circular(8),
+  textStyle: const TextStyle(fontSize: 20),
+  margin: const EdgeInsets.symmetric(horizontal: 8), // spacing between boxes
+  keyboardType: TextInputType.number,
+  onSubmit: (code) => otpController.text = code,
+),
                         const SizedBox(height: 20),
 
                         /// RESEND OTP
