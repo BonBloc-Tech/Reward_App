@@ -7,5 +7,5 @@ class PointsController extends GetxController {
   var earnedPoints = 6500.obs;
   var redeemedPoints = 2400.obs;
   var currentPoints = 12500.obs;
-  var targetPoints = 15001.obs;
+  var targetPoints = 15000.obs;
 }
