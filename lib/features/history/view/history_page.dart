@@ -47,7 +47,7 @@ class HistoryPage extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
                             child: Image.asset(
-                              'assets/images/profile_logo.png',
+                              'assets/logo/profile_logo.png',
                               width: 32,
                               height: 32,
                               fit: BoxFit.cover,

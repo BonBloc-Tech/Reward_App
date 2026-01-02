@@ -4,8 +4,11 @@ enum AppRoutes {
   dashboard,
   home,
   otp_verification,
-  otp1
-
+  otp1,
+  points,
+  benefits,
+  pointsCalculation,
+  history,
 }
 
 extension AppRouteExtension on AppRoutes {
@@ -15,6 +18,13 @@ extension AppRouteExtension on AppRoutes {
     AppRoutes.dashboard: "/dashboard",
     AppRoutes.home: "/HomeScreen",
     AppRoutes.otp_verification: "/OtpPage",
+
+    AppRoutes.otp1: "/OtpMobile", // ✅ 🔥 THIS WAS MISSING
+
+    AppRoutes.points: "/points",
+    AppRoutes.benefits: "/benefits",
+    AppRoutes.pointsCalculation: "/points-calculation",
+    AppRoutes.history: "/history",
   };
 
   String get toName => appRoutes[this]!;
