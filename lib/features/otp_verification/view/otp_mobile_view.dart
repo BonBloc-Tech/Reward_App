@@ -3,6 +3,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/features/auth/controller/login_page_c.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard.dart';
+import 'package:sm_reward_app/features/dashboard/view/dashboard_mob.dart';
 
 class OtpMobileView extends StatelessWidget {
   const OtpMobileView({super.key});
@@ -88,7 +89,7 @@ OtpTextField(
                     child: ElevatedButton(
                       onPressed: () {
                         if (otpController.text == controller.generatedOtp) {
-                          Get.offAll(() => const DashboardPage());
+                          Get.offAll(() => const DashboardMobilePage());
                         } else {
                           Get.snackbar("Error", "Invalid OTP");
                         }
