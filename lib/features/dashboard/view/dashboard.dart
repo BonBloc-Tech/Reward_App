@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/features/Account/view/account_page.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -106,20 +107,45 @@ class _DashboardPageState extends State<DashboardPage> {
                   height: 60,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   color: Colors.white,
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Dashboard",
+                      const Text("Dashboard",
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold)),
-                      Row(
-                        children: [
-                          CircleAvatar(radius: 16),
-                          SizedBox(width: 8),
-                          Text("BHARAT KALRA & CO"),
-                        ],
-                      ),
+                      InkWell(
+  onTap: () {
+    Navigator.push(
+      context,
+       MaterialPageRoute(
+        builder: (_) =>  AccountPage(), // 👈 your profile page
+      ),
+    );
+  },
+  child: const Row(
+    children:  [
+      CircleAvatar(
+        radius: 16,
+        backgroundColor: Colors.blueAccent,
+        child: Icon(
+          Icons.person,
+          size: 18,
+          color: Colors.white,
+        ),
+      ),
+      SizedBox(width: 8),
+      Text(
+        "BHARAT KALRA & CO",
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          // cursor: MouseCursor.defer, // desktop friendly
+        ),
+      ),
+    ],
+  ),
+),
+
                     ],
                   ),
                 ),
