@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
+
 
 
 class AccountPage extends StatefulWidget {
@@ -38,7 +39,7 @@ class _AccountPageState extends State<AccountPage> {
           backgroundColor: const Color(0xFFF5F6FA),
           body: Row(
             children: [
-              if (isDesktop) const Side_Menu(),
+              if (isDesktop) const SideNavbarMobile(),
 
               Expanded(
                 child: Column(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/history_controller.dart';
-import '../widget/history_table.dart';
+import '../widget/history_table_widget.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});

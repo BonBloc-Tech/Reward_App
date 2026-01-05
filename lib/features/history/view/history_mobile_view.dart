@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import '../controller/history_controller.dart';
-import '../widget/history_table.dart';
+import '../widget/history_table_widget.dart';
 
 class MobileHistoryList extends StatelessWidget {
   MobileHistoryList({super.key});
@@ -101,7 +101,7 @@ class MobileHistoryList extends StatelessWidget {
       ),
 
       /// 🔹 BOTTOM NAV
-      bottomNavigationBar: const Side_Menu (),
+      bottomNavigationBar: const SideNavbarMobile(),
     );
   }
 }

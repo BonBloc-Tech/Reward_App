@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
-
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
 import '../../../core/global_widgets/tier_progress_card.dart';
@@ -118,7 +117,7 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
       ),
 
       /// ✅ BOTTOM NAV
-      bottomNavigationBar: const Side_Menu(),
+      bottomNavigationBar: const SideNavbarMobile(),
     );
   }
 }

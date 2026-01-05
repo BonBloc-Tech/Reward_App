@@ -1,154 +1,167 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
-
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/calculation_controller.dart';
-import '../widget/summary_cards_row_mobile_widget.dart';
 import '../widget/invoice_table_widget.dart';
+import '../widget/points_summary_overview_card_widget.dart';
+import '../widget/rules_card_widget.dart';
 
-class PointsCalculationPageMobile extends StatefulWidget {
-  const PointsCalculationPageMobile({super.key});
+class PointsCalculationPage extends StatefulWidget {
+  const PointsCalculationPage({super.key});
 
   @override
-  State<PointsCalculationPageMobile> createState() =>
-      _PointsCalculationPageMobileState();
+  State<PointsCalculationPage> createState() =>
+      _PointsCalculationPageState();
 }
 
-class _PointsCalculationPageMobileState
-    extends State<PointsCalculationPageMobile> {
-  /// ✅ Register controller
-  final CalculationController controller =
-      Get.put(CalculationController());
+class _PointsCalculationPageState extends State<PointsCalculationPage> {
+  /// 🔹 ORDER (VERTICAL)
+  List<String> layoutOrder = ['rules', 'summary', 'table'];
 
-  /// 🔹 Widgets order list
-  late List<Widget> sections;
+  void swap(String from, String to) {
+    setState(() {
+      final fromIndex = layoutOrder.indexOf(from);
+      final toIndex = layoutOrder.indexOf(to);
+      final temp = layoutOrder[fromIndex];
+      layoutOrder[fromIndex] = layoutOrder[toIndex];
+      layoutOrder[toIndex] = temp;
+    });
+  }
 
-  @override
-  void initState() {
-    super.initState();
+  Widget section(String id) {
+    switch (id) {
+      case 'rules':
+        return const RulesCard();
 
-    sections = [
-      _description(),
-      _rulesCard(),
-      const SummaryCardsRowMobile(),
-      _invoiceTitle(),
-      const InvoiceTable(),
-    ];
+      case 'summary':
+        return const PointsSummaryOverviewCard();
+
+      case 'table':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'Invoice Details',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 16),
+            InvoiceTable(),
+          ],
+        );
+
+      default:
+        return const SizedBox();
+    }
+  }
+
+  Widget draggableSection(String id) {
+    return DragTarget<String>(
+      // ignore: unrelated_type_equality_checks
+      onWillAcceptWithDetails: (from) => from != id,
+      onAcceptWithDetails: (from) => swap(from as String, id),
+      builder: (context, _, __) {
+        return Draggable<String>(
+          data: id,
+          feedback: Material(
+            color: Colors.transparent,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: section(id),
+            ),
+          ),
+          childWhenDragging:
+              Opacity(opacity: 0.3, child: section(id)),
+          child: section(id),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CalculationController());
+
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
+      body: Row(
+        children: [
+          const SideMenu(),
 
-      /// 🔹 APP BAR
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Icon(Icons.menu, color: Colors.black),
-        title: const Text(
-          'Points Calculation',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 16,
-              backgroundColor: Color(0xFFE5E7EB),
-              child: Icon(Icons.person_outline, size: 18),
+          Expanded(
+            child: Column(
+              children: [
+                /// 🔹 HEADER
+                Container(
+                  height: 64,
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    border: Border(
+                      bottom: BorderSide(color: Color(0xFFE5E7EB)),
+                    ),
+                  ),
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Points Calculation Page',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Spacer(),
+                      Icon(Icons.account_circle, size: 32),
+                      SizedBox(width: 8),
+                      Text(
+                        'BHARAT KALRA & CO',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                /// 🔹 BODY
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(32),
+                    child: Column(
+                      children: [
+                        /// 🔹 RULES + SUMMARY ROW (DYNAMIC)
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: layoutOrder
+                              .where((e) =>
+                                  e == 'rules' || e == 'summary')
+                              .map(
+                                (id) => Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 24),
+                                    child: draggableSection(id),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+
+                        const SizedBox(height: 32),
+
+                        /// 🔹 TABLE (FULL WIDTH – DRAGGABLE)
+                        draggableSection('table'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
-      ),
-
-      /// 🔹 DRAG & DROP BODY
-      body: ReorderableListView(
-        padding: const EdgeInsets.all(16),
-        buildDefaultDragHandles: true,
-        onReorder: (oldIndex, newIndex) {
-          setState(() {
-            if (newIndex > oldIndex) newIndex -= 1;
-            final item = sections.removeAt(oldIndex);
-            sections.insert(newIndex, item);
-          });
-        },
-        children: [
-          for (int i = 0; i < sections.length; i++)
-            Container(
-              key: ValueKey(i),
-              margin: const EdgeInsets.only(bottom: 16),
-              child: sections[i],
-            ),
-        ],
-      ),
-
-      /// ✅ CORRECT PLACE
-      bottomNavigationBar: const Side_Menu(),
-    );
-  }
-
-  /// 🔹 DESCRIPTION
-  Widget _description() {
-    return const Text(
-      'Points are calculated based on invoice value.',
-      style: TextStyle(
-        fontSize: 13,
-        color: Color(0xFF6B7280),
-      ),
-    );
-  }
-
-  /// 🔹 RULES CARD
-  Widget _rulesCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Earn Rule:',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-          ),
-          SizedBox(height: 6),
-          Text(
-            '• Services > ₹1,000 → 100 pts per ₹1,000\n'
-            '• Accessories > ₹5,000 → 100 pts per ₹1,000',
-            style: TextStyle(fontSize: 13, color: Color(0xFF4B5563)),
-          ),
-          SizedBox(height: 14),
-          Text(
-            'Redeem Rule:',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-          ),
-          SizedBox(height: 6),
-          Text(
-            '• Max redeemable = 10% of invoice value\n'
-            '• Points expire after 1 year\n'
-            '• Oldest points used first',
-            style: TextStyle(fontSize: 13, color: Color(0xFF4B5563)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 🔹 INVOICE TITLE
-  Widget _invoiceTitle() {
-    return const Text(
-      'Invoice Details',
-      style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w700,
       ),
     );
   }

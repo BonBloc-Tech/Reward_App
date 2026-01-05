@@ -1,72 +1,74 @@
-import 'package:get/get.dart';
 
-// 🔹 Auth
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
-
-// 🔹 Dashboard
-import 'package:sm_reward_app/features/dashboard/view/dashboard.dart';
-
-// 🔹 OTP
-import 'package:sm_reward_app/features/otp_verification/otp.dart';
-import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
-
-// 🔹 Feature Pages
-import 'package:sm_reward_app/features/points/view/points_screen.dart';
+import 'package:sm_reward_app/features/auth/view/login_mobile_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.dart';
-import 'package:sm_reward_app/features/history/view/history_page.dart';
+import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
+import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
+import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
+import 'package:sm_reward_app/features/otp_verification/view/otp_desktop_view.dart';
+import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
+import 'package:sm_reward_app/features/points/view/points_desktop_view.dart';
+import 'package:sm_reward_app/features/points/view/points_mobile_view.dart';
 
-// 🔹 Routes
 import 'app_routes.dart';
 
 class AppPages {
   static final routes = [
 
-    /// 🔐 Login (Web)
+  
     GetPage(
-      name: AppRoutes.login.toName,
+      name: AppRoutes.logindesktop.toName,
       page: () => LoginPage(),
     ),
-
-    /// 🏠 Dashboard
     GetPage(
-      name: AppRoutes.dashboard.toName,
+      name: AppRoutes.loginmobile.toName,
+      page: () => LoginPageMobile(),
+    ),
+   GetPage(
+      name: AppRoutes.otpdesktop.toName,
+      page: () => OtpPage(),
+    ), 
+    GetPage(
+      name: AppRoutes.otpmobile.toName,
+      page: () => OtpMobileView(),
+    ),   
+    GetPage(
+      name: AppRoutes.dashboarddesktop.toName,
       page: () => DashboardPage(),
     ),
-
-    /// 🔢 OTP (Web)
     GetPage(
-      name: AppRoutes.otp_verification.toName,
-      page: () => OtpPage(),
+      name: AppRoutes.dashboardmobile.toName,
+      page: () => DashboardMobilePage(),
     ),
-
-    /// 📱 OTP (Mobile)
-    GetPage(
-      name: AppRoutes.otp1.toName,
-      page: () => OtpMobileView(),
-    ),
-
-    /// ⭐ Points
-    GetPage(
-      name: AppRoutes.points.toName,
+   GetPage(
+      name: AppRoutes.pointsdesktop.toName,
       page: () => PointsScreen(),
     ),
-
-    /// 🎁 Benefits
+      GetPage(
+      name: AppRoutes.pointsmobile.toName,
+      page: () => PointsCalculationPageMobile(),
+    ),
     GetPage(
-      name: AppRoutes.benefits.toName,
+      name: AppRoutes.benefitsdesktop.toName,
       page: () => BenefitsPage(),
     ),
-
-    /// 🧮 Points Calculation
+      GetPage(
+      name: AppRoutes.pointsdesktop.toName,
+      page: () => PointsScreen(),
+    ), 
     GetPage(
-      name: AppRoutes.pointsCalculation.toName,
-      page: () => PointsCalculationPage(),
+      name: AppRoutes.pointsmobile.toName,
+      page: () => PointsScreenMobile(),
     ),
 
-    /// 🕘 History
     GetPage(
-      name: AppRoutes.history.toName,
+      name: AppRoutes.historydesktop.toName,
+      page: () => HistoryPage(),
+    ),
+     GetPage(
+      name: AppRoutes.historymobile.toName,
       page: () => HistoryPage(),
     ),
   ];

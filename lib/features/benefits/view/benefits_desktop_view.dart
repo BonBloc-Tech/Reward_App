@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/global_widgets/tier_progress_card.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/benefits_controller.dart';
 import '../widget/benefits_widget.dart';
 

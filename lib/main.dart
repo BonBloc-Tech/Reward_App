@@ -7,6 +7,7 @@ import 'package:sm_reward_app/routes/app_routes.dart';
 
 void main() {
   final bool isMobile = Platform.isAndroid || Platform.isIOS;
+  // final bool isDesktop = Platform.isWindows || Platform.isLinux || Platform.isMacOS;
   runApp(MyApp(isMobile: isMobile));
 }
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute:
-          isMobile ? AppRoutes.otp1.toName : AppRoutes.login.toName,
+          isMobile ? AppRoutes.loginmobile.toName :AppRoutes.logindesktop.toName,
           getPages: AppPages.routes,
     );
   }

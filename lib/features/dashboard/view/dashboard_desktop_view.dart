@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import 'package:sm_reward_app/features/Account/view/account_desktop_view.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard.dart';
@@ -73,7 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
     return DragTarget<String>(
       onWillAccept: (from) => from != key,
-      onAccept: (from) => swap(from!, key),
+      onAccept: (from) => swap(from, key),
       builder: (_, __, ___) => Draggable<String>(
         data: key,
         feedback: Material(
