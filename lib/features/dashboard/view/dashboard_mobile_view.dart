@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard_widget.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:sm_reward_app/features/dashboard/widget/donutcard_widget.dart';
+import 'package:sm_reward_app/features/dashboard/widget/recentactivity_widget.dart';
 
 class DashboardMobilePage extends StatefulWidget {
   const DashboardMobilePage({super.key});
@@ -13,216 +13,120 @@ class DashboardMobilePage extends StatefulWidget {
 }
 
 class _DashboardMobilePageState extends State<DashboardMobilePage> {
-  List<String> sections = ['points', 'donut', 'recent'];
+  final List<String> sections = [
+    'available',
+    'membership',
+    'earned',
+    'redeemed',
+    'donut',
+    'recent',
+  ];
 
-  void reorder(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) newIndex--;
-      final item = sections.removeAt(oldIndex);
-      sections.insert(newIndex, item);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-    backgroundColor: const Color(0xFFF5F6FA),
-
-    /// ✅ APP BAR MUST BE HERE
-   
-
-    /// ✅ BODY ONLY HERE
-    body: Column(
-      children: [
-    
-       const MobileAppBar(title: "Dashboard"),
-        Expanded(
-          child: ReorderableListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: sections.length,
-        onReorder: reorder,
-        itemBuilder: (context, index) {
-          final id = sections[index];
-
-          return ReorderableDragStartListener(
-            key: ValueKey(id),
-            index: index,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: _buildSection(id),
-            ),
-          );
-        },
-      ),
-      
-        ),
-        const MobileBottomNav(),
-      ],
-      
-    ),
-    
-    );
-  }
-
-  Widget _buildSection(String id) {
+  Widget buildSection(String id) {
     switch (id) {
-      case 'points':
-        return _pointsSection();
+      case 'available':
+        return const BuildPointCard(
+          title: "Available Points",
+          value: "12,000",
+          color: Colors.deepPurple,
+        );
+
+      case 'membership':
+        return const BuildMembershipCard(
+          title: "Membership Level",
+          level: "Gold",
+          percent: 0.83,
+        );
+
+      case 'earned':
+        return const BuildPointCard(
+          title: "Total Earned Points",
+          value: "18,000",
+          color: Colors.blue,
+        );
+
+      case 'redeemed':
+        return const BuildPointCard(
+          title: "Total Redeemed Points",
+          value: "6,000",
+          color: Colors.pink,
+        );
 
       case 'donut':
-        return _donutCard();
+        return const DonutcardWidget();
 
       case 'recent':
-        return _recentActivityCard();
+        return const RecentactivityWidget();
 
       default:
         return const SizedBox();
     }
   }
 
-  /// 🔹 POINTS SECTION
-  Widget _pointsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Points Overview",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 12),
-        GridView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 1.2,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F6FA),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(
+          "Dashboard",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
           ),
-          children: const [
-            BuildPointCard(
-              title: "Available Points",
-              value: "12,000",
-              color: Colors.deepPurple,
-            ),
-            BuildMembershipCard(
-              title: "Membership Level",
-              level: "Gold",
-              percent: 0.83,
-            ),
-            BuildPointCard(
-              title: "Total Earned",
-              value: "18,000",
-              color: Colors.blue,
-            ),
-            BuildPointCard(
-              title: "Total Redeemed",
-              value: "6,000",
-              color: Colors.pink,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  /// 🔹 DONUT CARD
-  Widget _donutCard() {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Overall Report",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              height: 220,
-              child: SfCircularChart(
-                series: [
-                  DoughnutSeries<_ChartData, String>(
-                    radius: '85%',
-                    innerRadius: '65%',
-                    dataSource: [
-                      _ChartData('Earned', 50, Colors.blue),
-                      _ChartData('Redeemed', 20, Colors.red),
-                      _ChartData('Balance', 30, Colors.purple),
-                    ],
-                    xValueMapper: (d, _) => d.label,
-                    yValueMapper: (d, _) => d.value,
-                    pointColorMapper: (d, _) => d.color,
-                    dataLabelSettings:
-                        const DataLabelSettings(isVisible: true),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
-    );
-  }
-
-  /// 🔹 RECENT ACTIVITY
-  Widget _recentActivityCard() {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Recent Activity",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: ReorderableListView.builder(
+            itemCount: sections.length,
+            onReorder: (oldIndex, newIndex) {
+              setState(() {
+                if (newIndex > oldIndex) newIndex--;
+                final item = sections.removeAt(oldIndex);
+                sections.insert(newIndex, item);
+              });
+            },
+            itemBuilder: (context, index) {
+              final id = sections[index];
+              return Card(
+                key: ValueKey(id),
+                margin: const EdgeInsets.only(bottom: 16),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
                 ),
-                TextButton(onPressed: () {}, child: const Text("View All")),
-              ],
-            ),
-            const SizedBox(height: 12),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                columnSpacing: 20,
-                columns: const [
-                  DataColumn(label: Text("Invoice")),
-                  DataColumn(label: Text("Date")),
-                  DataColumn(label: Text("Type")),
-                  DataColumn(label: Text("Amount")),
-                  DataColumn(label: Text("Balance")),
-                ],
-                rows: const [
-                  DataRow(
-                    cells: [
-                      DataCell(Text("INV-123")),
-                      DataCell(Text("10-01-2026")),
-                      DataCell(Text("Purchase")),
-                      DataCell(Text("10,000")),
-                      DataCell(Text("8,000")),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+                child: Column(
+                  children: [
+                    /// Drag Handle
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: ReorderableDragStartListener(
+                        index: index,
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.drag_handle),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: buildSection(id),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
+      bottomNavigationBar: const MobileBottomNav(),
     );
   }
-}
-
-/// 🔹 CHART DATA
-class _ChartData {
-  final String label;
-  final double value;
-  final Color color;
-  _ChartData(this.label, this.value, this.color);
 }

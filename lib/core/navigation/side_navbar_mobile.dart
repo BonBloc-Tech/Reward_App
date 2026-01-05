@@ -18,11 +18,11 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
   int _currentIndex = 1; // Points default
 
   final List<_NavItem> _items = const [
-    _NavItem("Home", "assets/images/home_icon.png"),
-    _NavItem("Points", "assets/images/points_icon.png"),
-    _NavItem("History", "assets/images/history_icon.png"),
-    _NavItem("Benefits", "assets/images/benefits_icon.png"),
-    _NavItem("Calculation", "assets/images/calculation_icon.png"),
+    _NavItem("Home", "assets/logo/home_icon.png"),
+    _NavItem("Points", "assets/logo/points_icon.png"),
+    _NavItem("History", "assets/logo/history_icon.png"),
+    _NavItem("Benefits", "assets/logo/benefits_icon.png"),
+    _NavItem("Calculation", "assets/logo/calculation_icon.png"),
   ];
 
   @override

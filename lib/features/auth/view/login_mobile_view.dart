@@ -107,7 +107,7 @@ class LoginPageMobile extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const OtpMobileView(),
+                                           OtpMobileView(),
                                     ),
                                   );
                                 }

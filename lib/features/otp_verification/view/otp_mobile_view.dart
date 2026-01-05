@@ -5,13 +5,14 @@ import 'package:sm_reward_app/features/auth/controller/login_controller.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
 
 class OtpMobileView extends StatelessWidget {
-  const OtpMobileView({super.key});
+  OtpMobileView({super.key});
+
+  final TextEditingController otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-      final theme = Theme.of(context);
-    final LoginController controller = Get.find();
-    final otpController = TextEditingController();
+    final theme = Theme.of(context);
+    final LoginController controller = Get.find<LoginController>();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,46 +27,59 @@ class OtpMobileView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    // ignore: deprecated_member_use
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 10,
                     spreadRadius: 2,
-                    offset: const Offset(0, 0),
                   ),
                 ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Image.asset('assets/logo/logo_sm.png', height: 120),
+                  /// Logo
+                  Image.asset(
+                    'assets/logo/logo_sm.png',
+                    height: 120,
+                  ),
+
                   const SizedBox(height: 20),
 
+                  /// Title
                   const Text(
                     'OTP Verification',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+
                   const SizedBox(height: 10),
 
+                  /// Subtitle
                   const Text(
                     'Enter the OTP sent to your email',
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 30),
-OtpTextField(
-  numberOfFields: 4,
-  showFieldAsBox: true,
-  fieldWidth: 45, // width of each box
-  borderRadius: BorderRadius.circular(8),
-  textStyle: const TextStyle(fontSize: 20),
-  margin: const EdgeInsets.symmetric(horizontal: 8), // spacing between boxes
-  keyboardType: TextInputType.number,
-  onSubmit: (code) => otpController.text = code,
-),
 
+                  const SizedBox(height: 30),
+
+                  /// OTP Fields
+                  OtpTextField(
+                    numberOfFields: 4,
+                    showFieldAsBox: true,
+                    fieldWidth: 45,
+                    borderRadius: BorderRadius.circular(8),
+                    textStyle: const TextStyle(fontSize: 20),
+                    keyboardType: TextInputType.number,
+                    onSubmit: (code) {
+                      otpController.text = code;
+                    },
+                  ),
 
                   const SizedBox(height: 20),
 
+                  /// Resend OTP
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -82,19 +96,25 @@ OtpTextField(
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 30),
 
+                  /// Submit Button
                   SizedBox(
                     height: 48,
                     child: ElevatedButton(
-                     onPressed: () {
-  if (otpController.text == controller.generatedOtp) {
-    Get.offAllNamed('/DashboardMobilePage'); // make sure route exists in getPages
-  } else {
-    Get.snackbar("Error", "Invalid OTP");
-  }
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
 
-
+                        if (otpController.text == controller.generatedOtp) {
+                          Get.offAll(() => const DashboardMobilePage());
+                        } else {
+                          Get.snackbar(
+                            "Error",
+                            "Invalid OTP",
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF0A2FB6),
@@ -102,8 +122,13 @@ OtpTextField(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text('Submit',  style: theme.textTheme.bodyLarge
-                              ?.copyWith(fontWeight: FontWeight.w500,color: Colors.white)  ),
+                      child: Text(
+                        'Submit',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ],
