@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/config/textstyle.dart';
+import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
@@ -25,7 +26,10 @@ class PointsScreen extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                /// ================= TOP APP BAR =================
+                 SizedBox(
+        height: 64,
+        child: GlobalAppBar(title: 'Points Overview'),
+      ),
                 Container(
                   height: 64,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
