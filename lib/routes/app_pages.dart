@@ -48,7 +48,7 @@ class AppPages {
     ),
       GetPage(
       name: AppRoutes.pointsmobile.toName,
-      page: () => PointsCalculationPageMobile(),
+      page: () => PointsCalculationScreenMobile(),
     ),
     GetPage(
       name: AppRoutes.benefitsdesktop.toName,

@@ -1,153 +1,320 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
+
 import '../controller/calculation_controller.dart';
-import '../widget/summary_cards_row_mobile_widget.dart';
 import '../widget/invoice_table_widget.dart';
 
-class PointsCalculationPageMobile extends StatefulWidget {
-  const PointsCalculationPageMobile({super.key});
 
-  @override
-  State<PointsCalculationPageMobile> createState() =>
-      _PointsCalculationPageMobileState();
-}
-
-class _PointsCalculationPageMobileState
-    extends State<PointsCalculationPageMobile> {
-  /// ✅ Register controller
-  final CalculationController controller =
-      Get.put(CalculationController());
-
-  /// 🔹 Widgets order list
-  late List<Widget> sections;
-
-  @override
-  void initState() {
-    super.initState();
-
-    sections = [
-      _description(),
-      _rulesCard(),
-      const SummaryCardsRowMobile(),
-      _invoiceTitle(),
-      const InvoiceTable(),
-    ];
-  }
+class PointsCalculationScreenMobile extends StatelessWidget {
+  const PointsCalculationScreenMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF9FAFB),
+    Get.put(CalculationController());
 
-      /// 🔹 APP BAR
+    return Scaffold(
+      backgroundColor: const Color(0xFFF6F7FB),
+
+      // ================= APP BAR =================
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Icon(Icons.menu, color: Colors.black),
+        elevation: 1,
         title: const Text(
-          'Points Calculation',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
+          "Points Calculation",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16),
             child: CircleAvatar(
               radius: 16,
-              backgroundColor: Color(0xFFE5E7EB),
-              child: Icon(Icons.person_outline, size: 18),
+              backgroundImage: AssetImage('assets/images/profile_logo.png'),
             ),
           ),
         ],
       ),
 
-      /// 🔹 DRAG & DROP BODY
-      body: ReorderableListView(
+      // ================= BODY =================
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        buildDefaultDragHandles: true,
-        onReorder: (oldIndex, newIndex) {
-          setState(() {
-            if (newIndex > oldIndex) newIndex -= 1;
-            final item = sections.removeAt(oldIndex);
-            sections.insert(newIndex, item);
-          });
-        },
-        children: [
-          for (int i = 0; i < sections.length; i++)
-            Container(
-              key: ValueKey(i),
-              margin: const EdgeInsets.only(bottom: 16),
-              child: sections[i],
+        child: Column(
+          children: [
+            /// ✅ MOBILE SAFE RULES CARD (FULL CONTENT)
+            const MobileRulesCard(),
+
+            const SizedBox(height: 24),
+
+            /// ✅ MOBILE SAFE POINTS SUMMARY
+            _mobilePointsSummary(),
+
+            const SizedBox(height: 32),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Invoice Details",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
             ),
-        ],
+
+            const SizedBox(height: 16),
+            const InvoiceTable(),
+          ],
+        ),
       ),
 
-      /// ✅ CORRECT PLACE
-      bottomNavigationBar: const SideNavbarMobile(),
+
+      bottomNavigationBar: const SideNavbarMobile()
     );
   }
 
-  /// 🔹 DESCRIPTION
-  Widget _description() {
-    return const Text(
-      'Points are calculated based on invoice value.',
-      style: TextStyle(
-        fontSize: 13,
-        color: Color(0xFF6B7280),
-      ),
-    );
-  }
-
-  /// 🔹 RULES CARD
-  Widget _rulesCard() {
+  // =========================================================
+  // ✅ POINTS SUMMARY (UNCHANGED – WORKING FINE)
+  // =========================================================
+  Widget _mobilePointsSummary() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE5E7EB)),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1F000000),
+            blurRadius: 18,
+            offset: Offset(0, 8),
+          ),
+        ],
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Earn Rule:',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+          const Text(
+            'Points Summary',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
-          SizedBox(height: 6),
-          Text(
-            '• Services > ₹1,000 → 100 pts per ₹1,000\n'
-            '• Accessories > ₹5,000 → 100 pts per ₹1,000',
-            style: TextStyle(fontSize: 13, color: Color(0xFF4B5563)),
+          const SizedBox(height: 20),
+          Center(child: _donut()),
+          const SizedBox(height: 24),
+          _totalPoints(),
+          const SizedBox(height: 16),
+          _legendRow(
+            color: Color(0xFF6EE7B7),
+            title: 'Redeemed Points',
+            value: '6,000 pts',
+            percent: '33.3%',
           ),
-          SizedBox(height: 14),
-          Text(
-            'Redeem Rule:',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+          const SizedBox(height: 12),
+          _legendRow(
+            color: Color(0xFF60A5FA),
+            title: 'Available Points',
+            value: '12,000 pts',
+            percent: '66.7%',
           ),
-          SizedBox(height: 6),
-          Text(
-            '• Max redeemable = 10% of invoice value\n'
-            '• Points expire after 1 year\n'
-            '• Oldest points used first',
-            style: TextStyle(fontSize: 13, color: Color(0xFF4B5563)),
-          ),
+          const SizedBox(height: 20),
+          _progressBar(),
+          const SizedBox(height: 20),
+          _expiryAlert(),
         ],
       ),
     );
   }
 
-  /// 🔹 INVOICE TITLE
-  Widget _invoiceTitle() {
-    return const Text(
-      'Invoice Details',
-      style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w700,
+  Widget _donut() {
+    return Container(
+      width: 140,
+      height: 140,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: SweepGradient(
+          colors: [Color(0xFF60A5FA), Color(0xFF6EE7B7)],
+        ),
+      ),
+      child: Center(
+        child: Container(
+          width: 90,
+          height: 90,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Text(
+              '18,000\npts',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _totalPoints() {
+    return Row(
+      children: const [
+        Text("Total Earned Points"),
+        Spacer(),
+        Text("18,000 pts",
+            style: TextStyle(fontWeight: FontWeight.w700)),
+      ],
+    );
+  }
+
+  Widget _legendRow({
+    required Color color,
+    required String title,
+    required String value,
+    required String percent,
+  }) {
+    return Row(
+      children: [
+        Container(width: 10, height: 10, color: color),
+        const SizedBox(width: 8),
+        Expanded(child: Text(title)),
+        Text(value),
+        const SizedBox(width: 6),
+        Text("($percent)", style: TextStyle(color: color)),
+      ],
+    );
+  }
+
+  Widget _progressBar() {
+    return Column(
+      children: [
+        Row(
+          children: const [
+            Text("33.3% Used"),
+            Spacer(),
+            Text("66.7% Available"),
+          ],
+        ),
+        const SizedBox(height: 6),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: Row(
+            children: [
+              Expanded(
+                  flex: 33,
+                  child: Container(height: 8, color: Color(0xFF6EE7B7))),
+              Expanded(
+                  flex: 67,
+                  child: Container(height: 8, color: Color(0xFF60A5FA))),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _expiryAlert() {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF7ED),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: const [
+          Icon(Icons.notifications,
+              color: Color(0xFFF59E0B), size: 18),
+          SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '1,300 points expiring in next 30 days',
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//////////////////////////////////////////////////////////////
+// ✅ MOBILE SAFE RULES CARD (YOUR FULL CONTENT)
+//////////////////////////////////////////////////////////////
+
+class MobileRulesCard extends StatelessWidget {
+  const MobileRulesCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1F000000),
+            blurRadius: 16,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Points are calculated based on invoice value.',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              height: 1.4,
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          /// EARN RULE
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF3F8FF),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Earn Rule:',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'Service > ₹1,000 → 100 pts per ₹1,000\n'
+                  'Accessories > ₹5,000 → 100 pts per ₹1,000',
+                  style: TextStyle(fontSize: 12, height: 1.9),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 14),
+
+          const Text(
+            'Redeem Rule:',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 6),
+
+          const Text(
+            'Maximum redeemable = 10% of invoice value\n'
+            'Points expire 1 year after earn date.\n'
+            'Oldest points are consumed first.',
+            style: TextStyle(fontSize: 12, height: 1.9),
+          ),
+        ],
       ),
     );
   }
