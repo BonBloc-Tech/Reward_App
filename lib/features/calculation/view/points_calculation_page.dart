@@ -3,34 +3,98 @@ import 'package:get/get.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar.dart';
 
 
-import 'package:sm_reward_app/features/calculation/widget/points_summary_overview_card.dart';
-import 'package:sm_reward_app/features/calculation/widget/rules_card.dart';
-
 import '../controller/calculation_controller.dart';
 import '../widget/invoice_table.dart';
+import '../widget/points_summary_overview_card.dart';
+import '../widget/rules_card.dart';
 
-
-class PointsCalculationPage extends StatelessWidget {
+class PointsCalculationPage extends StatefulWidget {
   const PointsCalculationPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<PointsCalculationPage> createState() =>
+      _PointsCalculationPageState();
+}
 
-    // ✅ VERY IMPORTANT: Inject controller here
+class _PointsCalculationPageState extends State<PointsCalculationPage> {
+  /// 🔹 ORDER (VERTICAL)
+  List<String> layoutOrder = ['rules', 'summary', 'table'];
+
+  void swap(String from, String to) {
+    setState(() {
+      final fromIndex = layoutOrder.indexOf(from);
+      final toIndex = layoutOrder.indexOf(to);
+      final temp = layoutOrder[fromIndex];
+      layoutOrder[fromIndex] = layoutOrder[toIndex];
+      layoutOrder[toIndex] = temp;
+    });
+  }
+
+  Widget section(String id) {
+    switch (id) {
+      case 'rules':
+        return const RulesCard();
+
+      case 'summary':
+        return const PointsSummaryOverviewCard();
+
+      case 'table':
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'Invoice Details',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 16),
+            InvoiceTable(),
+          ],
+        );
+
+      default:
+        return const SizedBox();
+    }
+  }
+
+  Widget draggableSection(String id) {
+    return DragTarget<String>(
+      onWillAccept: (from) => from != id,
+      onAccept: (from) => swap(from, id),
+      builder: (context, _, __) {
+        return Draggable<String>(
+          data: id,
+          feedback: Material(
+            color: Colors.transparent,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: section(id),
+            ),
+          ),
+          childWhenDragging:
+              Opacity(opacity: 0.3, child: section(id)),
+          child: section(id),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     Get.put(CalculationController());
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-          /// 🔹 SIDE MENU
           const SideMenu(),
 
-          /// 🔹 MAIN AREA
           Expanded(
             child: Column(
               children: [
-                /// 🔹 TOP HEADER
+                /// 🔹 HEADER
                 Container(
                   height: 64,
                   padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -41,35 +105,23 @@ class PointsCalculationPage extends StatelessWidget {
                     ),
                   ),
                   child: Row(
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         'Points Calculation Page',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.asset(
-                              'assets/logo/profile_logo.png',
-                              width: 32,
-                              height: 32,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text(
-                            'BHARAT KALRA & CO',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                      Spacer(),
+                      Icon(Icons.account_circle, size: 32),
+                      SizedBox(width: 8),
+                      Text(
+                        'BHARAT KALRA & CO',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ],
                   ),
@@ -78,51 +130,32 @@ class PointsCalculationPage extends StatelessWidget {
                 /// 🔹 BODY
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 14,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          /// 🔹 RULES + SUMMARY
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              /// LEFT – RULES CARD
-                              Expanded(
-                                flex: 3,
-                                child: RulesCard(),
-                              ),
+                    padding: const EdgeInsets.all(32),
+                    child: Column(
+                      children: [
+                        /// 🔹 RULES + SUMMARY ROW (DYNAMIC)
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: layoutOrder
+                              .where((e) =>
+                                  e == 'rules' || e == 'summary')
+                              .map(
+                                (id) => Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 24),
+                                    child: draggableSection(id),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
 
-                              SizedBox(width: 44),
+                        const SizedBox(height: 32),
 
-                              /// RIGHT – POINTS SUMMARY
-                              Expanded(
-                                flex: 3,
-                                child: PointsSummaryOverviewCard(),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(height: 28),
-
-                          /// 🔹 TABLE TITLE
-                          const Text(
-                            'Invoice Details',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-
-                          const SizedBox(height: 16),
-
-                          /// 🔹 INVOICE TABLE
-                          const InvoiceTable(),
-                        ],
-                      ),
+                        /// 🔹 TABLE (FULL WIDTH – DRAGGABLE)
+                        draggableSection('table'),
+                      ],
                     ),
                   ),
                 ),
