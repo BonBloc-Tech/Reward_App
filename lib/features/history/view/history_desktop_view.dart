@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/history_controller.dart';
 import '../widget/history_table_widget.dart';
@@ -22,50 +23,12 @@ class HistoryPage extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
+                SizedBox(
+        height: 64,
+        child: GlobalAppBar(title: 'History'),
+      ),
                
-                Container(
-                  height: 64,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      bottom: BorderSide(color: Color(0xFFE5E7EB)),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "History",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.asset(
-                              'assets/logo/profile_logo.png',
-                              width: 32,
-                              height: 32,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text(
-                            'BHARAT KALRA & CO',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                
 
                 /// 🔹 BODY
                 Expanded(

@@ -30,52 +30,7 @@ class PointsScreen extends StatelessWidget {
         height: 64,
         child: GlobalAppBar(title: 'Points Overview'),
       ),
-                Container(
-                  height: 64,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 6,
-                        offset: Offset(0, 2),
-                      )
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      /// PAGE TITLE
-                      Text(
-                        "Points",
-                        style: AppTextStyles.titleMedium(context),
-                      ),
-
-                      /// PROFILE
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.asset(
-                              'assets/logo/profile_logo.png',
-                              width: 32,
-                              height: 32,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-
-                          if (!isMobile)
-                            Text(
-                              "BHARAT KALRA & CO",
-                              style: AppTextStyles.bodySmall(context),
-                            ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                
 
                 /// ================= BODY =================
                 Expanded(
