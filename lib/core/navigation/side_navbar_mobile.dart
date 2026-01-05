@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_page_mobile.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.dart';
+import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
 import 'package:sm_reward_app/features/history/view/history_mobile_view.dart';
 import 'package:sm_reward_app/features/points/view/points_mobile_view.dart';
 
@@ -57,9 +58,10 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
         /// 🔥 PAGE NAVIGATION
         switch (index) {
           case 0:
-          
+             Get.offAll(() => const DashboardMobilePage());
             break;
 
+          
           case 1:
             Get.offAll(() => const PointsScreenMobile());
             break;
@@ -75,6 +77,8 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
           case 4:
             Get.offAll(() => const PointsCalculationScreenMobile());
             break;
+
+            
         }
       },
       child: Column(
