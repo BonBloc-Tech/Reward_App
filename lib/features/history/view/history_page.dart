@@ -15,14 +15,14 @@ class HistoryPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-          /// 🔹 SIDE MENU
+        
           const SideMenu(),
 
-          /// 🔹 MAIN CONTENT
+         
           Expanded(
             child: Column(
               children: [
-                /// 🔹 HEADER
+               
                 Container(
                   height: 64,
                   padding: const EdgeInsets.symmetric(horizontal: 24),

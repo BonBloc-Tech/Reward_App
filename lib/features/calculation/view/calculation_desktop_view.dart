@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
 
 import '../controller/calculation_controller.dart';
-import '../widget/summary_cards_row_mobile.dart';
-import '../widget/invoice_table.dart';
+import '../widget/summary_cards_row_mobile_widget.dart';
+import '../widget/invoice_table_widget.dart';
 
 class PointsCalculationPageMobile extends StatefulWidget {
   const PointsCalculationPageMobile({super.key});

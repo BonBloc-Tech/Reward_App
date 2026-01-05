@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 // 🔹 Auth
-import 'package:sm_reward_app/features/auth/view/login_page.dart';
+import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
 
 // 🔹 Dashboard
 import 'package:sm_reward_app/features/dashboard/view/dashboard.dart';
@@ -12,8 +12,8 @@ import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dar
 
 // 🔹 Feature Pages
 import 'package:sm_reward_app/features/points/view/points_screen.dart';
-import 'package:sm_reward_app/features/benefits/view/benefits_page.dart';
-import 'package:sm_reward_app/features/calculation/view/points_calculation_page.dart';
+import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
+import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.dart';
 import 'package:sm_reward_app/features/history/view/history_page.dart';
 
 // 🔹 Routes

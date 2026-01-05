@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import '../model/invoice_model.dart';
+import 'package:sm_reward_app/features/calculation/model/calculation_model.dart';
+
 
 class CalculationController extends GetxController {
   final invoices = <InvoiceModel>[].obs;

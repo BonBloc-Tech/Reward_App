@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../model/benefit_item_model.dart';
+import '../model/benefits_model.dart';
 
 class BenefitsController extends GetxController {
 

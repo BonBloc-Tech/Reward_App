@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/routes/app_routes.dart';
+import 'package:sm_reward_app/routes/app_routes.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({super.key});

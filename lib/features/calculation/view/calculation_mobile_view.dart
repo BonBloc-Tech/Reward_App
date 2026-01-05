@@ -4,9 +4,9 @@ import 'package:sm_reward_app/core/navigation/side_navbar.dart';
 
 
 import '../controller/calculation_controller.dart';
-import '../widget/invoice_table.dart';
-import '../widget/points_summary_overview_card.dart';
-import '../widget/rules_card.dart';
+import '../widget/invoice_table_widget.dart';
+import '../widget/points_summary_overview_card_widget.dart';
+import '../widget/rules_card_widget.dart';
 
 class PointsCalculationPage extends StatefulWidget {
   const PointsCalculationPage({super.key});

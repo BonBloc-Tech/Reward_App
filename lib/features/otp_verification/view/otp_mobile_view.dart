@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/features/auth/controller/login_page_c.dart';
+import 'package:sm_reward_app/features/auth/controller/login_controller.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard_mob.dart';
 

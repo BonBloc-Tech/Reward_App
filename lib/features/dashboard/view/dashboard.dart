@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar.dart';
-import 'package:sm_reward_app/features/Account/view/account_page.dart';
+import 'package:sm_reward_app/features/Account/view/account_desktop_view.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -13,7 +13,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  /// layout positions
+  
   Map<String, String> layout = {
     'left1': 'available',
     'left2': 'membership',
@@ -119,7 +119,7 @@ class _DashboardPageState extends State<DashboardPage> {
     Navigator.push(
       context,
        MaterialPageRoute(
-        builder: (_) =>  AccountPage(), // 👈 your profile page
+        builder: (_) =>  AccountPage(), 
       ),
     );
   },
