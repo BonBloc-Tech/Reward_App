@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
 import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard.dart';
@@ -24,19 +25,21 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const Side_Menu(),
-      appBar: AppBar(
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
-        title: const Text("Dashboard"),
-      ),
+    return  Scaffold(
+    backgroundColor: const Color(0xFFF5F6FA),
 
-      body: ReorderableListView.builder(
+    /// ✅ APP BAR MUST BE HERE
+    appBar: const MobileAppBar(title: "Dashboard"),
+
+    /// ✅ BODY ONLY HERE
+    body: Row(
+      children: [
+        /// SIDE MENU (Desktop only – optional)
+        const Side_Menu(),
+
+        /// MAIN CONTENT
+        Expanded(
+          child: ReorderableListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: sections.length,
         onReorder: reorder,
@@ -53,6 +56,9 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
           );
         },
       ),
+        ),
+      ],
+    ),
     );
   }
 

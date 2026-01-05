@@ -1,8 +1,7 @@
 enum AppRoutes {
   root,
   login,
-  dashboard,
-  home,
+  dashboard,  
   otp_verification,
   otp1,
   points,
@@ -15,8 +14,7 @@ extension AppRouteExtension on AppRoutes {
   static const appRoutes = {
     AppRoutes.root: "/", 
     AppRoutes.login: "/LoginPage",
-    AppRoutes.dashboard: "/dashboard",
-    AppRoutes.home: "/HomeScreen",
+    AppRoutes.dashboard: "/DashboardPage",
     AppRoutes.otp_verification: "/OtpPage",
 
     AppRoutes.otp1: "/OtpMobile", // ✅ 🔥 THIS WAS MISSING

@@ -32,12 +32,11 @@ class SideMenu extends StatelessWidget {
           const SizedBox(height: 42),
 
           /// 🧭 MENU ITEMS
-          _menuItem(
-            label: "Home",
-            assetPath: 'assets/logo/home_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.home.toName),
-          ),
-
+         _menuItem(
+  label: "Home",
+  assetPath: 'assets/logo/home_icon.png',
+  onTap: () => Get.toNamed(AppRoutes.dashboard.toName),
+),
           _menuItem(
             label: "Points",
             assetPath: 'assets/logo/points_icon.png',
@@ -86,7 +85,7 @@ class SideMenu extends StatelessWidget {
   Widget _menuItem({
     required String label,
     required String assetPath,
-    required VoidCallback onTap,
+    required VoidCallback? onTap,
     double size = 22,
   }) {
     return InkWell(
