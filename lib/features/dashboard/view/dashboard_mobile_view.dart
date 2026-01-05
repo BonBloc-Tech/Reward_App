@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -34,10 +34,9 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
     /// ✅ BODY ONLY HERE
     body: Row(
       children: [
-        /// SIDE MENU (Desktop only – optional)
-        const Side_Menu(),
+    
+        const SideNavbarMobile(),
 
-        /// MAIN CONTENT
         Expanded(
           child: ReorderableListView.builder(
         padding: const EdgeInsets.all(16),

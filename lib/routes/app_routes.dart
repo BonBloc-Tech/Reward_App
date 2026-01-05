@@ -1,0 +1,45 @@
+enum AppRoutes {
+  root,
+  logindesktop,
+  loginmobile,
+  otpdesktop,
+  otpmobile,
+  dashboarddesktop,
+  dashboardmobile,
+  pointsdesktop,
+  pointsmobile,
+  benefitsdesktop,  
+  benefitsmobile,
+  pointsCalculationdesktop,
+  pointsCalculationmobile,
+  historydesktop,
+  historymobile,
+  accountdesktop,
+  accountmobile, benefits,
+}
+
+extension AppRouteExtension on AppRoutes {
+  static const appRoutes = {
+    AppRoutes.root: "/", 
+    AppRoutes.logindesktop: "/",
+    AppRoutes.loginmobile: "/loginmobile",
+    AppRoutes.otpdesktop: "/otpdesktop",
+    AppRoutes.otpmobile: "/otpmobile",
+    AppRoutes.dashboarddesktop: "/dashboarddesktop",
+    AppRoutes.dashboardmobile: "/dashboardmobile",
+    AppRoutes.pointsdesktop: "/pointsdesktop",
+    AppRoutes.pointsmobile: "/pointsmobile",
+    AppRoutes.benefitsdesktop: "/benefitsdesktop",
+    AppRoutes.benefitsmobile: "/benefitsmobile",
+    AppRoutes.pointsCalculationdesktop: "/pointsCalculationdesktop",
+    AppRoutes.pointsCalculationmobile: "/pointsCalculationmobile",
+    AppRoutes.historydesktop: "/historydesktop",
+    AppRoutes.historymobile: "/historymobile",
+    AppRoutes.accountdesktop: "/accountdesktop",
+    AppRoutes.accountmobile: "/accountmobile",
+    AppRoutes.benefits: "/benefits",
+    
+  };
+
+  String get toName => appRoutes[this]!;
+}

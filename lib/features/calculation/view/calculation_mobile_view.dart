@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 
 import '../controller/calculation_controller.dart';
-import '../widget/invoice_table.dart';
+import '../widget/invoice_table_widget.dart';
 
 
 class PointsCalculationScreenMobile extends StatelessWidget {
@@ -64,7 +64,8 @@ class PointsCalculationScreenMobile extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: const Side_Menu(),
+
+      bottomNavigationBar: const SideNavbarMobile()
     );
   }
 

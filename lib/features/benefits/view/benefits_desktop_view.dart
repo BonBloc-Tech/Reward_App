@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/global_widgets/tier_progress_card.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/benefits_controller.dart';
-import '../widget/benefit_list_tile.dart';
+import '../widget/benefits_widget.dart';
 
 class BenefitsPage extends StatelessWidget {
   const BenefitsPage({super.key});
@@ -17,53 +18,7 @@ class BenefitsPage extends StatelessWidget {
       body: Row(
         children: [
           const SideMenu(),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  height: 64,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      bottom: BorderSide(color: Color(0xFFE5E7EB)),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Benefits',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const Spacer(),
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.asset(
-                              'assets/logo/profile_logo.png',
-                              width: 32,
-                              height: 32,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          const Text(
-                            'BHARAT KALRA & CO',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
+         GlobalAppBar(title:  "Benefits"),
                 /// ================= BODY =================
                 Expanded(
                   child: SingleChildScrollView(
@@ -116,9 +71,9 @@ class BenefitsPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
-      ),
+        
+        
+      
     );
   }
 }

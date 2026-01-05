@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/global_widgets/header.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
+
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -10,7 +11,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  /// Controllers
+ 
   final nameCtrl = TextEditingController(text: "BHARAT KALRA & CO");
   final emailCtrl = TextEditingController(text: "bharatkalra&co@gmail.com");
   final mobileCtrl = TextEditingController(text: "9876543210");
@@ -39,10 +40,8 @@ class _AccountPageState extends State<AccountPage> {
           Expanded(
             child: Column(
               children: [
-                /// TOP BAR
-                _topBar(),
+               GlobalAppBar(title: "Account"),
 
-                /// BODY
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(20),
@@ -64,39 +63,7 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  /// ---------------- TOP BAR ----------------
-  Widget _topBar() {
-    return Container(
-      height: 60,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text(
-            "Account",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 16,
-                backgroundColor: Colors.blueAccent,
-                child: Icon(Icons.person, size: 18, color: Colors.white),
-              ),
-              SizedBox(width: 8),
-              Text(
-                "BHARAT KALRA & CO",
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 
-  /// ---------------- FORM ----------------
   Widget _accountForm() {
     return Column(
       children: [

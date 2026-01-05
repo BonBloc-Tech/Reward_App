@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/features/account/view/account_page.dart';
+import 'package:sm_reward_app/features/Account/view/account_desktop_view.dart';
+
 
 class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

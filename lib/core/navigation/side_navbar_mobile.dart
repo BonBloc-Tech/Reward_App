@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sm_reward_app/core/routes/app_routes.dart';
-
-class SideMenu extends StatelessWidget {
-  const SideMenu({super.key});
+import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
+import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
+class SideNavbarMobile extends StatelessWidget {
+  const SideNavbarMobile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Drawer(
       width: 72,
-      color: Colors.black,
+      backgroundColor: Colors.black,
       child: Column(
         children: [
           const SizedBox(height: 24),
 
-          /// 🔵 APP LOGO
+          /// APP LOGO
           Container(
             width: 50,
             height: 50,
@@ -31,48 +30,40 @@ class SideMenu extends StatelessWidget {
 
           const SizedBox(height: 42),
 
-          /// 🧭 MENU ITEMS
-         _menuItem(
-  label: "Home",
-  assetPath: 'assets/logo/home_icon.png',
-  onTap: () => Get.toNamed(AppRoutes.dashboard.toName),
-),
+          _menuItem(
+            label: "Home",
+            assetPath: 'assets/logo/home_icon.png',
+            onTap: () {},
+          ),
+
           _menuItem(
             label: "Points",
             assetPath: 'assets/logo/points_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.points.toName),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const DashboardPage()),
+              );
+            },
           ),
 
           _menuItem(
             label: "History",
             assetPath: 'assets/logo/history_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.history.toName),
-          ),
-
-          _menuItem(
-            label: "Benefits",
-            assetPath: 'assets/logo/benefits_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.benefits.toName),
-          ),
-
-          _menuItem(
-            label: "Calculation",
-            assetPath: 'assets/logo/calculation_icon.png',
-            size: 30,
-            onTap: () =>
-                Get.toNamed(AppRoutes.pointsCalculation.toName),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const DashboardMobilePage()),
+              );
+            },
           ),
 
           const Spacer(),
 
-          /// 🚪 LOGOUT
           _menuItem(
             label: "Logout",
             assetPath: 'assets/logo/logout_icon.png',
-            onTap: () {
-              // 🔐 clear session / token later if needed
-              Get.offAllNamed(AppRoutes.login.toName);
-            },
+            onTap: () {},
           ),
 
           const SizedBox(height: 28),
@@ -81,19 +72,17 @@ class SideMenu extends StatelessWidget {
     );
   }
 
-  /// ✅ ICON + LABEL (VERTICAL + TAP)
   Widget _menuItem({
     required String label,
     required String assetPath,
-    required VoidCallback? onTap,
     double size = 22,
+    required VoidCallback onTap,
   }) {
     return InkWell(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               assetPath,

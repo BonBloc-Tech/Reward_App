@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
+
+
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -38,13 +39,13 @@ class _AccountPageState extends State<AccountPage> {
           backgroundColor: const Color(0xFFF5F6FA),
           body: Row(
             children: [
-              if (isDesktop) const Side_Menu(),
+              if (isDesktop) const SideNavbarMobile(),
 
               Expanded(
                 child: Column(
                   children: [
                      const MobileAppBar(title: "Dashboard"),
-                    // _topBar(),
+                   
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
@@ -67,38 +68,6 @@ class _AccountPageState extends State<AccountPage> {
       },
     );
   }
-
-  /// ---------------- TOP BAR ----------------
-  // Widget _topBar() {
-  //   return Container(
-  //     height: 56,
-  //     padding: const EdgeInsets.symmetric(horizontal: 16),
-  //     color: Colors.white,
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       children: const [
-  //         Text(
-  //           "Account",
-  //           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-  //         ),
-  //         Row(
-  //           children: [
-  //             CircleAvatar(
-  //               radius: 16,
-  //               backgroundColor: Colors.blueAccent,
-  //               child: Icon(Icons.person, size: 18, color: Colors.white),
-  //             ),
-  //             SizedBox(width: 8),
-  //             Text(
-  //               "BHARAT KALRA & CO",
-  //               style: TextStyle(fontWeight: FontWeight.w600),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   /// ---------------- FORM ----------------
   Widget _accountForm(bool isDesktop) {

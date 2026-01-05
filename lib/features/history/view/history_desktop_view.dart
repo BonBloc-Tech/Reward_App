@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/history_controller.dart';
-import '../widget/history_table.dart';
+import '../widget/history_table_widget.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -15,14 +15,14 @@ class HistoryPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-          /// 🔹 SIDE MENU
+        
           const SideMenu(),
 
-          /// 🔹 MAIN CONTENT
+         
           Expanded(
             child: Column(
               children: [
-                /// 🔹 HEADER
+               
                 Container(
                   height: 64,
                   padding: const EdgeInsets.symmetric(horizontal: 24),
