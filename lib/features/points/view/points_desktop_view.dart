@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
 import '../../../core/global_widgets/tier_progress_card.dart';
 import '../../../core/global_widgets/points_activity_chart.dart';
 import '../../../core/global_widgets/info_side_card.dart';
-
-
 
 class PointsScreen extends StatelessWidget {
   const PointsScreen({super.key});
@@ -46,13 +45,13 @@ class PointsScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      /// PAGE TITLE
+                      Text(
                         "Points",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AppTextStyles.titleMedium(context),
                       ),
+
+                      /// PROFILE
                       Row(
                         children: [
                           ClipRRect(
@@ -65,13 +64,11 @@ class PointsScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
+
                           if (!isMobile)
-                            const Text(
+                            Text(
                               "BHARAT KALRA & CO",
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: AppTextStyles.bodySmall(context),
                             ),
                         ],
                       )
@@ -87,24 +84,22 @@ class PointsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         /// ================= TOP SUMMARY =================
-                        isMobile
-                            ? _mobileStats()
-                            : _desktopStats(),
+                        isMobile ? _mobileStats() : _desktopStats(),
 
                         const SizedBox(height: 28),
 
                         /// ================= CHART + INFO =================
                         isMobile
-                            ? Column(
-                                children: const [
+                            ? const Column(
+                                children: [
                                   PointsActivityChart(),
                                   SizedBox(height: 24),
                                   InfoSideCard(),
                                 ],
                               )
-                            : Row(
+                            : const Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Expanded(
                                     flex: 3,
                                     child: PointsActivityChart(),
