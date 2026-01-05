@@ -29,14 +29,13 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
     backgroundColor: const Color(0xFFF5F6FA),
 
     /// ✅ APP BAR MUST BE HERE
-    appBar: const MobileAppBar(title: "Dashboard"),
+   
 
     /// ✅ BODY ONLY HERE
-    body: Row(
+    body: Column(
       children: [
     
-        const MobileBottomNav(),
-
+       const MobileAppBar(title: "Dashboard"),
         Expanded(
           child: ReorderableListView.builder(
         padding: const EdgeInsets.all(16),
@@ -55,9 +54,13 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
           );
         },
       ),
+      
         ),
+        const MobileBottomNav(),
       ],
+      
     ),
+    
     );
   }
 

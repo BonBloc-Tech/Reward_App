@@ -87,12 +87,14 @@ OtpTextField(
                   SizedBox(
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (otpController.text == controller.generatedOtp) {
-                          Get.offAll(() => const DashboardMobilePage());
-                        } else {
-                          Get.snackbar("Error", "Invalid OTP");
-                        }
+                     onPressed: () {
+  if (otpController.text == controller.generatedOtp) {
+    Get.offAllNamed('/DashboardMobilePage'); // make sure route exists in getPages
+  } else {
+    Get.snackbar("Error", "Invalid OTP");
+  }
+
+
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF0A2FB6),
