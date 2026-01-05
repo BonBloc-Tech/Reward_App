@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
+import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 
 
@@ -44,7 +44,7 @@ class _AccountPageState extends State<AccountPage> {
               Expanded(
                 child: Column(
                   children: [
-                     const MobileAppBar(title: "Dashboard"),
+                     const GlobalAppBarMobile(title: "Dashboard"),
                    
                     Expanded(
                       child: Padding(
