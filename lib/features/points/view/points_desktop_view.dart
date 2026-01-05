@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/points_controller.dart';
@@ -16,21 +15,22 @@ class PointsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(PointsController());
 
-    final isMobile = MediaQuery.of(context).size.width < 900;
-
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
       body: Row(
         children: [
-          if (!isMobile) const SideMenu(),
+          /// ================= SIDE MENU =================
+          const SideMenu(),
+
+          /// ================= MAIN CONTENT =================
           Expanded(
             child: Column(
               children: [
-                 SizedBox(
-        height: 64,
-        child: GlobalAppBar(title: 'Points Overview'),
-      ),
-                
+                /// ================= HEADER =================
+                SizedBox(
+                  height: 64,
+                  child: GlobalAppBar(title: 'Points Overview'),
+                ),
 
                 /// ================= BODY =================
                 Expanded(
@@ -40,33 +40,25 @@ class PointsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         /// ================= TOP SUMMARY =================
-                        isMobile ? _mobileStats() : _desktopStats(),
+                        _desktopStats(),
 
                         const SizedBox(height: 28),
 
                         /// ================= CHART + INFO =================
-                        isMobile
-                            ? const Column(
-                                children: [
-                                  PointsActivityChart(),
-                                  SizedBox(height: 24),
-                                  InfoSideCard(),
-                                ],
-                              )
-                            : const Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: PointsActivityChart(),
-                                  ),
-                                  SizedBox(width: 24),
-                                  Expanded(
-                                    flex: 2,
-                                    child: InfoSideCard(),
-                                  ),
-                                ],
-                              ),
+                        const Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: PointsActivityChart(),
+                            ),
+                            SizedBox(width: 24),
+                            Expanded(
+                              flex: 2,
+                              child: InfoSideCard(),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -79,53 +71,7 @@ class PointsScreen extends StatelessWidget {
     );
   }
 
-  /// ================= MOBILE STATS =================
-  Widget _mobileStats() {
-    return Column(
-      children: const [
-        Row(
-          children: [
-            Expanded(
-              child: StatCard(
-                title: "Available\nPoints",
-                value: "12,000",
-                icon: Icons.account_balance_wallet,
-                bgColor: Color(0xFFEFF4FF),
-              ),
-            ),
-            SizedBox(width: 12),
-            Expanded(
-              child: StatCard(
-                title: "Earned\nThis Month",
-                value: "1,200",
-                icon: Icons.trending_up,
-                bgColor: Color(0xFFEFFAF3),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-              child: StatCard(
-                title: "Total\nEarned",
-                value: "18,000",
-                icon: Icons.card_giftcard,
-                bgColor: Color(0xFFF6EEFF),
-              ),
-            ),
-            SizedBox(width: 12),
-            Expanded(
-              child: TierProgressCard(),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  /// ================= DESKTOP STATS =================
+  /// ================= STATS =================
   Widget _desktopStats() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
