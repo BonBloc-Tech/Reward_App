@@ -39,7 +39,7 @@ class _AccountPageState extends State<AccountPage> {
           backgroundColor: const Color(0xFFF5F6FA),
           body: Row(
             children: [
-              if (isDesktop) const SideNavbarMobile(),
+              if (isDesktop) const MobileBottomNav(),
 
               Expanded(
                 child: Column(

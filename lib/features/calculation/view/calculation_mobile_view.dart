@@ -65,7 +65,7 @@ class PointsCalculationScreenMobile extends StatelessWidget {
       ),
 
 
-      bottomNavigationBar: const SideNavbarMobile()
+      bottomNavigationBar: const MobileBottomNav()
     );
   }
 

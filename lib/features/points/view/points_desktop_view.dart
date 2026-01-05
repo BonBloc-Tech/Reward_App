@@ -21,10 +21,7 @@ class PointsScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFF6F7FB),
       body: Row(
         children: [
-          /// ================= SIDEBAR (DESKTOP ONLY) =================
           if (!isMobile) const SideMenu(),
-
-          /// ================= MAIN CONTENT =================
           Expanded(
             child: Column(
               children: [

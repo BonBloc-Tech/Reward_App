@@ -35,7 +35,7 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
     body: Row(
       children: [
     
-        const SideNavbarMobile(),
+        const MobileBottomNav(),
 
         Expanded(
           child: ReorderableListView.builder(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/calculation_controller.dart';
@@ -16,7 +17,6 @@ class PointsCalculationPage extends StatefulWidget {
 }
 
 class _PointsCalculationPageState extends State<PointsCalculationPage> {
-  /// 🔹 ORDER (VERTICAL)
   List<String> layoutOrder = ['rules', 'summary', 'table'];
 
   void swap(String from, String to) {
@@ -40,16 +40,14 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
       case 'table':
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
+            /// ✅ SECTION TITLE
             Text(
               'Invoice Details',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
+              style: AppTextStyles.titleSmall(context),
             ),
-            SizedBox(height: 16),
-            InvoiceTable(),
+            const SizedBox(height: 16),
+            const InvoiceTable(),
           ],
         );
 
@@ -60,7 +58,6 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
 
   Widget draggableSection(String id) {
     return DragTarget<String>(
-      // ignore: unrelated_type_equality_checks
       onWillAcceptWithDetails: (from) => from != id,
       onAcceptWithDetails: (from) => swap(from as String, id),
       builder: (context, _, __) {
@@ -89,18 +86,24 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
+          /// ================= SIDEBAR =================
           const SideMenu(),
 
+          /// ================= MAIN CONTENT =================
           Expanded(
             child: Column(
               children: [
-              GlobalAppBar(title:   'Points Calculation',),
+                /// ✅ GLOBAL HEADER (already consistent)
+                const GlobalAppBar(
+                  title: 'Points Calculation',
+                ),
+
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(32),
                     child: Column(
                       children: [
-                        /// 🔹 RULES + SUMMARY ROW (DYNAMIC)
+                        /// 🔹 RULES + SUMMARY (DRAGGABLE)
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: layoutOrder
@@ -109,8 +112,8 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
                               .map(
                                 (id) => Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 24),
+                                    padding:
+                                        const EdgeInsets.only(right: 24),
                                     child: draggableSection(id),
                                   ),
                                 ),
