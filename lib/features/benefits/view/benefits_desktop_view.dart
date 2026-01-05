@@ -18,14 +18,11 @@ class BenefitsDesktopView extends StatelessWidget {
         children: [
           const SideMenu(),
 
-        
           Expanded(
             child: Column(
               children: [
-               
                 const GlobalAppBar(title: "Benefits"),
-
-                /// BODY
+                
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(

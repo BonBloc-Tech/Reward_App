@@ -41,7 +41,6 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// ✅ SECTION TITLE
             Text(
               'Invoice Details',
               style: AppTextStyles.titleSmall(context),
@@ -86,14 +85,10 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-          /// ================= SIDEBAR =================
           const SideMenu(),
-
-          /// ================= MAIN CONTENT =================
           Expanded(
             child: Column(
               children: [
-                /// ✅ GLOBAL HEADER (already consistent)
                 const GlobalAppBar(
                   title: 'Points Calculation',
                 ),
@@ -103,7 +98,6 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
                     padding: const EdgeInsets.all(32),
                     child: Column(
                       children: [
-                        /// 🔹 RULES + SUMMARY (DRAGGABLE)
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: layoutOrder
@@ -122,8 +116,7 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
                         ),
 
                         const SizedBox(height: 32),
-
-                        /// 🔹 TABLE (FULL WIDTH – DRAGGABLE)
+                        
                         draggableSection('table'),
                       ],
                     ),

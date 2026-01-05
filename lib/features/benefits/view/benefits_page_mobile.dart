@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
-
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import '../controller/benefits_controller.dart';
-
 import '../../../core/global_widgets/tier_progress_card.dart';
 
 class BenefitsScreenMobile extends StatelessWidget {
@@ -16,7 +14,6 @@ class BenefitsScreenMobile extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
 
-      /// ================= APP BAR =================
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
@@ -39,18 +36,13 @@ class BenefitsScreenMobile extends StatelessWidget {
         ],
       ),
 
-      /// ================= BODY =================
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// ================= TIER PROGRESS =================
             const TierProgressCard(),
-
             const SizedBox(height: 28),
-
-            /// ================= TITLE =================
             const Text(
               "Available Benefits",
               style: TextStyle(
@@ -61,7 +53,6 @@ class BenefitsScreenMobile extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            /// ================= BENEFITS LIST =================
             Obx(
               () => ListView.separated(
                 shrinkWrap: true,
@@ -84,7 +75,6 @@ class BenefitsScreenMobile extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /// BENEFIT TITLE
                       Text(
                         item.title,
                         style: const TextStyle(
@@ -96,7 +86,6 @@ class BenefitsScreenMobile extends StatelessWidget {
 
                       const SizedBox(height: 6),
 
-                      /// BENEFIT DESCRIPTION
                       Text(
                         item.description,
                         style: const TextStyle(
@@ -114,8 +103,8 @@ class BenefitsScreenMobile extends StatelessWidget {
         ),
       ),
 
-      /// ================= BOTTOM NAV =================
-      // bottomNavigationBar: const Side_Menu(),
+      
+      bottomNavigationBar: const MobileBottomNav(),
     );
   }
 }

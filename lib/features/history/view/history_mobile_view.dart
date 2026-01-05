@@ -7,7 +7,6 @@ import '../widget/history_table_widget.dart';
 class MobileHistoryList extends StatelessWidget {
   MobileHistoryList({super.key});
 
-  /// ✅ Controller init (ONLY ONCE)
   final HistoryController controller =
       Get.put(HistoryController());
 
@@ -30,7 +29,6 @@ class MobileHistoryList extends StatelessWidget {
         ),
       ),
 
-      /// 🔹 BODY
       body: Column(
         children: [
           /// 🔍 SEARCH
@@ -93,14 +91,12 @@ class MobileHistoryList extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          /// 📄 HISTORY TABLE (REUSED WIDGET)
           const Expanded(
             child: HistoryTable(),
           ),
         ],
       ),
 
-      /// 🔹 BOTTOM NAV
       bottomNavigationBar: const MobileBottomNav(),
     );
   }

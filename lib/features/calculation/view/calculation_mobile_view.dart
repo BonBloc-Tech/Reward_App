@@ -15,8 +15,6 @@ class PointsCalculationScreenMobile extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
-
-      // ================= APP BAR =================
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
@@ -35,21 +33,16 @@ class PointsCalculationScreenMobile extends StatelessWidget {
         ],
       ),
 
-      // ================= BODY =================
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            /// ✅ MOBILE SAFE RULES CARD (FULL CONTENT)
             const MobileRulesCard(),
-
             const SizedBox(height: 24),
 
-            /// ✅ MOBILE SAFE POINTS SUMMARY
             _mobilePointsSummary(),
 
             const SizedBox(height: 32),
-
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -64,14 +57,10 @@ class PointsCalculationScreenMobile extends StatelessWidget {
         ),
       ),
 
-
       bottomNavigationBar: const MobileBottomNav()
     );
   }
 
-  // =========================================================
-  // ✅ POINTS SUMMARY (UNCHANGED – WORKING FINE)
-  // =========================================================
   Widget _mobilePointsSummary() {
     return Container(
       width: double.infinity,
@@ -232,10 +221,6 @@ class PointsCalculationScreenMobile extends StatelessWidget {
   }
 }
 
-//////////////////////////////////////////////////////////////
-// ✅ MOBILE SAFE RULES CARD (YOUR FULL CONTENT)
-//////////////////////////////////////////////////////////////
-
 class MobileRulesCard extends StatelessWidget {
   const MobileRulesCard({super.key});
 
@@ -269,7 +254,6 @@ class MobileRulesCard extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          /// EARN RULE
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),

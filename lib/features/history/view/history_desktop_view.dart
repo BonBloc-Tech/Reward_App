@@ -16,10 +16,7 @@ class HistoryPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-        
           const SideMenu(),
-
-         
           Expanded(
             child: Column(
               children: [
@@ -28,9 +25,6 @@ class HistoryPage extends StatelessWidget {
         child: GlobalAppBar(title: 'History'),
       ),
                
-                
-
-                /// 🔹 BODY
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -99,8 +93,6 @@ class HistoryPage extends StatelessWidget {
                           ),
 
                           const SizedBox(height: 24),
-
-                         
                           const HistoryTable(),
                         ],
                       ),

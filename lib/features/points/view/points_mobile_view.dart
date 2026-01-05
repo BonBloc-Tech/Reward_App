@@ -15,7 +15,6 @@ class PointsScreenMobile extends StatefulWidget {
 }
 
 class _PointsScreenMobileState extends State<PointsScreenMobile> {
-  /// 🔥 Draggable widgets list
   late List<Widget> sections;
 
   @override
@@ -93,7 +92,6 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
         ],
       ),
 
-      /// 🔥 DRAGGABLE BODY
       body: SafeArea(
         child: ReorderableListView(
           padding: const EdgeInsets.all(16),
@@ -116,7 +114,6 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
         ),
       ),
 
-      /// ✅ BOTTOM NAV
       bottomNavigationBar: const MobileBottomNav(),
     );
   }
