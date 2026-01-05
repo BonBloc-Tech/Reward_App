@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/calculation_controller.dart';
 import '../widget/invoice_table_widget.dart';
@@ -93,40 +94,7 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
           Expanded(
             child: Column(
               children: [
-                /// 🔹 HEADER
-                Container(
-                  height: 64,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      bottom: BorderSide(color: Color(0xFFE5E7EB)),
-                    ),
-                  ),
-                  child: Row(
-                    children: const [
-                      Text(
-                        'Points Calculation Page',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Spacer(),
-                      Icon(Icons.account_circle, size: 32),
-                      SizedBox(width: 8),
-                      Text(
-                        'BHARAT KALRA & CO',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                /// 🔹 BODY
+              GlobalAppBar(title:   'Points Calculation',),
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(32),
