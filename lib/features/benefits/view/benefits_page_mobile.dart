@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
+// import 'package:sm_reward_app/core/navigation/side_navbae_mob.dart';
 
 import '../controller/benefits_controller.dart';
 
@@ -115,7 +115,7 @@ class BenefitsScreenMobile extends StatelessWidget {
       ),
 
       /// ================= BOTTOM NAV =================
-      bottomNavigationBar: const Side_Menu(),
+      // bottomNavigationBar: const Side_Menu(),
     );
   }
 }
