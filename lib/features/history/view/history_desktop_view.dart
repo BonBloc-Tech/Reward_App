@@ -114,7 +114,7 @@ class HistoryPage extends StatelessWidget {
 
                           const SizedBox(height: 16),
 
-                          /// 🔘 FILTER BUTTONS
+                          
                           Row(
                             children: [
                               Obx(() => _FilterButton(
@@ -137,7 +137,7 @@ class HistoryPage extends StatelessWidget {
 
                           const SizedBox(height: 24),
 
-                          /// 📊 TABLE (SEPARATE WIDGET)
+                         
                           const HistoryTable(),
                         ],
                       ),

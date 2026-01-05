@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/appbar/appbar_mob.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
-import 'package:sm_reward_app/features/dashboard/widget/buildmembercard.dart';
-import 'package:sm_reward_app/features/dashboard/widget/buildpointcard.dart';
+import 'package:sm_reward_app/features/dashboard/widget/buildmembercard_widget.dart';
+import 'package:sm_reward_app/features/dashboard/widget/buildpointcard_widget.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class DashboardMobilePage extends StatefulWidget {
