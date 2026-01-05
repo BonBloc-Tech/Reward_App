@@ -5,9 +5,8 @@ import 'package:sm_reward_app/core/global_widgets/tier_progress_card.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/benefits_controller.dart';
 import '../widget/benefits_widget.dart';
-
-class BenefitsPage extends StatelessWidget {
-  const BenefitsPage({super.key});
+class BenefitsDesktopView extends StatelessWidget {
+  const BenefitsDesktopView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,43 +17,45 @@ class BenefitsPage extends StatelessWidget {
       body: Row(
         children: [
           const SideMenu(),
-         GlobalAppBar(title:  "Benefits"),
-                /// ================= BODY =================
+
+        
+          Expanded(
+            child: Column(
+              children: [
+               
+                const GlobalAppBar(title: "Benefits"),
+
+                /// BODY
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 20,
-                      ),
+                      padding: const EdgeInsets.all(24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          /// ================= TIER PROGRESS =================
                           const TierProgressCard(),
+                          const SizedBox(height: 24),
 
-                          const SizedBox(height: 28),
-
-                          /// ================= TITLE =================
                           const Text(
-                            'Available Benefits',
+                            "Available Benefits",
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
 
                           const SizedBox(height: 16),
 
-                          /// ================= BENEFITS LIST =================
                           Obx(
                             () => ListView.separated(
                               shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: controller.benefitsList.length,
-                              separatorBuilder: (_, _) =>
-                                  Divider(color: Colors.grey.shade300),
-                              itemBuilder: (context, index) {
+                              physics:
+                                  const NeverScrollableScrollPhysics(),
+                              itemCount:
+                                  controller.benefitsList.length,
+                              separatorBuilder: (_, __) =>
+                                  const Divider(),
+                              itemBuilder: (_, index) {
                                 final item =
                                     controller.benefitsList[index];
                                 return BenefitListTile(
@@ -71,9 +72,9 @@ class BenefitsPage extends StatelessWidget {
                 ),
               ],
             ),
-        
-        
-      
+          ),
+        ],
+      ),
     );
   }
 }

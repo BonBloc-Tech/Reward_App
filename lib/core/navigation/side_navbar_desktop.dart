@@ -60,7 +60,7 @@ class SideMenu extends StatelessWidget {
             assetPath: 'assets/logo/calculation_icon.png',
             size: 30,
             onTap: () =>
-                Get.toNamed(AppRoutes.pointsCalculationdesktop.toName),
+                Get.toNamed(AppRoutes.pointscalculationdesktop.toName),
           ),
 
           const Spacer(),
