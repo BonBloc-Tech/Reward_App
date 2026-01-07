@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
 
 import '../controller/benefits_controller.dart';
 import '../../../core/global_widgets/tier_progress_card.dart';
@@ -14,51 +15,42 @@ class BenefitsScreenMobile extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
 
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
-        title: const Text(
-          "Benefits",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 16,
-              backgroundImage:
-                  AssetImage('assets/logo/profile_logo.png'),
-            ),
-          ),
-        ],
+      /// ✅ GLOBAL APP BAR (STATUS BAR + TITLE + PROFILE)
+      appBar: const GlobalAppBarMobile(
+        title: "Benefits",
+        showBack: false, // no back button on Benefits page
       ),
 
+      /// ✅ BODY CONTENT
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// 🔹 TIER PROGRESS CARD
             const TierProgressCard(),
+
             const SizedBox(height: 28),
+
+            /// 🔹 SECTION TITLE
             const Text(
               "Available Benefits",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
+                color: Colors.black,
               ),
             ),
 
             const SizedBox(height: 16),
 
+            /// 🔹 BENEFITS LIST
             Obx(
               () => ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.benefitsList.length,
-                separatorBuilder: (_, _) => Padding(
+                separatorBuilder: (_, __) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Divider(
                     height: 1,
@@ -66,7 +58,6 @@ class BenefitsScreenMobile extends StatelessWidget {
                     color: Colors.grey.shade300,
                   ),
                 ),
-
                 itemBuilder: (context, index) {
                   final item = controller.benefitsList[index];
 
@@ -81,9 +72,7 @@ class BenefitsScreenMobile extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-
                       const SizedBox(height: 6),
-
                       Text(
                         item.description,
                         style: const TextStyle(
@@ -100,9 +89,6 @@ class BenefitsScreenMobile extends StatelessWidget {
           ],
         ),
       ),
-
-      
-      
     );
   }
 }

@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/features/Account/view/account_mobile_view.dart';
 
-class GlobalAppBarMobile extends StatelessWidget {
+class GlobalAppBarMobile extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onProfileTap;
+  final bool showBack;
 
   const GlobalAppBarMobile({
     super.key,
     required this.title,
     this.onProfileTap,
+    this.showBack = false,
   });
+
+  @override
+  Size get preferredSize => const Size.fromHeight(72);
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final screenWidth = MediaQuery.of(context).size.width;
+    final statusBarHeight = MediaQuery.of(context).padding.top;
 
     return SafeArea(
       bottom: false,
@@ -30,8 +37,8 @@ class GlobalAppBarMobile extends StatelessWidget {
               const Color(0xFF2C2C2C),
             ]
           : [
-             Colors.white,
-             Colors.white
+              const Color.fromARGB(255, 127, 40, 220),
+              const Color(0xFF2575FC),
             ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -58,7 +65,7 @@ class GlobalAppBarMobile extends StatelessWidget {
                 style: AppTextStyles.titleSmall(context).copyWith(
                   color: isDarkMode
                       ? Colors.white
-                      : Colors.black,
+                      : Colors.white,
                   fontWeight: FontWeight.w700,
                 ),
                 maxLines: 1,
@@ -81,11 +88,11 @@ class GlobalAppBarMobile extends StatelessWidget {
                   CircleAvatar(
                     radius: 14,
                     backgroundColor:
-                        isDarkMode ? Colors.blueGrey : const Color.fromARGB(255, 238, 234, 234),
+                        isDarkMode ? Colors.blueGrey : Colors.white,
                     child: const Icon(
                       Icons.person,
                       size: 12,
-                      color: Color.fromARGB(255, 94, 96, 99),
+                      color: Colors.blueAccent,
                     ),
                   ),
                   const SizedBox(width: 6),

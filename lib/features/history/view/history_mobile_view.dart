@@ -15,6 +15,20 @@ class MobileHistoryList extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
 
+      /// 🔹 APP BAR
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text(
+          "History",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
+      ),
+
       body: Column(
         children: [
           /// 🔵 HEADER

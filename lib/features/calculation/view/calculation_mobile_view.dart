@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
 
 
 import '../controller/calculation_controller.dart';
@@ -15,24 +16,10 @@ class PointsCalculationScreenMobile extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
-        title: const Text(
-          "Points Calculation",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 16,
-              backgroundImage: AssetImage('assets/logo/profile_logo.png'),
-            ),
-          ),
-        ],
+      appBar: const GlobalAppBarMobile(
+        title: "Calculation",
+        showBack: false, // no back button on Benefits page
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
