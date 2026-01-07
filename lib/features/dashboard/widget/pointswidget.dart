@@ -8,7 +8,7 @@ class Pointswidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -32,7 +32,7 @@ class Pointswidget extends StatelessWidget {
                 child: BuildPointCard(
                   title: "Available Points",
                   value: "12,000",
-                  color: Color.fromARGB(255, 165, 124, 236),
+                  color: const Color.fromARGB(255, 151, 188, 224),
                 ),
               ),
               const SizedBox(width: 12),
@@ -54,7 +54,7 @@ class Pointswidget extends StatelessWidget {
                 child: BuildPointCard(
                   title: "Total Earned",
                   value: "18,000",
-                  color: Color.fromARGB(255, 114, 181, 236),
+                  color:Color(0xFFDECFF1),
                 ),
               ),
               const SizedBox(width: 12),
@@ -62,7 +62,7 @@ class Pointswidget extends StatelessWidget {
                 child: BuildPointCard(
                   title: "Redeemed",
                   value: "6,000",
-                  color: Color.fromARGB(255, 241, 98, 146),
+                  color:const Color.fromARGB(255, 151, 188, 224),
                 ),
               ),
             ],

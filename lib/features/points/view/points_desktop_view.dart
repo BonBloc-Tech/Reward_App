@@ -16,16 +16,11 @@ class PointsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
+      appBar: GlobalAppBar(title: 'Points Overview'),
       body: Row(
         children: [
          
-          Expanded(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 64,
-                  child: GlobalAppBar(title: 'Points Overview'),
-                ),
+        
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(16),
@@ -54,9 +49,7 @@ class PointsScreen extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
-      ),
+          
     );
   }
 

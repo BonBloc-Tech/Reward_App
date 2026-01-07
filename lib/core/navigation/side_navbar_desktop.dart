@@ -1,91 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sm_reward_app/routes/app_routes.dart';
+import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
+import 'package:sm_reward_app/features/calculation/view/calculation_desktop_view.dart';
+import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
+import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
+import 'package:sm_reward_app/features/points/view/points_desktop_view.dart';
 
-class SideMenu extends StatelessWidget {
-  const SideMenu({super.key});
+class SideMenuLayout extends StatefulWidget {
+  const SideMenuLayout({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 72,
-      color: Colors.black,
-      child: Column(
-        children: [
-          const SizedBox(height: 24),
+  State<SideMenuLayout> createState() => _SideMenuLayoutState();
+}
 
-          /// 🔵 APP LOGO
-          Container(
-            width: 50,
-            height: 50,
-            padding: const EdgeInsets.all(6),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.black,
-            ),
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
-            ),
+class _SideMenuLayoutState extends State<SideMenuLayout> {
+  int selectedIndex = 0;
+
+  final List<String> labels = [
+    "Dashboard",
+    "Points",
+    "History",
+    "Benefits",
+    "Calculation",
+    "Logout"
+  ];
+
+  final List<String> icons = [
+    'assets/logo/home_icon.png',
+    'assets/logo/points_icon.png',
+    'assets/logo/history_icon.png',
+    'assets/logo/benefits_icon.png',
+    'assets/logo/calculation_icon.png',
+    'assets/logo/logout_icon.png',
+  ];
+  void setSelectedIndex(int index) {
+  setState(() {
+    selectedIndex = index;
+  });
+}
+
+  final List<Widget> screens = [
+   DashboardPage(
+   
+  ),
+    PointsScreen(),
+    HistoryPage(),
+    BenefitsDesktopView(),
+    PointsCalculationPage(), 
+    Container(), 
+  ];
+
+ @override
+Widget build(BuildContext context) {
+  final screens = [
+    DashboardPage(
+     
+    ),
+    PointsScreen(),
+    HistoryPage(),
+    BenefitsDesktopView(),
+    PointsCalculationPage(),
+    Container(),
+  ];
+
+  return Scaffold(
+    body: Row(
+      children: [
+        /// SIDE MENU
+        Container(
+          width: 72,
+          color: Colors.black,
+          child: Column(
+            children: [
+              const SizedBox(height: 24),
+              Image.asset('assets/logo/app_logo.png', width: 40),
+              const SizedBox(height: 42),
+              ...List.generate(labels.length, (index) {
+                final isSelected = selectedIndex == index;
+                return _menuItem(
+                  label: labels[index],
+                  assetPath: icons[index],
+                  isSelected: isSelected,
+                  onTap: () {
+                    if (labels[index] == "Logout") {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    } else {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    }
+                  },
+                  size: labels[index] == "Calculation" ? 30 : 22,
+                );
+              }),
+              const Spacer(),
+              const SizedBox(height: 28),
+            ],
           ),
+        ),
 
-          const SizedBox(height: 42),
-
-          /// 🧭 MENU ITEMS
-         _menuItem(
-  label: "Home",
-  assetPath: 'assets/logo/home_icon.png',
-  onTap: () => Get.toNamed(AppRoutes.dashboarddesktop.toName),
-),
-          _menuItem(
-            label: "Points",
-            assetPath: 'assets/logo/points_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.pointsdesktop.toName),
+        /// CONTENT
+        Expanded(
+          child: IndexedStack(
+            index: selectedIndex,
+            children: screens,
           ),
+        ),
+      ],
+    ),
+  );
+}
 
-          _menuItem(
-            label: "History",
-            assetPath: 'assets/logo/history_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.historydesktop.toName),
-          ),
-
-          _menuItem(
-            label: "Benefits",
-            assetPath: 'assets/logo/benefits_icon.png',
-            onTap: () => Get.toNamed(AppRoutes.benefitsdesktop.toName),
-          ),
-
-          _menuItem(
-            label: "Calculation",
-            assetPath: 'assets/logo/calculation_icon.png',
-            size: 30,
-            onTap: () =>
-                Get.toNamed(AppRoutes.pointscalculationdesktop.toName),
-          ),
-
-          const Spacer(),
-
-          /// 🚪 LOGOUT
-          _menuItem(
-            label: "Logout",
-            assetPath: 'assets/logo/logout_icon.png',
-            onTap: () {
-              // 🔐 clear session / token later if needed
-              Get.offAllNamed(AppRoutes.logindesktop.toName);
-            },
-          ),
-
-          const SizedBox(height: 28),
-        ],
-      ),
-    );
-  }
-
-  /// ✅ ICON + LABEL (VERTICAL + TAP)
+  /// 🔹 MENU ITEM WIDGET
   Widget _menuItem({
     required String label,
     required String assetPath,
-    required VoidCallback? onTap,
+    required VoidCallback onTap,
+    required bool isSelected,
     double size = 22,
   }) {
     return InkWell(
@@ -93,22 +123,20 @@ class SideMenu extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               assetPath,
               width: size,
               height: size,
-              color: Colors.white,
+              color: isSelected ? Colors.blue : Colors.white70,
             ),
             const SizedBox(height: 6),
             Text(
               label,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 10,
-                color: Colors.white70,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
+                color: isSelected ? Colors.blue : Colors.white70,
               ),
             ),
           ],

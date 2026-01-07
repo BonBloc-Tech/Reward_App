@@ -14,17 +14,11 @@ class HistoryPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
+      appBar: GlobalAppBar(title: 'History'),
       body: Row(
         children: [
          
-          Expanded(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 64,
-                  child: GlobalAppBar(title: 'History'),
-                ),
-
+          
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -115,9 +109,7 @@ class HistoryPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
-      ),
+         
     );
   }
 }

@@ -45,7 +45,6 @@ Widget build(BuildContext context) {
         ),
       ],
     ),
-// bottomNavigationBar: MobileBottomNav(),
   );
 }
 }

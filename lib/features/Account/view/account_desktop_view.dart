@@ -32,7 +32,11 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F6FA),
+  backgroundColor: const Color(0xFFF5F6FA),
+ appBar: GlobalAppBar(title: "Account", showBackButton: true),
+
+  
+
       body: Row(
         children: [
           
@@ -40,7 +44,7 @@ class _AccountPageState extends State<AccountPage> {
           Expanded(
             child: Column(
               children: [
-               GlobalAppBar(title: "Account"),
+             
 
                 Expanded(
                   child: Padding(

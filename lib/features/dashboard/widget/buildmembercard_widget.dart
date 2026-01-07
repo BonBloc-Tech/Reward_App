@@ -21,7 +21,7 @@ class BuildMembershipCard extends StatelessWidget {
       width: 160,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color:  const Color.fromARGB(255, 153, 231, 155),
+        color:  Color(0xFFDECFF1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(

@@ -30,8 +30,8 @@ class GlobalAppBarMobile extends StatelessWidget {
               const Color(0xFF2C2C2C),
             ]
           : [
-              const Color.fromARGB(255, 127, 40, 220),
-              const Color(0xFF2575FC),
+             Colors.white,
+             Colors.white
             ],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -58,7 +58,7 @@ class GlobalAppBarMobile extends StatelessWidget {
                 style: AppTextStyles.titleSmall(context).copyWith(
                   color: isDarkMode
                       ? Colors.white
-                      : Colors.white,
+                      : Colors.black,
                   fontWeight: FontWeight.w700,
                 ),
                 maxLines: 1,
@@ -81,11 +81,11 @@ class GlobalAppBarMobile extends StatelessWidget {
                   CircleAvatar(
                     radius: 14,
                     backgroundColor:
-                        isDarkMode ? Colors.blueGrey : Colors.white,
+                        isDarkMode ? Colors.blueGrey : const Color.fromARGB(255, 238, 234, 234),
                     child: const Icon(
                       Icons.person,
                       size: 12,
-                      color: Colors.blueAccent,
+                      color: Color.fromARGB(255, 94, 96, 99),
                     ),
                   ),
                   const SizedBox(width: 6),
