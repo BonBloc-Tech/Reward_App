@@ -8,7 +8,7 @@ class Pointswidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 6),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,

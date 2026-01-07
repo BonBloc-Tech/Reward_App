@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
 import '../controller/history_controller.dart';
 import '../widget/history_table_widget.dart';
 
@@ -15,17 +16,9 @@ class MobileHistoryList extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
 
       /// 🔹 APP BAR
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "History",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
+      appBar: const GlobalAppBarMobile(
+        title: "History",
+        showBack: false, // no back button on Benefits page
       ),
 
       body: Column(

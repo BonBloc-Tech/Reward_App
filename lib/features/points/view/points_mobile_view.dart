@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
-
 
 class PointsScreenMobile extends StatefulWidget {
   const PointsScreenMobile({super.key});
@@ -61,7 +61,7 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
     );
   }
 
-  /// 🔹 TIER CARD
+  /// 🔹 TIER PROGRESS
   Widget _buildTierProgressCard() {
     const current = 12500;
     const total = 15000;
@@ -118,7 +118,6 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
         ),
         const SizedBox(height: 12),
 
-        /// CHART
         Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
@@ -165,7 +164,6 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
 
         const SizedBox(height: 16),
 
-        /// SUMMARY CARDS
         Row(
           children: [
             _summaryCard(
@@ -234,10 +232,7 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
   Widget _buildInfoCards() {
     return Column(
       children: [
-        _infoCard(
-          "Expiry Date",
-          "Valid for 1 year from date of Redeem Earning",
-        ),
+        _infoCard("Expiry Date", "Valid for 1 year from date of Redeem Earning"),
         const SizedBox(height: 16),
         _infoCard(
           "Ways to Earn Points",
@@ -271,7 +266,6 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
     );
   }
 
-  /// 🔹 BAR DATA
   List<BarChartGroupData> _barGroups() {
     final earned = [1200, 950, 1400, 700, 1100, 900];
     final redeemed = [350, 600, 400, 200, 750, 400];
@@ -293,34 +287,24 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
 
-        title: const Text("Points", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-
-        
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 16,
-              backgroundImage:
-                  AssetImage('assets/logo/profile_logo.png'),
-            ),
-          ),
-        ],
-
+      /// ✅ GLOBAL APP BAR (FIXED STATUS BAR ISSUE)
+      appBar: const GlobalAppBarMobile(
+        title: "Points",
+        showBack: false,
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: sections.map((e) => Padding(
-          padding: const EdgeInsets.only(bottom: 24),
-          child: e,
-        )).toList(),
+        children: sections
+            .map(
+              (e) => Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: e,
+              ),
+            )
+            .toList(),
       ),
-
-      // bottomNavigationBar: const MobileBottomNav(),
     );
   }
 }
