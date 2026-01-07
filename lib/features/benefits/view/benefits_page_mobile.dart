@@ -58,9 +58,7 @@ class BenefitsScreenMobile extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.benefitsList.length,
-
-                /// 🔹 DIVIDER BETWEEN ITEMS
-                separatorBuilder: (_, __) => Padding(
+                separatorBuilder: (_, _) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Divider(
                     height: 1,
@@ -104,7 +102,7 @@ class BenefitsScreenMobile extends StatelessWidget {
       ),
 
       
-      bottomNavigationBar: const MobileBottomNav(currentIndex: 3),
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 2,),
     );
   }
 }

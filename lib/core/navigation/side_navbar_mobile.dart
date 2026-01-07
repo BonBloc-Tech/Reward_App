@@ -5,28 +5,28 @@ import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.
 import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
 import 'package:sm_reward_app/features/history/view/history_mobile_view.dart';
 import 'package:sm_reward_app/features/points/view/points_mobile_view.dart';
-
+ 
 class MobileBottomNav extends StatefulWidget {
   final int currentIndex;
-
+ 
   const MobileBottomNav({
     super.key,
     required this.currentIndex,
   });
-
+ 
   @override
   State<MobileBottomNav> createState() => _MobileBottomNavState();
 }
-
+ 
 class _MobileBottomNavState extends State<MobileBottomNav> {
   late int _currentIndex;
-
+ 
   @override
   void initState() {
     super.initState();
     _currentIndex = widget.currentIndex;
   }
-
+ 
   final List<_NavItem> _items = const [
     _NavItem("Home", "assets/logo/home_icon.png"),
     _NavItem("Points", "assets/logo/points_icon.png"),
@@ -34,7 +34,7 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
     _NavItem("Benefits", "assets/logo/benefits_icon.png"),
     _NavItem("Calculation", "assets/logo/calculation_icon.png"),
   ];
-
+ 
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,16 +55,16 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
       ),
     );
   }
-
+ 
   Widget _buildNavItem(int index) {
     final bool isSelected = _currentIndex == index;
-
+ 
     return GestureDetector(
       onTap: () {
         if (_currentIndex == index) return;
-
+ 
         setState(() => _currentIndex = index);
-
+ 
         switch (index) {
           case 0:
             Get.offAll(() => const DashboardMobilePage());
@@ -109,9 +109,9 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
               ),
             ),
           ),
-
+ 
           const SizedBox(height: 4),
-
+ 
           /// LABEL
           Text(
             _items[index].label,
@@ -128,11 +128,12 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
     );
   }
 }
-
+ 
 /// 🔹 MODEL
 class _NavItem {
   final String label;
   final String icon;
-
+ 
   const _NavItem(this.label, this.icon);
 }
+ 

@@ -43,6 +43,7 @@ class LoginPageMobile extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
+                              // ignore: deprecated_member_use
                               color: const Color.fromARGB(255, 30, 4, 135).withOpacity(0.4),
                               blurRadius: 10,
                               offset: const Offset(0, 1),
@@ -119,6 +120,7 @@ class LoginPageMobile extends StatelessWidget {
                                           await controller.sendOtp();
                                           if (controller.isOtpSent.value) {
                                             Navigator.push(
+                                              // ignore: use_build_context_synchronously
                                               context,
                                               MaterialPageRoute(
                                                 builder: (_) =>

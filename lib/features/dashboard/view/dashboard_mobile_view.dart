@@ -5,21 +5,21 @@ import 'package:sm_reward_app/features/dashboard/widget/buildmembercard_widget.d
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/donutcard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/recentactivity_widget.dart';
-
+ 
 class DashboardMobilePage extends StatefulWidget {
   const DashboardMobilePage({super.key});
-
+ 
   @override
   State<DashboardMobilePage> createState() => _DashboardMobilePageState();
 }
-
+ 
 class _DashboardMobilePageState extends State<DashboardMobilePage> {
   final List<String> cardOrder = [
     'points_group',
     'donut',
     'recent',
   ];
-
+ 
   void swap(int from, int to) {
     setState(() {
       final temp = cardOrder[from];
@@ -27,7 +27,7 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
       cardOrder[to] = temp;
     });
   }
-
+ 
   /// ---------------- ALL POINTS IN ONE CONTAINER ----------------
   Widget buildAllPointsContainer() {
     return Container(
@@ -47,7 +47,7 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 16),
-
+ 
           /// Available + Membership
           Row(
             children: [
@@ -68,9 +68,9 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
               ),
             ],
           ),
-
+ 
           const SizedBox(height: 12),
-
+ 
           /// Earned + Redeemed
           Row(
             children: [
@@ -95,11 +95,11 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
       ),
     );
   }
-
+ 
   /// ---------------- SINGLE CARDS ----------------
   Widget buildSingleCard(String id) {
     Widget child;
-
+ 
     switch (id) {
       case 'donut':
         child = const DonutcardWidget();
@@ -110,14 +110,14 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
       default:
         child = const SizedBox();
     }
-
+ 
     return child;
   }
-
+ 
   /// ---------------- DRAGGABLE CARD ----------------
   Widget draggableCard(int index) {
     final id = cardOrder[index];
-
+ 
     return DragTarget<int>(
       onWillAccept: (from) => from != index,
       onAccept: (from) => swap(from!, index),
@@ -132,7 +132,7 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
                     ? buildAllPointsContainer()
                     : buildSingleCard(id),
               ),
-
+ 
               /// Drag Icon
               Positioned(
                 top: 0,
@@ -158,7 +158,7 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
       },
     );
   }
-
+ 
   Widget _dragIcon(bool dragging) {
     return CircleAvatar(
       radius: 14,
@@ -167,8 +167,8 @@ class _DashboardMobilePageState extends State<DashboardMobilePage> {
       child: const Icon(Icons.drag_indicator, size: 18),
     );
   }
+ 
 
-  @override
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -179,7 +179,7 @@ Widget build(BuildContext context) {
           title: 'Dashboard',
           onProfileTap: () {},
         ),
-
+ 
         /// ✅ FIX IS HERE
         Expanded(
           child: ListView.builder(
@@ -190,7 +190,8 @@ Widget build(BuildContext context) {
         ),
       ],
     ),
-      bottomNavigationBar: const MobileBottomNav(currentIndex: 0,),
+bottomNavigationBar: MobileBottomNav(currentIndex: 0,),
   );
 }
 }
+ 

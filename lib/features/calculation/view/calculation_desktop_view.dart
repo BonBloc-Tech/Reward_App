@@ -57,9 +57,10 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
 
   Widget draggableSection(String id) {
     return DragTarget<String>(
+      // ignore: unrelated_type_equality_checks
       onWillAcceptWithDetails: (from) => from != id,
       onAcceptWithDetails: (from) => swap(from as String, id),
-      builder: (context, _, __) {
+      builder: (context, _, _) {
         return Draggable<String>(
           data: id,
           feedback: Material(

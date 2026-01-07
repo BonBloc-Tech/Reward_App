@@ -1,6 +1,7 @@
 
  
   import 'package:flutter/material.dart';
+import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
 
 class RecentactivityWidget extends StatelessWidget {
   const RecentactivityWidget({super.key});
@@ -20,7 +21,18 @@ class RecentactivityWidget extends StatelessWidget {
                 const Text("Recent Activity",
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                ElevatedButton(onPressed: () {}, child: const Text("View")),
+               ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HistoryPage(),
+      ),
+    );
+  },
+  child: const Text("View"),
+),
+
               ],
             ),
             const SizedBox(height: 16),

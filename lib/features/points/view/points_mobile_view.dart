@@ -114,7 +114,7 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
         ),
       ),
 
-      bottomNavigationBar: const MobileBottomNav(currentIndex: 1),
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 1,),
     );
   }
 }

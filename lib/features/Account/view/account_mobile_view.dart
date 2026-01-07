@@ -64,7 +64,7 @@ class _AccountPageState extends State<AccountPageMobile> {
               ),
             ],
           ),
-            bottomNavigationBar: const MobileBottomNav(currentIndex: 4,),
+          
         );
       },
     );
