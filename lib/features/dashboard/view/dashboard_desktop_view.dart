@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import 'package:sm_reward_app/features/Account/view/account_desktop_view.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/donutcard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/recentactivity_widget.dart';
-
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -15,7 +15,6 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  
   Map<String, String> layout = {
     'left1': 'available',
     'left2': 'membership',
@@ -24,6 +23,9 @@ class _DashboardPageState extends State<DashboardPage> {
     'right': 'donut',
     'bottom': 'recent',
   };
+
+  bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < 768;
 
   void swap(String fromKey, String toKey) {
     setState(() {
@@ -70,6 +72,7 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
+  /// ---------------- DESKTOP DRAG (UNCHANGED) ----------------
   Widget dragBox(String key, {double? height}) {
     final id = layout[key]!;
 
@@ -81,16 +84,102 @@ class _DashboardPageState extends State<DashboardPage> {
         feedback: Material(
           color: Colors.transparent,
           child: SizedBox(
-              width: 320,
-              height: height,
-              child: buildCard(id)),
+              width: 320, height: height, child: buildCard(id)),
         ),
         childWhenDragging:
             Opacity(opacity: 0.4, child: buildCard(id)),
-        child: SizedBox(
-            height: height,
-            child: buildCard(id)),
+        child: SizedBox(height: height, child: buildCard(id)),
       ),
+    );
+  }
+
+  /// ---------------- MOBILE: ALL POINTS IN ONE CONTAINER ----------------
+  Widget mobilePointsGroup() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 6),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(child: buildCard('available')),
+              const SizedBox(width: 12),
+              Expanded(child: buildCard('membership')),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(child: buildCard('earned')),
+              const SizedBox(width: 12),
+              Expanded(child: buildCard('redeemed')),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// ---------------- MOBILE SINGLE DRAG ----------------
+  Widget mobileDragBox(String key) {
+    final id = layout[key]!;
+
+    return DragTarget<String>(
+      onWillAccept: (from) => from != key,
+      onAccept: (from) => swap(from, key),
+      builder: (_, __, ___) {
+        return Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: const [
+              BoxShadow(color: Colors.black12, blurRadius: 6),
+            ],
+          ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: buildCard(id),
+              ),
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Draggable<String>(
+                  data: key,
+                  feedback: Material(
+                    color: Colors.transparent,
+                    child: SizedBox(
+                      width:
+                          MediaQuery.of(context).size.width - 32,
+                      child: buildCard(id),
+                    ),
+                  ),
+                  childWhenDragging: _dragIcon(true),
+                  child: _dragIcon(false),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _dragIcon(bool dragging) {
+    return CircleAvatar(
+      radius: 14,
+      backgroundColor:
+          dragging ? Colors.grey.shade300 : Colors.grey.shade200,
+      child: const Icon(Icons.drag_indicator, size: 18),
     );
   }
 
@@ -100,115 +189,102 @@ class _DashboardPageState extends State<DashboardPage> {
       backgroundColor: const Color(0xFFF5F6FA),
       body: Row(
         children: [
-          const SideMenu(),
+          if (!isMobile(context)) const SideMenu(),
           Expanded(
             child: Column(
               children: [
                 /// TOP BAR
                 Container(
                   height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20),
                   color: Colors.white,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                
                     children: [
-                      const Text("Dashboard",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold)),
-                      InkWell(
-  onTap: () {
-    Navigator.push(
-      context,
-       MaterialPageRoute(
-        builder: (_) =>  AccountPage(), 
-      ),
-    );
-  },
-  child: const Row(
-    children:  [
-      CircleAvatar(
-        radius: 16,
-        backgroundColor: Colors.blueAccent,
-        child: Icon(
-          Icons.person,
-          size: 18,
-          color: Colors.white,
-        ),
-      ),
-      SizedBox(width: 8),
-      Text(
-        "BHARAT KALRA & CO",
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          // cursor: MouseCursor.defer, // desktop friendly
-        ),
-      ),
-    ],
-  ),
-),
-
+                      GlobalAppBar(title: "Dashboard"),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
 
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 60, vertical: 20),
-                    child: Column(
-                      children: [
-                        /// TOP SECTION
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            /// LEFT
-                            Expanded(
-                              flex: 2,
-                              child: Column(
+                    padding: EdgeInsets.symmetric(
+                        horizontal:
+                            isMobile(context) ? 16 : 60,
+                        vertical: 20),
+                    child: isMobile(context)
+                        ? Column(
+                            children: [
+                              /// ✅ ALL POINTS IN ONE CONTAINER
+                              mobilePointsGroup(),
+
+                              /// OTHER DRAGGABLE CARDS
+                              mobileDragBox('right'),
+                              mobileDragBox('bottom'),
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              /// DESKTOP (UNCHANGED)
+                              Row(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Expanded(child: dragBox('left1')),
-                                      const SizedBox(width: 16),
-                                      Expanded(child: dragBox('left2')),
-                                    ],
+                                  Expanded(
+                                    flex: 2,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: dragBox(
+                                                    'left1')),
+                                            const SizedBox(
+                                                width: 16),
+                                            Expanded(
+                                                child: dragBox(
+                                                    'left2')),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: dragBox(
+                                                    'left3')),
+                                            const SizedBox(
+                                                width: 16),
+                                            Expanded(
+                                                child: dragBox(
+                                                    'left4')),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Expanded(child: dragBox('left3')),
-                                      const SizedBox(width: 16),
-                                      Expanded(child: dragBox('left4')),
-                                    ],
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    flex: 3,
+                                    child: dragBox('right',
+                                        height: 360),
                                   ),
                                 ],
                               ),
-                            ),
-
-                            const SizedBox(width: 16),
-
-                            /// RIGHT DONUT
-                            Expanded(
-                              flex: 3,
-                              child: dragBox('right', height: 360),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 24),
-
-                        /// BOTTOM
-                        dragBox('bottom'),
-                      ],
-                    ),
+                              const SizedBox(height: 24),
+                              dragBox('bottom'),
+                            ],
+                          ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
+          
+        
+    
     );
   }
 }

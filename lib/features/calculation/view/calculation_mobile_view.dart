@@ -27,7 +27,7 @@ class PointsCalculationScreenMobile extends StatelessWidget {
             padding: EdgeInsets.only(right: 16),
             child: CircleAvatar(
               radius: 16,
-              backgroundImage: AssetImage('assets/images/profile_logo.png'),
+              backgroundImage: AssetImage('assets/logo/profile_logo.png'),
             ),
           ),
         ],
@@ -57,7 +57,7 @@ class PointsCalculationScreenMobile extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: const MobileBottomNav()
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 4,)
     );
   }
 

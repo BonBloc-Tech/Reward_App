@@ -297,7 +297,21 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1,
+
         title: const Text("Points", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+
+        
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: CircleAvatar(
+              radius: 16,
+              backgroundImage:
+                  AssetImage('assets/logo/profile_logo.png'),
+            ),
+          ),
+        ],
+
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -306,7 +320,9 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
           child: e,
         )).toList(),
       ),
-      bottomNavigationBar: const MobileBottomNav(),
+
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 1,),
+     
     );
   }
 }

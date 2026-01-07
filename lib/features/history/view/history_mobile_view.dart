@@ -97,7 +97,7 @@ class MobileHistoryList extends StatelessWidget {
         ],
       ),
 
-      bottomNavigationBar: const MobileBottomNav(),
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 2,),
     );
   }
 }

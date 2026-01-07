@@ -4,14 +4,14 @@ import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 
 
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({super.key});
+class AccountPageMobile extends StatefulWidget {
+  const AccountPageMobile({super.key});
 
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<AccountPageMobile> createState() => _AccountPageState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _AccountPageState extends State<AccountPageMobile> {
   final nameCtrl = TextEditingController(text: "BHARAT KALRA & CO");
   final emailCtrl = TextEditingController(text: "bharatkalra&co@gmail.com");
   final mobileCtrl = TextEditingController(text: "9876543210");
@@ -39,7 +39,7 @@ class _AccountPageState extends State<AccountPage> {
           backgroundColor: const Color(0xFFF5F6FA),
           body: Row(
             children: [
-              if (isDesktop) const MobileBottomNav(),
+            
 
               Expanded(
                 child: Column(
@@ -64,6 +64,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ],
           ),
+            bottomNavigationBar: const MobileBottomNav(currentIndex: 4,),
         );
       },
     );
@@ -103,13 +104,13 @@ class _AccountPageState extends State<AccountPage> {
           _addressField(),
           const SizedBox(height: 24),
 
-          Align(
-            alignment: Alignment.centerRight,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Save Changes"),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.centerRight,
+          //   child: ElevatedButton(
+          //     onPressed: () {},
+          //     child: const Text("Save Changes"),
+          //   ),
+          // ),
         ],
       ),
     );

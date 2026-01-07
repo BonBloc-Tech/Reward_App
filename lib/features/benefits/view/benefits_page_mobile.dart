@@ -30,7 +30,7 @@ class BenefitsScreenMobile extends StatelessWidget {
             child: CircleAvatar(
               radius: 16,
               backgroundImage:
-                  AssetImage('assets/images/profile_logo.png'),
+                  AssetImage('assets/logo/profile_logo.png'),
             ),
           ),
         ],
@@ -104,7 +104,7 @@ class BenefitsScreenMobile extends StatelessWidget {
       ),
 
       
-      bottomNavigationBar: const MobileBottomNav(),
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 3),
     );
   }
 }
