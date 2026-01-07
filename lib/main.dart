@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute:
-          isMobile ? AppRoutes.loginmobile.toName :AppRoutes.pointsdesktop.toName,
+          isMobile ? AppRoutes.loginmobile.toName :AppRoutes.logindesktop.toName,
           getPages: AppPages.routes,
     );
   }
