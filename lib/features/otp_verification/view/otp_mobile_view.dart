@@ -21,7 +21,7 @@ class OtpMobileView extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               Color(0xFFF5F7FF),
-              Color(0xFFEFF1FF),
+              Color.fromARGB(255, 78, 99, 254),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -33,7 +33,7 @@ class OtpMobileView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  /// OTP CARD
+                  const SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
@@ -188,7 +188,7 @@ class OtpMobileView extends StatelessWidget {
                       Text(
                         '© 2025 All Rights Reserved',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: const Color(0xFF6B7280),
+                          color: Colors.white,
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -207,9 +207,13 @@ class OtpMobileView extends StatelessWidget {
                 ],
               ),
             ),
+
           ),
+          
         ),
+        
       ),
+      
     );
   }
 }
@@ -220,7 +224,7 @@ Widget _footerLink(BuildContext context, String text) {
     text,
     style: Theme.of(context).textTheme.bodySmall?.copyWith(
           decoration: TextDecoration.underline,
-          color: const Color(0xFF4F46E5),
+            color: Colors.white,
           fontWeight: FontWeight.w500,
         ),
   );

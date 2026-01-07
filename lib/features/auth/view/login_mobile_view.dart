@@ -18,7 +18,7 @@ class LoginPageMobile extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               Color(0xFFF5F7FF),
-              Color(0xFFEFF1FF),
+              Color.fromARGB(255, 78, 99, 254),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -26,14 +26,17 @@ class LoginPageMobile extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
+            
             children: [
-              /// MAIN CONTENT
+              
               Expanded(
+                child: Center(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 80),
 
                       /// LOGIN CARD
                       Container(
@@ -164,6 +167,7 @@ class LoginPageMobile extends StatelessWidget {
                   ),
                 ),
               ),
+              ),
 
               /// FOOTER
               Padding(
@@ -173,7 +177,8 @@ class LoginPageMobile extends StatelessWidget {
                     Text(
                       '© 2025 All Rights Reserved',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: const Color(0xFF6B7280),
+                        // color: const Color(0xFF6B7280),
+                        color: Colors.white
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -202,7 +207,8 @@ class LoginPageMobile extends StatelessWidget {
       text,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             decoration: TextDecoration.underline,
-            color: const Color(0xFF4F46E5),
+            // color: const Color(0xFF4F46E5),
+            color:Colors.white,
             fontWeight: FontWeight.w500,
           ),
     );
