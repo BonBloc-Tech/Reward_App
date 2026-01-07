@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import 'package:sm_reward_app/features/auth/controller/login_controller.dart';
-import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
+
 
 class OtpPage extends StatelessWidget {
   OtpPage({super.key});
@@ -100,7 +101,7 @@ class OtpPage extends StatelessWidget {
                                 Get.snackbar("Error", "Please enter OTP");
                               } else if (otp == controller.generatedOtp) {
                                 // OTP is correct, go to dashboard
-                               Get.off(() => const DashboardPage());
+                               Get.off(() => SideMenu());
 
                               } else {
                                 Get.snackbar("Error", "Invalid OTP");

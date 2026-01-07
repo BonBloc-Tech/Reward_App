@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/calculation_controller.dart';
 import '../widget/invoice_table_widget.dart';
 import '../widget/points_summary_overview_card_widget.dart';
@@ -85,7 +84,7 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-          const SideMenu(),
+          
           Expanded(
             child: Column(
               children: [

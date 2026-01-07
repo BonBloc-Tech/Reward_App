@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import '../controller/history_controller.dart';
 import '../widget/history_table_widget.dart';
 
@@ -97,7 +96,7 @@ class MobileHistoryList extends StatelessWidget {
         ],
       ),
 
-      bottomNavigationBar: const MobileBottomNav(currentIndex: 3,),
+      // bottomNavigationBar: const MobileBottomNav(),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
+
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/donutcard_widget.dart';
@@ -99,7 +99,7 @@ class _DashboardPageState extends State<DashboardPage> {
       backgroundColor: const Color(0xFFF5F6FA),
       body: Row(
         children: [
-          const SideMenu(),
+          
 
           Expanded(
             child: Column(

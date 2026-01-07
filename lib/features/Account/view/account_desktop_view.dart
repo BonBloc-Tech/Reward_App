@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
+
 
 
 class AccountPage extends StatefulWidget {
@@ -35,7 +35,7 @@ class _AccountPageState extends State<AccountPage> {
       backgroundColor: const Color(0xFFF5F6FA),
       body: Row(
         children: [
-          const SideMenu(),
+          
 
           Expanded(
             child: Column(

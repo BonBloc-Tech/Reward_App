@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
+
 
 import '../controller/calculation_controller.dart';
 import '../widget/invoice_table_widget.dart';
@@ -57,7 +57,7 @@ class PointsCalculationScreenMobile extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: const MobileBottomNav(currentIndex: 4,)
+      // bottomNavigationBar: const MobileBottomNav()
     );
   }
 

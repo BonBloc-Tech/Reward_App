@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
 import '../../../core/global_widgets/tier_progress_card.dart';
@@ -19,7 +18,7 @@ class PointsScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFF6F7FB),
       body: Row(
         children: [
-          const SideMenu(),
+         
           Expanded(
             child: Column(
               children: [
