@@ -17,13 +17,11 @@ class BenefitsDesktopView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
+      appBar: GlobalAppBar(title: 'Benefits'),
       body: Row(
         children: [
           
-          Expanded(
-            child: Column(
-              children: [
-                const GlobalAppBar(title: "Benefits"),
+        
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -70,9 +68,7 @@ class BenefitsDesktopView extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
+      
   }
 }

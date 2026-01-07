@@ -1,7 +1,8 @@
 
  
   import 'package:flutter/material.dart';
-import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
+
+import 'package:sm_reward_app/features/history/view/history_mobile_view.dart';
 
 class RecentactivityWidget extends StatelessWidget {
   const RecentactivityWidget({super.key});
@@ -26,7 +27,7 @@ class RecentactivityWidget extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const HistoryPage(),
+        builder: (context) =>  MobileHistoryList(),
       ),
     );
   },

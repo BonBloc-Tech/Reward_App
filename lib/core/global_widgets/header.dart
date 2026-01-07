@@ -3,13 +3,19 @@ import 'package:get/get.dart';
 import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/features/Account/view/account_desktop_view.dart';
 
-class GlobalAppBar extends StatelessWidget {
+class GlobalAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
+  final bool showBackButton;
 
   const GlobalAppBar({
     super.key,
     required this.title,
+    this.showBackButton = false, // default: no back button
   });
+
+  @override
+  Size get preferredSize => const Size.fromHeight(64);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +32,17 @@ class GlobalAppBar extends StatelessWidget {
       ),
       child: Row(
         children: [
+          /// 🔙 BACK BUTTON (if enabled)
+          if (showBackButton)
+            InkWell(
+              onTap: () => Navigator.pop(context),
+              borderRadius: BorderRadius.circular(20),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(Icons.arrow_back, size: 24),
+              ),
+            ),
+
           /// TITLE
           Text(
             title,

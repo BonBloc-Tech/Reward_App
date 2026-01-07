@@ -16,30 +16,46 @@ class MobileHistoryList extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
 
       /// 🔹 APP BAR
-      appBar: const GlobalAppBarMobile(
-        title: "History",
-        showBack: false, // no back button on Benefits page
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Text(
+          "History",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
       ),
 
       body: Column(
         children: [
+          /// 🔵 HEADER
+          GlobalAppBarMobile(
+            title: 'History',
+          ),
+
           /// 🔍 SEARCH
           Padding(
             padding: const EdgeInsets.all(12),
             child: Container(
               height: 44,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 14),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
-                border:
-                    Border.all(color: const Color(0xFFDDE3EA)),
+                border: Border.all(
+                  color: const Color(0xFFDDE3EA),
+                ),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.search,
-                      size: 20, color: Colors.grey),
+                  const Icon(
+                    Icons.search,
+                    size: 20,
+                    color: Colors.grey,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: TextField(
@@ -58,43 +74,41 @@ class MobileHistoryList extends StatelessWidget {
 
           /// 🔘 FILTER BUTTONS
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               children: [
-                Obx(() => _FilterButton(
-                      text: "All",
-                      selected:
-                          !controller.isLast30Days.value,
-                      onTap: () =>
-                          controller.toggleLast30Days(false),
-                    )),
+                Obx(
+                  () => _FilterButton(
+                    text: "All",
+                    selected: !controller.isLast30Days.value,
+                    onTap: () =>
+                        controller.toggleLast30Days(false),
+                  ),
+                ),
                 const SizedBox(width: 10),
-                Obx(() => _FilterButton(
-                      text: "Last 30 Days",
-                      selected:
-                          controller.isLast30Days.value,
-                      onTap: () =>
-                          controller.toggleLast30Days(true),
-                    )),
+                Obx(
+                  () => _FilterButton(
+                    text: "Last 30 Days",
+                    selected: controller.isLast30Days.value,
+                    onTap: () =>
+                        controller.toggleLast30Days(true),
+                  ),
+                ),
               ],
             ),
           ),
 
           const SizedBox(height: 12),
 
+          /// 📊 TABLE
           const Expanded(
             child: HistoryTable(),
           ),
         ],
       ),
-
-      // bottomNavigationBar: const MobileBottomNav(),
     );
   }
 }
-
-/// 🔘 FILTER BUTTON
 class _FilterButton extends StatelessWidget {
   final String text;
   final bool selected;
@@ -108,31 +122,23 @@ class _FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(24),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 16, vertical: 8),
+        padding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: selected
-              ? const Color(0xFFE0ECFF)
-              : Colors.white,
-          borderRadius: BorderRadius.circular(24),
+          color: selected ? Colors.blue : Colors.white,
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: selected
-                ? const Color(0xFF2563EB)
-                : const Color(0xFFDDE3EA),
+            color: selected ? Colors.blue : const Color(0xFFDDE3EA),
           ),
         ),
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
-            color: selected
-                ? const Color(0xFF2563EB)
-                : Colors.black,
+            color: selected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

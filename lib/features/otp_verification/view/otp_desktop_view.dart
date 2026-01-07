@@ -101,7 +101,7 @@ class OtpPage extends StatelessWidget {
                                 Get.snackbar("Error", "Please enter OTP");
                               } else if (otp == controller.generatedOtp) {
                                 // OTP is correct, go to dashboard
-                               Get.off(() => SideMenu());
+                               Get.off(() => SideMenuLayout());
 
                               } else {
                                 Get.snackbar("Error", "Invalid OTP");
