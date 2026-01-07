@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import '../controller/history_controller.dart';
@@ -20,11 +21,11 @@ class HistoryPage extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                SizedBox(
-        height: 64,
-        child: GlobalAppBar(title: 'History'),
-      ),
-               
+                const SizedBox(
+                  height: 64,
+                  child: GlobalAppBar(title: 'History'),
+                ),
+
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -38,8 +39,8 @@ class HistoryPage extends StatelessWidget {
                           /// 🔍 SEARCH BAR
                           Container(
                             height: 44,
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 14),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
@@ -58,8 +59,16 @@ class HistoryPage extends StatelessWidget {
                                 Expanded(
                                   child: TextField(
                                     onChanged: controller.onSearch,
-                                    decoration: const InputDecoration(
-                                      hintText: "Search transactions",
+                                    style:
+                                        AppTextStyles.bodyMedium(context),
+                                    decoration: InputDecoration(
+                                      hintText:
+                                          "Search transactions",
+                                      hintStyle:
+                                          AppTextStyles.bodySmall(
+                                        context,
+                                        color: Colors.grey,
+                                      ),
                                       border: InputBorder.none,
                                       isDense: true,
                                     ),
@@ -71,28 +80,34 @@ class HistoryPage extends StatelessWidget {
 
                           const SizedBox(height: 16),
 
-                          
+                          /// 🔘 FILTER BUTTONS
                           Row(
                             children: [
-                              Obx(() => _FilterButton(
-                                    text: "All Transactions",
-                                    selected:
-                                        !controller.isLast30Days.value,
-                                    onTap: () => controller
-                                        .toggleLast30Days(false),
-                                  )),
+                              Obx(
+                                () => _FilterButton(
+                                  text: "All Transactions",
+                                  selected: !controller
+                                      .isLast30Days.value,
+                                  onTap: () => controller
+                                      .toggleLast30Days(false),
+                                ),
+                              ),
                               const SizedBox(width: 10),
-                              Obx(() => _FilterButton(
-                                    text: "Last 30 Days",
-                                    selected:
-                                        controller.isLast30Days.value,
-                                    onTap: () =>
-                                        controller.toggleLast30Days(true),
-                                  )),
+                              Obx(
+                                () => _FilterButton(
+                                  text: "Last 30 Days",
+                                  selected: controller
+                                      .isLast30Days.value,
+                                  onTap: () => controller
+                                      .toggleLast30Days(true),
+                                ),
+                              ),
                             ],
                           ),
 
                           const SizedBox(height: 24),
+
+                          /// 🔹 HISTORY TABLE
                           const HistoryTable(),
                         ],
                       ),
@@ -108,7 +123,7 @@ class HistoryPage extends StatelessWidget {
   }
 }
 
-/// 🔘 FILTER BUTTON
+/// 🔘 FILTER BUTTON (AppTextStyles applied)
 class _FilterButton extends StatelessWidget {
   final String text;
   final bool selected;
@@ -150,8 +165,8 @@ class _FilterButton extends StatelessWidget {
             if (selected) const SizedBox(width: 6),
             Text(
               text,
-              style: TextStyle(
-                fontSize: 13,
+              style: AppTextStyles.bodySmall(
+                context,
                 fontWeight: FontWeight.w600,
                 color: selected
                     ? const Color(0xFF2563EB)

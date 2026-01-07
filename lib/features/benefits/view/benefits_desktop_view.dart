@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/global_widgets/header.dart';
 import 'package:sm_reward_app/core/global_widgets/tier_progress_card.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
+
 import '../controller/benefits_controller.dart';
 import '../widget/benefits_widget.dart';
+
 class BenefitsDesktopView extends StatelessWidget {
   const BenefitsDesktopView({super.key});
 
@@ -17,12 +20,10 @@ class BenefitsDesktopView extends StatelessWidget {
       body: Row(
         children: [
           const SideMenu(),
-
           Expanded(
             child: Column(
               children: [
                 const GlobalAppBar(title: "Benefits"),
-                
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -30,15 +31,14 @@ class BenefitsDesktopView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          /// 🔹 TIER PROGRESS
                           const TierProgressCard(),
+
                           const SizedBox(height: 24),
 
-                          const Text(
+                          Text(
                             "Available Benefits",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: AppTextStyles.titleSmall(context),
                           ),
 
                           const SizedBox(height: 16),
@@ -55,6 +55,7 @@ class BenefitsDesktopView extends StatelessWidget {
                               itemBuilder: (_, index) {
                                 final item =
                                     controller.benefitsList[index];
+
                                 return BenefitListTile(
                                   title: item.title,
                                   description: item.description,

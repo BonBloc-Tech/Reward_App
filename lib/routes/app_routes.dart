@@ -16,6 +16,8 @@ enum AppRoutes {
   historymobile,
   accountdesktop,
   accountmobile, benefits,
+  admindesktop,
+  adminmobile,
 }
 
 extension AppRouteExtension on AppRoutes {
@@ -38,6 +40,8 @@ extension AppRouteExtension on AppRoutes {
     AppRoutes.accountdesktop: "/accountdesktop",
     AppRoutes.accountmobile: "/accountmobile",
     AppRoutes.benefits: "/benefits",
+    AppRoutes.admindesktop: "/ben",
+    AppRoutes.adminmobile: "/benefits",
     
   };
 
