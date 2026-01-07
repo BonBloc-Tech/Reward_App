@@ -7,18 +7,18 @@ import '../controller/calculation_controller.dart';
 import '../widget/invoice_table_widget.dart';
 import '../widget/points_summary_overview_card_widget.dart';
 import '../widget/rules_card_widget.dart';
-
+ 
 class PointsCalculationPage extends StatefulWidget {
   const PointsCalculationPage({super.key});
-
+ 
   @override
   State<PointsCalculationPage> createState() =>
       _PointsCalculationPageState();
 }
-
+ 
 class _PointsCalculationPageState extends State<PointsCalculationPage> {
   List<String> layoutOrder = ['rules', 'summary', 'table'];
-
+ 
   void swap(String from, String to) {
     setState(() {
       final fromIndex = layoutOrder.indexOf(from);
@@ -28,15 +28,15 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
       layoutOrder[toIndex] = temp;
     });
   }
-
+ 
   Widget section(String id) {
     switch (id) {
       case 'rules':
         return const RulesCard();
-
+ 
       case 'summary':
         return const PointsSummaryOverviewCard();
-
+ 
       case 'table':
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,18 +49,17 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
             const InvoiceTable(),
           ],
         );
-
+ 
       default:
         return const SizedBox();
     }
   }
-
+ 
   Widget draggableSection(String id) {
     return DragTarget<String>(
-      // ignore: unrelated_type_equality_checks
       onWillAcceptWithDetails: (from) => from != id,
       onAcceptWithDetails: (from) => swap(from as String, id),
-      builder: (context, _, _) {
+      builder: (context, _, __) {
         return Draggable<String>(
           data: id,
           feedback: Material(
@@ -77,11 +76,11 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
       },
     );
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     Get.put(CalculationController());
-
+ 
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
@@ -93,7 +92,7 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
                 const GlobalAppBar(
                   title: 'Points Calculation',
                 ),
-
+ 
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(32),
@@ -115,9 +114,9 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
                               )
                               .toList(),
                         ),
-
+ 
                         const SizedBox(height: 32),
-                        
+                       
                         draggableSection('table'),
                       ],
                     ),
@@ -131,3 +130,5 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
     );
   }
 }
+ 
+ 
