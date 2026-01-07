@@ -50,7 +50,7 @@ class BenefitsDesktopView extends StatelessWidget {
                                   const NeverScrollableScrollPhysics(),
                               itemCount:
                                   controller.benefitsList.length,
-                              separatorBuilder: (_, __) =>
+                              separatorBuilder: (_, _) =>
                                   const Divider(),
                               itemBuilder: (_, index) {
                                 final item =

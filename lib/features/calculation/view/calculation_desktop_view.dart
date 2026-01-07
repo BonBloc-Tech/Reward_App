@@ -130,4 +130,3 @@ class _PointsCalculationPageState extends State<PointsCalculationPage> {
     );
   }
 }
- 

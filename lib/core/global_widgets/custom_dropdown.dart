@@ -189,6 +189,7 @@ class _AppDropdownFieldState<T> extends State<AppDropdownField<T>> {
       suffixIcon: widget.isSearchable
           ? Icon(
               _isDropdownOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+              // ignore: deprecated_member_use
               color: theme.colorScheme.onSurface.withOpacity(0.6),
             )
           : (widget.suffixIcon ?? const Icon(Icons.arrow_drop_down_rounded)),
@@ -261,6 +262,7 @@ class _AppDropdownFieldState<T> extends State<AppDropdownField<T>> {
               ),
               boxShadow: [
                 BoxShadow(
+                  // ignore: deprecated_member_use
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
@@ -291,9 +293,10 @@ class _AppDropdownFieldState<T> extends State<AppDropdownField<T>> {
                           padding: EdgeInsets.symmetric(
                             vertical: 10,
                             horizontal:
-                                _horizontalPadding(), // 🔹 reduced horizontal padding for rows
+                                _horizontalPadding(), 
                           ),
                           color: isSelected
+                              // ignore: deprecated_member_use
                               ? theme.colorScheme.primary.withOpacity(0.1)
                               : Colors.transparent,
                           child: Text(

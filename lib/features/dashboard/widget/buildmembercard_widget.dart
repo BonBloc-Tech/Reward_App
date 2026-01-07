@@ -42,6 +42,7 @@ class BuildMembershipCard extends StatelessWidget {
             lineHeight: 8,
             percent: percent,
             progressColor: Colors.white,
+            // ignore: deprecated_member_use
             backgroundColor: Colors.white.withOpacity(0.3),
             barRadius: const Radius.circular(8),
           ),

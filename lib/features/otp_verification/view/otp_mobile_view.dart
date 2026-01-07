@@ -40,6 +40,7 @@ class OtpMobileView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: Colors.black.withOpacity(0.08),
                           blurRadius: 20,
                           offset: const Offset(0, 8),

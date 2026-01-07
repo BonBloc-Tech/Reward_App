@@ -8,6 +8,7 @@ class DonutcardWidget extends StatelessWidget {
        return  Card(
      
       color: Colors.white,
+      
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
