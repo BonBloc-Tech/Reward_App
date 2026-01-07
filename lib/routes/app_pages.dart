@@ -1,5 +1,7 @@
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:sm_reward_app/features/Account/view/account_desktop_view.dart';
+import 'package:sm_reward_app/features/Account/view/account_mobile_view.dart';
 import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
 import 'package:sm_reward_app/features/auth/view/login_mobile_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
@@ -71,6 +73,14 @@ class AppPages {
      GetPage(
       name: AppRoutes.historymobile.toName,
       page: () => HistoryPage(),
+    ),
+     GetPage(
+      name: AppRoutes.accountdesktop.toName,
+      page: () => AccountPage(),
+    ),
+     GetPage(
+      name: AppRoutes.accountmobile.toName,
+      page: () => AccountPageMobile(),
     ),
     
   ];

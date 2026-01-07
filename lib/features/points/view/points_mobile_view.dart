@@ -86,7 +86,7 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
             child: CircleAvatar(
               radius: 16,
               backgroundImage:
-                  AssetImage('assets/images/profile_logo.png'),
+                  AssetImage('assets/logo/profile_logo.png'),
             ),
           ),
         ],
@@ -114,7 +114,7 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
         ),
       ),
 
-      bottomNavigationBar: const MobileBottomNav(),
+      bottomNavigationBar: const MobileBottomNav(currentIndex: 1),
     );
   }
 }
