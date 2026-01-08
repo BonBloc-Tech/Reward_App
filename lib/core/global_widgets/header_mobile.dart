@@ -208,7 +208,7 @@ class GlobalAppBarMobile extends StatelessWidget
 
       ),
 
-    );
+     );
 
   }
 
