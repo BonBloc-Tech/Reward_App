@@ -61,13 +61,9 @@ class NavMenu extends StatelessWidget {
           /// 🚪 LOGOUT
           _menuItem(
             label: "Logout",
-            assetPath: 'assets/images/logout_icon.png',
+            assetPath: 'assets/logo/logout_icon.png',
             onTap: () {
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(builder: (_) => const LoginPage()),
-              //   (route) => false,
-              // );
+             
             },
           ),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/features/admin/view/admin_dashboard_mobile_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_page_mobile.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
@@ -25,6 +26,7 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
     MobileHistoryList(),
     const BenefitsScreenMobile(),
     const PointsCalculationScreenMobile(),
+    AdminDashboardMobileView(),
   ];
 
   final List<_NavItem> _items = const [
@@ -33,6 +35,7 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
     _NavItem("History", "assets/logo/history_icon.png"),
     _NavItem("Benefits", "assets/logo/benefits_icon.png"),
     _NavItem("Calculation", "assets/logo/calculation_icon.png"),
+    _NavItem("Admin", "assets/logo/admin_icon.png"),
   ];
 
   @override

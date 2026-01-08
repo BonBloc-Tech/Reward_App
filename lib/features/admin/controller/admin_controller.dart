@@ -1,7 +1,7 @@
 import '../model/admin_model.dart';
 import '../model/reward_model.dart';
 
-class RewardsController {
+class AdminController {
   CustomerModel selectedCustomer = CustomerModel.sample();
 
   final List<String> customers = [

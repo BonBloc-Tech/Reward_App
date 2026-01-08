@@ -40,8 +40,8 @@ extension AppRouteExtension on AppRoutes {
     AppRoutes.accountdesktop: "/accountdesktop",
     AppRoutes.accountmobile: "/accountmobile",
     AppRoutes.benefits: "/benefits",
-    AppRoutes.admindesktop: "/ben",
-    AppRoutes.adminmobile: "/benefits",
+    AppRoutes.admindesktop: "/admindesktop",
+    AppRoutes.adminmobile: "/adminmobile",
     
   };
 

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/features/admin/controller/admin_controller.dart';
 import '../../../core/global_widgets/nav_menu.dart';
-import '../controller/admin_controller.dart';
 import '../widget/customer_search_bar.dart';
 import '../widget/customer_vehicle_section.dart';
 import '../widget/points_summary_row.dart';
 import '../widget/reward_table.dart';
 
-class RewardsDashboardView extends StatelessWidget {
-  const RewardsDashboardView({super.key});
+class AdminDashboardView extends StatelessWidget {
+  const AdminDashboardView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = RewardsController();
+    final controller = AdminController();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
@@ -49,7 +49,7 @@ class RewardsDashboardView extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
                             child: Image.asset(
-                              'assets/images/profile_logo.png',
+                              'assets/logo/profile_logo.png',
                               width: 32,
                               height: 32,
                               fit: BoxFit.cover,

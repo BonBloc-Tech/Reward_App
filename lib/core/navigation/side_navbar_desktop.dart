@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/features/admin/view/admin_dashboard_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_desktop_view.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
@@ -6,23 +7,22 @@ import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
 import 'package:sm_reward_app/features/points/view/points_desktop_view.dart';
 
 class SideMenuLayout extends StatefulWidget {
-  final int initialIndex; // ✅ ADD THIS
-
+  final int initialIndex; 
   const SideMenuLayout({
     super.key,
-    this.initialIndex = 0, // ✅ DEFAULT
+    this.initialIndex = 0, 
   });
 
   @override
   State<SideMenuLayout> createState() => _SideMenuLayoutState();
 }
 class _SideMenuLayoutState extends State<SideMenuLayout> {
-  late int selectedIndex; // ✅ late
+  late int selectedIndex; 
 
   @override
   void initState() {
     super.initState();
-    selectedIndex = widget.initialIndex; // ✅ initialize here
+    selectedIndex = widget.initialIndex;
   }
 
 
@@ -32,8 +32,9 @@ class _SideMenuLayoutState extends State<SideMenuLayout> {
     "History",
     "Benefits",
     "Calculation",
-    "Logout"
-  ];
+    "Logout",
+    "Admin"
+      ];
 
   final List<String> icons = [
     'assets/logo/home_icon.png',
@@ -42,12 +43,9 @@ class _SideMenuLayoutState extends State<SideMenuLayout> {
     'assets/logo/benefits_icon.png',
     'assets/logo/calculation_icon.png',
     'assets/logo/logout_icon.png',
+    'assets/logo/home_icon.png',
   ];
-  void setSelectedIndex(int index) {
-  setState(() {
-    selectedIndex = index;
-  });
-}
+  
 
   final List<Widget> screens = [
    DashboardPage(
@@ -58,6 +56,7 @@ class _SideMenuLayoutState extends State<SideMenuLayout> {
     BenefitsDesktopView(),
     PointsCalculationPage(), 
     Container(), 
+    AdminDashboardView(),
   ];
 
  @override
@@ -71,12 +70,13 @@ Widget build(BuildContext context) {
     BenefitsDesktopView(),
     PointsCalculationPage(),
     Container(),
+    AdminDashboardView(),
   ];
 
   return Scaffold(
     body: Row(
       children: [
-        /// SIDE MENU
+       
         Container(
           width: 72,
           color: Colors.black,
@@ -121,7 +121,7 @@ Widget build(BuildContext context) {
   );
 }
 
-  /// 🔹 MENU ITEM WIDGET
+ 
   Widget _menuItem({
     required String label,
     required String assetPath,
