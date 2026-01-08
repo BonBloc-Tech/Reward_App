@@ -67,16 +67,11 @@ class _DashboardPageState extends State<DashboardPage> {
       case 'donut':
         return const DonutcardWidget();
 
-      // case 'recent':
-        // return RecentActivityDesktopWidget(
-        //   onViewPressed: () {
-        //     // Navigate to History page directly
-        //     onViewHistory: () {
-        // setState(() {
-        //   selectedIndex = 2; // History page
-        // });
-        //   },
-      //  );
+      case 'recent':
+        return RecentActivityDesktopWidget(onViewPressed: () {  },
+         
+        
+       );
 
       default:
         return const SizedBox();

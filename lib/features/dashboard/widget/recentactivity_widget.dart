@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import 'package:sm_reward_app/features/history/view/history_mobile_view.dart';
  
 class RecentactivityWidget extends StatelessWidget {
@@ -28,13 +29,16 @@ class RecentactivityWidget extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>  MobileHistoryList(),
-                      ),
-                    );
+                   Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => const MobileBottomNav(
+      initialIndex: 2, 
+    ),
+  ),
+);
                   },
+
                   child: const Text("View"),
                 ),
               ],

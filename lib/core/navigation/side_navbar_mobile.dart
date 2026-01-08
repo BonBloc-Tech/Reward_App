@@ -4,23 +4,27 @@ import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.
 import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
 import 'package:sm_reward_app/features/history/view/history_mobile_view.dart';
 import 'package:sm_reward_app/features/points/view/points_mobile_view.dart';
-
 class MobileBottomNav extends StatefulWidget {
-  const MobileBottomNav({super.key});
+  final int initialIndex;
+
+  const MobileBottomNav({
+    super.key,
+    this.initialIndex = 0,
+  });
 
   @override
   State<MobileBottomNav> createState() => _MobileBottomNavState();
 }
 
 class _MobileBottomNavState extends State<MobileBottomNav> {
-  int _currentIndex = 0;
+  late int _currentIndex; // ✅ late variable
 
-  final List<Widget> _pages =  [
-    DashboardMobilePage(),
-    PointsScreenMobile(),
+  final List<Widget> _pages = [
+    const DashboardMobilePage(),
+    const PointsScreenMobile(),
     MobileHistoryList(),
-    BenefitsScreenMobile(),
-    PointsCalculationScreenMobile(),
+    const BenefitsScreenMobile(),
+    const PointsCalculationScreenMobile(),
   ];
 
   final List<_NavItem> _items = const [
@@ -30,6 +34,12 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
     _NavItem("Benefits", "assets/logo/benefits_icon.png"),
     _NavItem("Calculation", "assets/logo/calculation_icon.png"),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex; // ✅ initialize here
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,21 +83,19 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          /// ICON
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: isSelected
-                  // ignore: deprecated_member_use
                   ? const Color(0xFF2563EB).withOpacity(0.15)
                   : Colors.transparent,
             ),
             child: ColorFiltered(
               colorFilter: ColorFilter.mode(
                 isSelected
-                    ? const Color(0xFF2563EB) // 🔵 Selected
-                    : Colors.blueGrey,       // ⚪ Unselected
+                    ? const Color(0xFF2563EB)
+                    : Colors.blueGrey,
                 BlendMode.srcIn,
               ),
               child: Image.asset(
@@ -97,18 +105,15 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
               ),
             ),
           ),
-
           const SizedBox(height: 4),
-
-          /// TEXT
           Text(
             _items[index].label,
             style: TextStyle(
               fontSize: 12,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               color: isSelected
-                  ? const Color(0xFF2563EB) // 🔵 Selected text
-                  : Colors.blueGrey,       // ⚪ Unselected text
+                  ? const Color(0xFF2563EB)
+                  : Colors.blueGrey,
             ),
           ),
         ],
@@ -116,10 +121,9 @@ class _MobileBottomNavState extends State<MobileBottomNav> {
     );
   }
 }
-
-/// MODEL
 class _NavItem {
   final String label;
   final String icon;
+
   const _NavItem(this.label, this.icon);
 }
