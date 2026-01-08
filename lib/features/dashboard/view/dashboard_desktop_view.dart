@@ -29,15 +29,19 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
-  /// ---------------- LEFT GROUP (4 CARDS TOGETHER) ----------------
+  /// ---------- LEFT GROUP (COMPACT – FIGMA STYLE) ----------
   Widget buildPointsContainer() {
     return Container(
-      padding: const EdgeInsets.all(20),
+      constraints: const BoxConstraints(
+        minHeight: 360, // SAME HEIGHT AS OVERALL REPORT
+      ),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -48,7 +52,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: const Color.fromARGB(255, 48, 140, 232),
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 14),
               Expanded(
                 child: BuildMembershipCard(
                   title: "Membership Level",
@@ -58,7 +62,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
           Row(
             children: [
               Expanded(
@@ -68,7 +72,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: const Color.fromARGB(255, 173, 121, 241),
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 14),
               Expanded(
                 child: BuildPointCard(
                   title: "Total Redeemed Points",
@@ -83,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  /// ---------------- CARD BUILDER ----------------
+  /// ---------- CARD BUILDER ----------
   Widget buildCard(String id) {
     switch (id) {
       case 'points':
@@ -95,7 +99,6 @@ class _DashboardPageState extends State<DashboardPage> {
       case 'recent':
         return RecentActivityDesktopWidget(
           onViewPressed: () {
-            // Navigate to History page directly
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -110,7 +113,7 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  /// ---------------- DRAG BOX ----------------
+  /// ---------- DRAG BOX ----------
   Widget dragBox(String key, {double? height}) {
     final id = layout[key]!;
 
@@ -132,16 +135,31 @@ class _DashboardPageState extends State<DashboardPage> {
           child: buildCard(id),
         ),
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
             SizedBox(height: height, child: buildCard(id)),
 
-            /// DRAG ICON (ONLY FOR CONTAINER)
-            const Positioned(
-              top: 12,
-              left: 12,
-              child: Icon(
-                Icons.drag_indicator,
-                color: Colors.grey,
+            /// DRAG ICON – FIGMA STYLE
+            Positioned(
+              top: -8,
+              left: -8,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(6),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.drag_indicator,
+                  size: 18,
+                  color: Colors.grey,
+                ),
               ),
             ),
           ],
@@ -150,7 +168,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  /// ---------------- UI ----------------
+  /// ---------- UI ----------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,27 +178,23 @@ class _DashboardPageState extends State<DashboardPage> {
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
         child: Column(
           children: [
-            /// TOP SECTION
+            /// TOP SECTION – PERFECT ROW ALIGN
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// LEFT GROUP (4 cards together)
                 Expanded(
                   flex: 2,
-                  child: dragBox('left'),
+                  child: dragBox('left', height: 250),
                 ),
-
-                const SizedBox(width: 16),
-
-                /// RIGHT DONUT
+                const SizedBox(width: 20),
                 Expanded(
                   flex: 3,
-                  child: dragBox('right', height: 360),
+                  child: dragBox('right', height: 250),
                 ),
               ],
             ),
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 28),
 
             /// BOTTOM RECENT ACTIVITY
             dragBox('bottom'),

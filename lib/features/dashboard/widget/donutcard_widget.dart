@@ -19,12 +19,12 @@ class DonutcardWidget extends StatelessWidget {
             const Text("Overall Report",
                 style:
                     TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
+            const SizedBox(height: 7),
             Row(
               children: [
                 Expanded(
                   child: SizedBox(
-                    height: 200,
+                    height: 180,
                     child: SfCircularChart(
                       series: [
                         DoughnutSeries<_ChartData, String>(

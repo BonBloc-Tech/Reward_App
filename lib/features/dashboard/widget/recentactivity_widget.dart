@@ -41,6 +41,7 @@ class RecentactivityWidget extends StatelessWidget {
             const SizedBox(height: 16),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              
               child: DataTable(
                 columns: const [
                   DataColumn(label: Text("Invoice Id")),
@@ -51,7 +52,11 @@ class RecentactivityWidget extends StatelessWidget {
                   DataColumn(label: Text("Balance")),
                   DataColumn(label: Text("Expiry Date")),
                 ],
-                rows:   [ _dataRow( "INV-456", "12.08.2025", "Car Service", "10,000", "1000", "9000", "12.08.2026"), _dataRow( "INV-879", "01.08.2025", "Service Labour", "20,000", "2000", "18,000", "01.08.2026"),],
+                rows:   [ _dataRow( "INV-456", "12.08.2025", "Car Service", "10,000", "1000", "9000", "12.08.2026"),
+                _dataRow( "INV-879", "01.08.2025", "Service Labour", "20,000", "2000", "18,000", "01.08.2026"),
+                _dataRow( "INV-987", "22.07.2025", "Full Car Service", "8000", "800", "7200", "22.07.2026"),
+                _dataRow( "INV-932", "15.07.2025", "Purchase Engine Oil", "7000", "700", "6300", "01.08.2026"),
+                _dataRow( "INV-879", "01.08.2025", "Service Labour", "20,000", "2000", "18,000", "01.08.2026"),],
               ),
             ),
           ],
