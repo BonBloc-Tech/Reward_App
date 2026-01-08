@@ -15,7 +15,7 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   /// ONLY 3 DRAGGABLE CONTAINERS
-  Map<String, String> layout = {
+  final Map<String, String> layout = {
     'left': 'points',
     'right': 'donut',
     'bottom': 'recent',
@@ -29,31 +29,30 @@ class _DashboardPageState extends State<DashboardPage> {
     });
   }
 
-  /// ---------- LEFT GROUP (COMPACT – FIGMA STYLE) ----------
+  /// ---------- POINTS CONTAINER ----------
   Widget buildPointsContainer() {
     return Container(
-      constraints: const BoxConstraints(
-        minHeight: 360, // SAME HEIGHT AS OVERALL REPORT
-      ),
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 234, 232, 232),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          /// ROW 1
           Row(
             children: [
               Expanded(
                 child: BuildPointCard(
                   title: "Available Points",
                   value: "12,000",
-                  color: const Color.fromARGB(255, 48, 140, 232),
+                  color: const Color(0xFFE0EAFC),
+                  icon: Icons.account_balance_wallet,
+                  iconBgColor: const Color(0xFFD6E4FF),
                 ),
               ),
               const SizedBox(width: 14),
-              Expanded(
+              const Expanded(
                 child: BuildMembershipCard(
                   title: "Membership Level",
                   level: "Gold",
@@ -62,14 +61,19 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ],
           ),
+
           const SizedBox(height: 14),
+
+          /// ROW 2
           Row(
             children: [
               Expanded(
                 child: BuildPointCard(
                   title: "Total Earned Points",
                   value: "18,000",
-                  color: const Color.fromARGB(255, 173, 121, 241),
+                  color: Colors.white,
+                  icon: Icons.trending_up,
+                  iconBgColor: const Color(0xFFFFD9C4),
                 ),
               ),
               const SizedBox(width: 14),
@@ -77,7 +81,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: BuildPointCard(
                   title: "Total Redeemed Points",
                   value: "6,000",
-                  color: const Color.fromARGB(255, 48, 140, 232),
+                  color: const Color.fromARGB(255, 224, 234, 252),
+                  icon: Icons.trending_down,
+                  iconBgColor: const Color(0xFFD6E4FF),
                 ),
               ),
             ],
@@ -137,9 +143,11 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            SizedBox(height: height, child: buildCard(id)),
+            height != null
+                ? SizedBox(height: height, child: buildCard(id))
+                : buildCard(id),
 
-            /// DRAG ICON – FIGMA STYLE
+            /// Drag Handle
             Positioned(
               top: -8,
               left: -8,
@@ -149,10 +157,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 4,
-                    ),
+                    BoxShadow(color: Colors.black12, blurRadius: 4),
                   ],
                 ),
                 child: const Icon(
@@ -178,13 +183,13 @@ class _DashboardPageState extends State<DashboardPage> {
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
         child: Column(
           children: [
-            /// TOP SECTION – PERFECT ROW ALIGN
+            /// TOP ROW
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 2,
-                  child: dragBox('left', height: 250),
+                  child: dragBox('left'), // ✅ auto height → NO overflow
                 ),
                 const SizedBox(width: 20),
                 Expanded(
@@ -196,7 +201,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
             const SizedBox(height: 28),
 
-            /// BOTTOM RECENT ACTIVITY
+            /// BOTTOM
             dragBox('bottom'),
           ],
         ),

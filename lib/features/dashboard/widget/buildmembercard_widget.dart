@@ -21,29 +21,29 @@ class BuildMembershipCard extends StatelessWidget {
       width: 160,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 173, 121, 241),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: Colors.white)),
+          Text(title, style: const TextStyle(color: Colors.black)),
           const SizedBox(height: 8),
           Text(
             level,
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           const SizedBox(height: 8),
           LinearPercentIndicator(
             lineHeight: 8,
             percent: percent,
-            progressColor: Colors.white,
+            progressColor: Color.fromARGB(255, 197, 213, 245),
             // ignore: deprecated_member_use
-            backgroundColor: Colors.white.withOpacity(0.3),
+            backgroundColor: Color.fromARGB(255, 168, 193, 243),
             barRadius: const Radius.circular(8),
           ),
         ],
