@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildmembercard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/buildpointcard_widget.dart';
 
 class Pointswidget extends StatelessWidget {
   const Pointswidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +14,11 @@ class Pointswidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 8),
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
         ],
       ),
       child: Column(
@@ -22,17 +26,23 @@ class Pointswidget extends StatelessWidget {
         children: [
           const Text(
             "Points Summary",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           const SizedBox(height: 16),
 
+          /// ---------- ROW 1 ----------
           Row(
             children: [
               Expanded(
                 child: BuildPointCard(
                   title: "Available Points",
                   value: "12,000",
-                  color: const Color.fromARGB(255, 48, 140, 232),
+                  color: const Color.fromARGB(255, 225, 235, 255),
+                  icon: Icons.account_balance_wallet,
+                  iconBgColor: const Color.fromARGB(255, 200, 220, 255),
                 ),
               ),
               const SizedBox(width: 12),
@@ -48,13 +58,16 @@ class Pointswidget extends StatelessWidget {
 
           const SizedBox(height: 12),
 
+          /// ---------- ROW 2 ----------
           Row(
             children: [
               Expanded(
                 child: BuildPointCard(
                   title: "Total Earned",
                   value: "18,000",
-                  color:Color.fromARGB(255, 173, 121, 241),
+                  color: const Color.fromARGB(255, 249, 249, 250),
+                  icon: Icons.trending_up,
+                  iconBgColor: const Color.fromARGB(255, 220, 195, 255),
                 ),
               ),
               const SizedBox(width: 12),
@@ -62,7 +75,9 @@ class Pointswidget extends StatelessWidget {
                 child: BuildPointCard(
                   title: "Redeemed",
                   value: "6,000",
-                  color:const Color.fromARGB(255, 48, 140, 232),
+                  color: const Color.fromARGB(255, 255, 235, 235),
+                  icon: Icons.trending_down,
+                  iconBgColor: const Color.fromARGB(255, 255, 200, 200),
                 ),
               ),
             ],
