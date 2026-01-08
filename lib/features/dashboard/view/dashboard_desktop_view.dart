@@ -14,55 +14,80 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  // Layout map
+  /// ONLY 3 DRAGGABLE CONTAINERS
   Map<String, String> layout = {
-    'left1': 'available',
-    'left2': 'membership',
-    'left3': 'earned',
-    'left4': 'redeemed',
+    'left': 'points',
     'right': 'donut',
     'bottom': 'recent',
   };
 
-  // Swap two cards
-  void swap(String fromKey, String toKey) {
+  void swap(String from, String to) {
     setState(() {
-      final temp = layout[fromKey];
-      layout[fromKey] = layout[toKey]!;
-      layout[toKey] = temp!;
+      final temp = layout[from];
+      layout[from] = layout[to]!;
+      layout[to] = temp!;
     });
   }
 
-  // Build each card based on id
+  /// ---------------- LEFT GROUP (4 CARDS TOGETHER) ----------------
+  Widget buildPointsContainer() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: BuildPointCard(
+                  title: "Available Points",
+                  value: "12,000",
+                  color: const Color.fromARGB(255, 48, 140, 232),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: BuildMembershipCard(
+                  title: "Membership Level",
+                  level: "Gold",
+                  percent: 0.83,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: BuildPointCard(
+                  title: "Total Earned Points",
+                  value: "18,000",
+                  color: const Color.fromARGB(255, 173, 121, 241),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: BuildPointCard(
+                  title: "Total Redeemed Points",
+                  value: "6,000",
+                  color: const Color.fromARGB(255, 48, 140, 232),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// ---------------- CARD BUILDER ----------------
   Widget buildCard(String id) {
     switch (id) {
-      case 'available':
-        return BuildPointCard(
-          title: "Available Points",
-          value: "12,000",
-          color: Colors.deepPurple,
-        );
-
-      case 'membership':
-        return BuildMembershipCard(
-          title: "Membership Level",
-          level: "Gold",
-          percent: 0.83,
-        );
-
-      case 'earned':
-        return BuildPointCard(
-          title: "Total Earned Points",
-          value: "18,000",
-          color: Colors.blue,
-        );
-
-      case 'redeemed':
-        return BuildPointCard(
-          title: "Total Redeemed Points",
-          value: "6,000",
-          color: Colors.pink,
-        );
+      case 'points':
+        return buildPointsContainer();
 
       case 'donut':
         return const DonutcardWidget();
@@ -70,7 +95,6 @@ class _DashboardPageState extends State<DashboardPage> {
       case 'recent':
         return RecentActivityDesktopWidget(
           onViewPressed: () {
-            // Navigate to History page directly
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -85,7 +109,7 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  // Drag and drop box
+  /// ---------------- DRAG BOX ----------------
   Widget dragBox(String key, {double? height}) {
     final id = layout[key]!;
 
@@ -97,76 +121,70 @@ class _DashboardPageState extends State<DashboardPage> {
         feedback: Material(
           color: Colors.transparent,
           child: SizedBox(
-            width: 320,
+            width: 420,
             height: height,
             child: buildCard(id),
           ),
         ),
-        childWhenDragging: Opacity(opacity: 0.4, child: buildCard(id)),
-        child: SizedBox(height: height, child: buildCard(id)),
+        childWhenDragging: Opacity(
+          opacity: 0.4,
+          child: buildCard(id),
+        ),
+        child: Stack(
+          children: [
+            SizedBox(height: height, child: buildCard(id)),
+
+            /// DRAG ICON (ONLY FOR CONTAINER)
+            const Positioned(
+              top: 12,
+              left: 12,
+              child: Icon(
+                Icons.drag_indicator,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
+  /// ---------------- UI ----------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F6FA),
       appBar: GlobalAppBar(title: "Dashboard"),
-      body: Row(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
-              child: Column(
-                children: [
-                  /// TOP SECTION
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /// LEFT CARDS
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(child: dragBox('left1')),
-                                const SizedBox(width: 16),
-                                Expanded(child: dragBox('left2')),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Expanded(child: dragBox('left3')),
-                                const SizedBox(width: 16),
-                                Expanded(child: dragBox('left4')),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+        child: Column(
+          children: [
+            /// TOP SECTION
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// LEFT GROUP (4 cards together)
+                Expanded(
+                  flex: 2,
+                  child: dragBox('left'),
+                ),
 
-                      const SizedBox(width: 16),
+                const SizedBox(width: 16),
 
-                      /// RIGHT DONUT
-                      Expanded(
-                        flex: 3,
-                        child: dragBox('right', height: 360),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  /// BOTTOM RECENT ACTIVITY
-                  dragBox('bottom'),
-                ],
-              ),
+                /// RIGHT DONUT
+                Expanded(
+                  flex: 3,
+                  child: dragBox('right', height: 360),
+                ),
+              ],
             ),
-          ),
-        ],
+
+            const SizedBox(height: 24),
+
+            /// BOTTOM RECENT ACTIVITY
+            dragBox('bottom'),
+          ],
+        ),
       ),
     );
   }
