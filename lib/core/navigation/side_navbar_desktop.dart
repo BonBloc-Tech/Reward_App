@@ -6,14 +6,25 @@ import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
 import 'package:sm_reward_app/features/points/view/points_desktop_view.dart';
 
 class SideMenuLayout extends StatefulWidget {
-  const SideMenuLayout({super.key});
+  final int initialIndex; // ✅ ADD THIS
+
+  const SideMenuLayout({
+    super.key,
+    this.initialIndex = 0, // ✅ DEFAULT
+  });
 
   @override
   State<SideMenuLayout> createState() => _SideMenuLayoutState();
 }
-
 class _SideMenuLayoutState extends State<SideMenuLayout> {
-  int selectedIndex = 0;
+  late int selectedIndex; // ✅ late
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.initialIndex; // ✅ initialize here
+  }
+
 
   final List<String> labels = [
     "Dashboard",

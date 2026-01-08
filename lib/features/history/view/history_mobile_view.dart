@@ -16,27 +16,13 @@ class MobileHistoryList extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
 
       /// 🔹 APP BAR
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "History",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
+      appBar: GlobalAppBarMobile(
+        title: 'History',
       ),
-
       body: Column(
         children: [
-          /// 🔵 HEADER
-          GlobalAppBarMobile(
-            title: 'History',
-          ),
-
-          /// 🔍 SEARCH
+         
+         
           Padding(
             padding: const EdgeInsets.all(12),
             child: Container(

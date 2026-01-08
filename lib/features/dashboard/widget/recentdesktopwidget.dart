@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 
 class RecentActivityDesktopWidget extends StatelessWidget {
   final VoidCallback onViewPressed;
@@ -30,8 +31,18 @@ class RecentActivityDesktopWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: onViewPressed,
+                  ElevatedButton(
+                  onPressed: () {
+                   Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => const SideMenuLayout(
+      initialIndex: 2, 
+    ),
+  ),
+);
+                  },
+
                   child: const Text("View"),
                 ),
               ],

@@ -95,6 +95,7 @@ class _DashboardPageState extends State<DashboardPage> {
       case 'recent':
         return RecentActivityDesktopWidget(
           onViewPressed: () {
+            // Navigate to History page directly
             Navigator.push(
               context,
               MaterialPageRoute(

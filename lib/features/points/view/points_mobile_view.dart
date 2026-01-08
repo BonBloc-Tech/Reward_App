@@ -281,14 +281,12 @@ class _PointsScreenMobileState extends State<PointsScreenMobile> {
       );
     });
   }
-
-  /// 🔹 BUILD
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
 
-      /// ✅ GLOBAL APP BAR (FIXED STATUS BAR ISSUE)
+      
       appBar: const GlobalAppBarMobile(
         title: "Points",
         showBack: false,
