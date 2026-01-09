@@ -12,9 +12,9 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  netbridge: ^0.0.1
   google_fonts: ^6.3.3
   get: ^4.6.6
-  netbridge: ^0.0.1
   shimmer: ^3.0.0
   flutter_otp_text_field: ^1.5.1+1
   http: ^1.2.0

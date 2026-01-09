@@ -1,106 +1,113 @@
 import 'package:flutter/material.dart';
-// import 'package:sm_reward_app/features/benefits/view/benefits_page.dart';
-// import 'package:sm_reward_app/features/calculation/view/points_calculation_page.dart';
-// import 'package:sm_reward_app/features/history/view/history_page.dart';
-// import 'package:sm_reward_app/features/points/view/points_screen.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:sm_reward_app/features/admin/view/admin_dashboard_view.dart';
+import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
 
 
+class NavMenuLayout extends StatefulWidget {
+  const NavMenuLayout({super.key});
 
-// 🔹 Import your pages
+  @override
+  State<NavMenuLayout> createState() => _NavMenuLayoutState();
+}
 
+class _NavMenuLayoutState extends State<NavMenuLayout> {
+  int selectedIndex = 0;
 
-class NavMenu extends StatelessWidget {
-  const NavMenu({super.key});
+  final List<String> labels = [
+    "Home",
+    
+    "Logout",
+  ];
+
+  final List<String> icons = [
+    'assets/logo/home_icon.png',
+    
+    'assets/logo/logout_icon.png',
+  ];
+
+  final List<Widget> screens = [
+    AdminDashboardView(),
+   
+    Container(), // Logout placeholder
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 72,
-      color: Colors.black,
-      child: Column(
+    return Scaffold(
+      body: Row(
         children: [
-          const SizedBox(height: 24),
-
-          /// 🔵 APP LOGO
+          /// SIDEBAR
           Container(
-            width: 50,
-            height: 50,
-            padding: const EdgeInsets.all(6),
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.black,
+            width: 72,
+            color: Colors.black,
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                Image.asset('assets/logo/app_logo.png', width: 40),
+                const SizedBox(height: 42),
+
+                /// MENU ITEMS
+                ...List.generate(labels.length, (index) {
+                  final isSelected = selectedIndex == index;
+                  return _menuItem(
+                    label: labels[index],
+                    assetPath: icons[index],
+                    isSelected: isSelected,
+                    onTap: () {
+                     if (labels[index] == "Logout") {
+  Get.offAll(() => AdminPasswordPage(email: '')); // clears history & goes to login
+}
+
+                    },
+                  );
+                }),
+
+                const Spacer(),
+                const SizedBox(height: 28),
+              ],
             ),
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
+          ),
+
+          /// MAIN CONTENT
+          Expanded(
+            child: IndexedStack(
+              index: selectedIndex,
+              children: screens,
             ),
           ),
-
-          const SizedBox(height: 42),
-
-          /// 🧭 MENU ITEMS
-          _menuItem(
-            label: "Home",
-            assetPath: 'assets/logo/home_icon.png',
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (_) => const HomePage()),
-              // );
-            },
-          ),
-
-         
-
-         
-
-
-         
-          const Spacer(),
-
-          /// 🚪 LOGOUT
-          _menuItem(
-            label: "Logout",
-            assetPath: 'assets/logo/logout_icon.png',
-            onTap: () {
-             
-            },
-          ),
-
-          const SizedBox(height: 28),
         ],
       ),
     );
   }
 
-  /// ✅ ICON + LABEL (VERTICAL)
   Widget _menuItem({
     required String label,
     required String assetPath,
-    double size = 22,
+    required bool isSelected,
     required VoidCallback onTap,
+    double size = 22,
   }) {
     return InkWell(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               assetPath,
               width: size,
               height: size,
-              color: Colors.white,
+              color: isSelected ? Colors.blue : Colors.white70,
             ),
             const SizedBox(height: 6),
             Text(
               label,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 10,
-                color: Colors.white70,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
+                color: isSelected ? Colors.blue : Colors.white70,
               ),
             ),
           ],

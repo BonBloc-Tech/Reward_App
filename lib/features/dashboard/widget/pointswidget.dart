@@ -75,7 +75,7 @@ class Pointswidget extends StatelessWidget {
                 child: BuildPointCard(
                   title: "Redeemed",
                   value: "6,000",
-                  color: const Color.fromARGB(255, 255, 235, 235),
+                  color: const Color.fromARGB(255, 225, 235, 255),
                   icon: Icons.trending_down,
                   iconBgColor: const Color.fromARGB(255, 255, 200, 200),
                 ),

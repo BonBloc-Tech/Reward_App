@@ -2,18 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
-import 'package:sm_reward_app/features/auth/controller/login_controller.dart';
-
+import 'package:sm_reward_app/features/otp_verification/controller/otp_controller.dart';
+import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
 
 class OtpMobileView extends StatelessWidget {
-  OtpMobileView({super.key});
+  final String email;
+  final bool isCustomer;
+  final bool isAdmin;
 
-  final TextEditingController otpController = TextEditingController();
+  OtpMobileView({
+    super.key,
+    required this.email,
+    required this.isCustomer,
+    required this.isAdmin,
+  });
+
+  final OtpController controller = Get.put(OtpController());
+  final RxString otpValue = ''.obs;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final LoginController controller = Get.find<LoginController>();
 
     return Scaffold(
       body: Container(
@@ -28,204 +37,210 @@ class OtpMobileView extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  const SizedBox(height: 80),
-                  Container(
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          // ignore: deprecated_member_use
-                          color: Colors.black.withOpacity(0.08),
-                          blurRadius: 20,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                    ),
+          child: Column(
+            children: [
+              /// MAIN CONTENT
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /// LOGO
-                        Center(
-                          child: Image.asset(
-                            'assets/logo/logo_sm.png',
-                            height: 110,
+                        const SizedBox(height: 80),
+
+                        /// CARD
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromARGB(255, 30, 4, 135)
+                                    .withOpacity(0.4),
+                                blurRadius: 10,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
                           ),
-                        ),
-
-                        const SizedBox(height: 28),
-
-                        /// TITLE
-                        Text(
-                          'OTP Verification',
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFF1F2937),
-                          ),
-                        ),
-
-                        const SizedBox(height: 8),
-
-                        /// SUBTITLE
-                        Text(
-                          'Enter the 4-digit code sent to your email',
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: const Color(0xFF6B7280),
-                          ),
-                        ),
-
-                        const SizedBox(height: 32),
-
-                        /// OTP INPUT
-                        OtpTextField(
-                          numberOfFields: 4,
-                          fieldWidth: 52,
-                          borderRadius: BorderRadius.circular(12),
-                          showFieldAsBox: true,
-                          filled: true,
-                          fillColor: const Color(0xFFF9FAFB),
-                          focusedBorderColor:
-                              const Color(0xFF4F46E5),
-                          enabledBorderColor:
-                              const Color(0xFFE5E7EB),
-                          textStyle: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          keyboardType: TextInputType.number,
-                          onSubmit: (code) {
-                            otpController.text = code;
-                          },
-                        ),
-
-                        const SizedBox(height: 20),
-
-                        /// RESEND OTP
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Didn't receive the code?",
-                              style: theme.textTheme.bodySmall,
-                            ),
-                            const SizedBox(width: 4),
-                            GestureDetector(
-                              onTap: controller.sendOtp,
-                              child: Text(
-                                "Resend OTP",
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: const Color(0xFF4F46E5),
-                                  fontWeight: FontWeight.w600,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              /// LOGO
+                              Center(
+                                child: Image.asset(
+                                  'assets/logo/logo_sm.png',
+                                  height: 120,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
 
-                        const SizedBox(height: 32),
+                              const SizedBox(height: 32),
 
-                        /// VERIFY BUTTON
-                        SizedBox(
-                          height: 52,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              FocusScope.of(context).unfocus();
-
-                              if (otpController.text ==
-                                  controller.generatedOtp) {
-                                Get.offAll(
-                                  () => const MobileBottomNav(),
-                                );
-                              } else {
-                                Get.snackbar(
-                                  "Error",
-                                  "Invalid OTP",
-                                  snackPosition:
-                                      SnackPosition.BOTTOM,
-                                  backgroundColor:
-                                      Colors.red.shade50,
-                                  colorText:
-                                      Colors.red.shade700,
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color(0xFF4F46E5),
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(12),
+                              /// TITLE
+                              Text(
+                                isAdmin
+                                    ? 'Admin Password'
+                                    : 'OTP Verification',
+                                textAlign: TextAlign.center,
+                                style:
+                                    theme.textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            child: Text(
-                              'Verify OTP',
-                              style:
-                                  theme.textTheme.bodyLarge?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
+
+                              const SizedBox(height: 10),
+
+                              Text(
+                                'Enter the OTP sent to your email',
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.bodySmall,
                               ),
-                            ),
+
+                              const SizedBox(height: 30),
+
+                              /// OTP FIELD
+                              if (isCustomer)
+                                OtpTextField(
+                                  numberOfFields: 4,
+                                  borderColor: Colors.grey,
+                                  focusedBorderColor:
+                                      const Color(0xFF0A2FB6),
+                                  showFieldAsBox: true,
+                                  fieldWidth: 50,
+                                  onSubmit: (code) {
+                                    otpValue.value = code;
+                                  },
+                                ),
+
+                              const SizedBox(height: 20),
+
+                              /// RESEND OTP
+                              TextButton(
+                                onPressed: () async {
+                                  await controller.resendOtp(email);
+                                  Get.snackbar(
+                                    "Success",
+                                    "OTP Resent",
+                                    snackPosition:
+                                        SnackPosition.BOTTOM,
+                                  );
+                                },
+                                child: const Text(
+                                  "Didn’t receive OTP? Resend",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+
+                              const SizedBox(height: 20),
+
+                              /// VERIFY BUTTON
+                              Obx(
+                                () => SizedBox(
+                                  width: double.infinity,
+                                  height: 45,
+                                  child: ElevatedButton(
+                                    onPressed:
+                                        controller.isLoading.value ||
+                                                otpValue.value.length <
+                                                    4
+                                            ? null
+                                            : () async {
+                                                final response =
+                                                    await controller
+                                                        .verifyOtp(
+                                                  email: email,
+                                                  otp: otpValue.value,
+                                                );
+
+                                                if (response["status"] !=
+                                                    "SUCCESS") {
+                                                  Get.snackbar(
+                                                    "Error",
+                                                    "Invalid OTP",
+                                                    snackPosition:
+                                                        SnackPosition
+                                                            .BOTTOM,
+                                                  );
+                                                  return;
+                                                }
+
+                                                if (response["iscustomer"] ==
+                                                    true) {
+                                                  Get.offAll(() =>
+                                                      const MobileBottomNav());
+                                                } else if (response[
+                                                        "isadmin"] ==
+                                                    true) {
+                                                  Get.offAll(() =>
+                                                      AdminPasswordPage(
+                                                          email: email));
+                                                }
+                                              },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          const Color(0xFF0A2FB6),
+                                      foregroundColor: Colors.white,
+                                    ),
+                                    child: controller.isLoading.value
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.white,
+                                          )
+                                        : const Text("Verify OTP"),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-
-                  const SizedBox(height: 94),
-
-                  /// FOOTER
-                  Column(
-                    children: [
-                      Text(
-                        '© 2025 All Rights Reserved',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _footerLink(context, 'Terms & Conditions'),
-                          const SizedBox(width: 12),
-                          const Text('|'),
-                          const SizedBox(width: 12),
-                          _footerLink(context, 'Privacy Policy'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
 
+              /// FOOTER
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Column(
+                  children: [
+                    Text(
+                      '© 2025 All Rights Reserved',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _footerLink(context, 'Terms & Conditions'),
+                        const SizedBox(width: 12),
+                        const Text('|',
+                            style: TextStyle(color: Colors.white)),
+                        const SizedBox(width: 12),
+                        _footerLink(context, 'Privacy Policy'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          
         ),
-        
       ),
-      
     );
   }
-}
 
-/// FOOTER LINK
-Widget _footerLink(BuildContext context, String text) {
-  return Text(
-    text,
-    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          decoration: TextDecoration.underline,
+  Widget _footerLink(BuildContext context, String text) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            decoration: TextDecoration.underline,
             color: Colors.white,
-          fontWeight: FontWeight.w500,
-        ),
-  );
+            fontWeight: FontWeight.w500,
+          ),
+    );
+  }
 }

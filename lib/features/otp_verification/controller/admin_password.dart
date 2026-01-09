@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 import 'package:sm_reward_app/services/credentials/environment_controller.dart';
 import 'package:sm_reward_app/services/url/restlet_api.dart';
 
-class OtpController extends GetxController {
+class AdminPasswordController extends GetxController {
   final isLoading = false.obs;
 
-  late RestletApi api;
-  late EnvironmentServiceController env;
+  late final RestletApi api;
+  late final EnvironmentServiceController env;
 
   @override
   void onInit() {
@@ -15,32 +15,31 @@ class OtpController extends GetxController {
     env = Get.find<EnvironmentServiceController>();
   }
 
-  Future<Map<String, dynamic>> verifyOtp({
+  Future<bool> verifyAdmin({
     required String email,
-     String? otp,  bool? isAdmin,
+    required String password,
   }) async {
     try {
       isLoading.value = true;
 
       final response = await api.fetchReportData(
-        env.getScriptId('verifyOtp'),
+        env.getScriptId('verifyOtp'), // SAME endpoint
         {
           "email": email,
-          "otp": otp,
-          "password": ""
+          "otp": "",
+          "password": password,
         },
       );
 
-      return response; // <-- IMPORTANT
+      if (response['status'] == "SUCCESS" &&
+          response['isadmin'] == true) {
+        return true;
+      }
+
+      Get.snackbar("Error", response['message'] ?? "Invalid password");
+      return false;
     } finally {
       isLoading.value = false;
     }
-  }
-
-  Future<void> resendOtp(String email) async {
-    await api.fetchReportData(
-      env.getScriptId('getEmail'),
-      {"email": email},
-    );
   }
 }

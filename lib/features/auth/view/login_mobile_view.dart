@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/features/auth/controller/login_controller.dart';
 import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
 
@@ -26,147 +27,128 @@ class LoginPageMobile extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
-            
             children: [
-              
               Expanded(
                 child: Center(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 80),
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(height: 80),
 
-                      /// LOGIN CARD
-                      Container(
-                        padding: const EdgeInsets.all(24),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              // ignore: deprecated_member_use
-                              color: const Color.fromARGB(255, 30, 4, 135).withOpacity(0.4),
-                              blurRadius: 10,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            /// LOGO
-                            Center(
-                              child: Image.asset(
-                                'assets/logo/logo_sm.png',
-                                height: 120,
+                        /// LOGIN CARD
+                        Container(
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromARGB(255, 30, 4, 135)
+                                    .withOpacity(0.4),
+                                blurRadius: 10,
+                                offset: const Offset(0, 1),
                               ),
-                            ),
-                            const SizedBox(height: 32),
-
-                            /// TITLE
-                            Text(
-                              'Login',
-                              textAlign: TextAlign.center,
-                              style: theme.textTheme.headlineMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF111827)  ,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-
-                            /// SUBTITLE
-                            Text(
-                              'Login with your registered email',
-                              textAlign: TextAlign.center,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: const Color(0xFF6B7280),
-                              ),
-                            ),
-                            const SizedBox(height: 32),
-
-                            /// EMAIL LABEL
-                            Text(
-                              'Email Address',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xFF374151),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-
-                            /// EMAIL FIELD
-                            TextFormField(
-                              controller: controller.emailController,
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                hintText: 'example@gmail.com',
-                                filled: true,
-                                fillColor: const Color(0xFFF9FAFB),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              /// LOGO
+                              Center(
+                                child: Image.asset(
+                                  'assets/logo/logo_sm.png',
+                                  height: 120,
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 28),
+                              const SizedBox(height: 32),
 
-                            /// SEND OTP BUTTON
-                            Obx(
-                              () => SizedBox(
-                                height: 52,
-                                child: ElevatedButton(
-                                  onPressed: controller.isLoading.value
-                                      ? null
-                                      : () async {
-                                          await controller.sendOtp();
-                                          if (controller.isOtpSent.value) {
-                                            Navigator.push(
-                                              // ignore: use_build_context_synchronously
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) =>
-                                                     OtpMobileView(),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color(0xFF4F46E5),
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
+                              /// TITLE
+                              Text(
+                                'Login',
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.headlineMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF111827),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+
+                              /// SUBTITLE
+                              Text(
+                                'Login with your registered email',
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: const Color(0xFF6B7280),
+                                ),
+                              ),
+                              const SizedBox(height: 32),
+
+                              /// EMAIL LABEL
+                              Text(
+                                'Email Address',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF374151),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+
+                              /// EMAIL FIELD
+                              TextFormField(
+                                controller: controller.emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  hintText: 'example@gmail.com',
+                                  filled: true,
+                                  fillColor: const Color(0xFFF9FAFB),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide.none,
                                   ),
-                                  child: controller.isLoading.value
-                                      ? const SizedBox(
-                                          height: 22,
-                                          width: 22,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 2,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      : Text(
-                                          'Send OTP',
-                                          style: theme.textTheme.bodyLarge
-                                              ?.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
                                 ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 28),
+
+                              /// SEND OTP / SUBMIT BUTTON
+                              Obx(
+                                () => SizedBox(
+                                  height: 45,
+                                  child: ElevatedButton(
+                                    onPressed: controller.isLoading.value
+                                        ? null
+                                        : controller.sendOtp,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFF0A2FB6),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    child: controller.isLoading.value
+                                        ? const SizedBox(
+                                            width: 22,
+                                            height: 22,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : Text(
+                                            "Submit",
+                                            style: AppTextStyles.bodySmall(context)
+                                                .copyWith(color: Colors.white),
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
               ),
 
               /// FOOTER
@@ -177,8 +159,7 @@ class LoginPageMobile extends StatelessWidget {
                     Text(
                       '© 2025 All Rights Reserved',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        // color: const Color(0xFF6B7280),
-                        color: Colors.white
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -187,7 +168,7 @@ class LoginPageMobile extends StatelessWidget {
                       children: [
                         _footerLink(context, 'Terms & Conditions'),
                         const SizedBox(width: 12),
-                        const Text('|'),
+                        const Text('|', style: TextStyle(color: Colors.white)),
                         const SizedBox(width: 12),
                         _footerLink(context, 'Privacy Policy'),
                       ],
@@ -207,8 +188,7 @@ class LoginPageMobile extends StatelessWidget {
       text,
       style: Theme.of(context).textTheme.bodySmall?.copyWith(
             decoration: TextDecoration.underline,
-            // color: const Color(0xFF4F46E5),
-            color:Colors.white,
+            color: Colors.white,
             fontWeight: FontWeight.w500,
           ),
     );

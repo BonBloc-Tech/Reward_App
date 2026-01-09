@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/features/admin/view/admin_dashboard_view.dart';
+import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_desktop_view.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
@@ -33,7 +34,7 @@ class _SideMenuLayoutState extends State<SideMenuLayout> {
     "Benefits",
     "Calculation",
     "Logout",
-    "Admin"
+    // "Admin"
       ];
 
   final List<String> icons = [
@@ -43,7 +44,7 @@ class _SideMenuLayoutState extends State<SideMenuLayout> {
     'assets/logo/benefits_icon.png',
     'assets/logo/calculation_icon.png',
     'assets/logo/logout_icon.png',
-    'assets/logo/home_icon.png',
+    // 'assets/logo/home_icon.png',
   ];
   
 
@@ -56,7 +57,7 @@ class _SideMenuLayoutState extends State<SideMenuLayout> {
     BenefitsDesktopView(),
     PointsCalculationPage(), 
     Container(), 
-    AdminDashboardView(),
+    // AdminDashboardView(),
   ];
 
  @override
@@ -70,7 +71,7 @@ Widget build(BuildContext context) {
     BenefitsDesktopView(),
     PointsCalculationPage(),
     Container(),
-    AdminDashboardView(),
+    // AdminDashboardView(),
   ];
 
   return Scaffold(
@@ -92,13 +93,19 @@ Widget build(BuildContext context) {
                   assetPath: icons[index],
                   isSelected: isSelected,
                   onTap: () {
-                    if (labels[index] == "Logout") {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                    } else {
-                      setState(() {
-                        selectedIndex = index;
-                      });
-                    }
+                   if (labels[index] == "Logout") {
+  Navigator.of(context).pushAndRemoveUntil(
+    MaterialPageRoute(
+      builder: (_) => LoginPage(), // replace with your login page
+    ),
+    (route) => false, // remove all previous routes
+  );
+} else {
+  setState(() {
+    selectedIndex = index;
+  });
+}
+
                   },
                   size: labels[index] == "Calculation" ? 30 : 22,
                 );

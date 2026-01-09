@@ -17,8 +17,7 @@ class AdminDashboardView extends StatelessWidget {
       backgroundColor: const Color(0xFFF9FAFB),
       body: Row(
         children: [
-          /// 🔹 SIDE MENU (Same as PointsCalculationPage)
-          const NavMenu(),
+       
 
           /// 🔹 MAIN CONTENT AREA
           Expanded(

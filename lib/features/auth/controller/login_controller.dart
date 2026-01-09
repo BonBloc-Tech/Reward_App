@@ -1,75 +1,257 @@
-import 'dart:math';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
+// import 'package:sm_reward_app/features/otp_verification/view/otp_desktop_view.dart';
+// import 'package:sm_reward_app/services/credentials/environment_controller.dart';
+// import 'package:sm_reward_app/services/url/restlet_api.dart';
 
+// class LoginController extends GetxController {
+//   final TextEditingController emailController = TextEditingController();
+//   final RxBool isLoading = false.obs;
+
+//   late final RestletApi _restletService;
+//   late final EnvironmentServiceController envService;
+
+//   @override
+//   void onInit() {
+//     super.onInit();
+
+//     envService = Get.put(
+//       EnvironmentServiceController(),
+//       permanent: true,
+//     );
+
+//     _restletService = Get.put(
+//       RestletApi(envService: envService),
+//       permanent: true,
+//     );
+//   }
+
+//   Future<void> sendOtp() async {
+//     final email = emailController.text.trim();
+
+//     if (email.isEmpty) {
+//       Get.snackbar("Error", "Please enter email");
+//       return;
+//     }
+
+//     try {
+//       isLoading.value = true;
+
+//       final response = await _restletService.fetchReportData(
+//         envService.getScriptId('getEmail'),
+//         {"email": email},
+//       );
+
+//       debugPrint("OTP RESPONSE: $response");
+
+//       if (response["status"] == "SUCCESS") {
+//         Get.snackbar("Success", response["message"]);
+
+//         /// ✅ ADMIN FLOW
+//         if (response["isadmin"] == true) {
+//           Get.offAll(() => AdminPasswordPage(email: email));
+//           return;
+//         }
+
+//         /// ✅ CUSTOMER FLOW
+//         if (response["iscustomer"] == true) {
+//           Get.offAll(() => OtpPage(
+//                 email: email,
+//                 isCustomer: true,
+//                 isAdmin: false,
+//               ));
+//           return;
+//         }
+
+//         Get.snackbar("Error", "User type not identified");
+//       } else {
+//         Get.snackbar("Error", response["message"] ?? "OTP failed");
+//       }
+//     } catch (e) {
+//       debugPrint("SEND OTP ERROR: $e");
+//       Get.snackbar("Error", "Something went wrong");
+//     } finally {
+//       isLoading.value = false;
+//     }
+//   }
+
+//   @override
+//   void onClose() {
+//     emailController.dispose();
+//     super.onClose();
+//   }
+// }
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server.dart';
 
+import 'package:get/get.dart';
 
+import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
+
+import 'package:sm_reward_app/features/otp_verification/view/otp_desktop_view.dart';
+
+import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
+
+import 'package:sm_reward_app/features/otp_verification/view/admin_pass_mobile_view.dart';
+
+import 'package:sm_reward_app/services/credentials/environment_controller.dart';
+
+import 'package:sm_reward_app/services/url/restlet_api.dart';
+ 
 class LoginController extends GetxController {
-  final emailController = TextEditingController();
 
-  var isOtpSent = false.obs;
-  var isLoading = false.obs;
+  final TextEditingController emailController = TextEditingController();
 
-  String generatedOtp = '';
+  final RxBool isLoading = false.obs;
+ 
+  late final RestletApi _restletService;
 
-  // ⚠️ TEST ONLY
-  final String username = 'crm@the-absol.com';
-  final String password = 'absol@2024';
+  late final EnvironmentServiceController envService;
+ 
+  @override
 
-  Future<void> sendOtp() async {
-    final email = emailController.text.trim();
+  void onInit() {
 
-    if (!GetUtils.isEmail(email)) {
-      Get.snackbar("Error", "Enter valid email");
-      return;
-    }
+    super.onInit();
+ 
+    envService = Get.put(
 
-    generatedOtp = (1000 + Random().nextInt(9000)).toString();
-    isLoading.value = true;
+      EnvironmentServiceController(),
 
-    final smtpServer = SmtpServer(
-      'mail.the-absol.com',
-      port: 465,
-      ssl: true,
-      username: username,
-      password: password,
+      permanent: true,
+
+    );
+ 
+    _restletService = Get.put(
+
+      RestletApi(envService: envService),
+
+      permanent: true,
+
     );
 
-    final message = Message()
-      ..from = Address(username, 'Reward App')
-      ..recipients.add(email)
-      ..subject = 'OTP Verification'
-      ..text = 'Your OTP is $generatedOtp';
+  }
+ 
+  Future<void> sendOtp() async {
 
+    final email = emailController.text.trim();
+ 
+    if (email.isEmpty) {
+
+      Get.snackbar("Error", "Please enter email");
+
+      return;
+
+    }
+ 
     try {
-      await send(message, smtpServer);
-      isOtpSent.value = true;
-      Get.snackbar("Success", "OTP sent to $email");
+
+      isLoading.value = true;
+ 
+      final response = await _restletService.fetchReportData(
+
+        envService.getScriptId('getEmail'),
+
+        {"email": email},
+
+      );
+ 
+      debugPrint("OTP RESPONSE: $response");
+ 
+      if (response["status"] == "SUCCESS") {
+
+        Get.snackbar("Success", response["message"]);
+ 
+        final bool isAdmin = response["isadmin"] == true;
+
+        final bool isCustomer = response["iscustomer"] == true;
+
+        final bool isDesktop = GetPlatform.isDesktop;
+ 
+        /// ================= ADMIN FLOW =================
+
+        if (isAdmin) {
+
+          if (isDesktop) {
+
+            Get.offAll(() => AdminPasswordPage(email: email));
+
+          } else {
+
+            Get.offAll(() => AdminPasswordMobileView(email: email));
+
+          }
+
+          return;
+
+        }
+ 
+        /// ================= CUSTOMER FLOW =================
+
+        if (isCustomer) {
+
+          if (isDesktop) {
+
+            Get.offAll(() => OtpPage(
+
+                  email: email,
+
+                  isCustomer: true,
+
+                  isAdmin: false,
+
+                ));
+
+          } else {
+
+            Get.offAll(() => OtpMobileView(
+
+                  email: email,
+
+                  isCustomer: true,
+
+                  isAdmin: false,
+
+                ));
+
+          }
+
+          return;
+
+        }
+ 
+        Get.snackbar("Error", "User type not identified");
+
+      } else {
+
+        Get.snackbar("Error", response["message"] ?? "OTP failed");
+
+      }
+
     } catch (e) {
-      Get.snackbar("Error", "OTP send failed");
-      debugPrint(e.toString());
+
+      debugPrint("SEND OTP ERROR: $e");
+
+      Get.snackbar("Error", "Something went wrong");
+
     } finally {
+
       isLoading.value = false;
-    }
-  }
 
-  void verifyOtp(String otp) {
-    if (otp == generatedOtp) {
-      // Get.offAll(() => const DashboardPage());
-    } else {
-      Get.snackbar("Error", "Invalid OTP");
     }
-  }
 
+  }
+ 
   @override
+
   void onClose() {
+
     emailController.dispose();
+
     super.onClose();
+
   }
+
 }
+
+ 

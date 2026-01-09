@@ -188,7 +188,7 @@ class _DashboardPageState extends State<DashboardPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: dragBox('left'), // ✅ auto height → NO overflow
                 ),
                 const SizedBox(width: 20),

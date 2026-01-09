@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/features/admin/view/admin_dashboard_mobile_view.dart';
-import 'package:sm_reward_app/features/benefits/view/benefits_page_mobile.dart';
-import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.dart';
-import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
-import 'package:sm_reward_app/features/history/view/history_mobile_view.dart';
-import 'package:sm_reward_app/features/points/view/points_mobile_view.dart';
-class MobileBottomNav extends StatefulWidget {
+
+class MobileBottomNav1 extends StatefulWidget {
   final int initialIndex;
 
-  const MobileBottomNav({
+  const MobileBottomNav1({
     super.key,
     this.initialIndex = 0,
   });
 
   @override
-  State<MobileBottomNav> createState() => _MobileBottomNavState();
+  State<MobileBottomNav1> createState() => _MobileBottomNavState();
 }
 
-class _MobileBottomNavState extends State<MobileBottomNav> {
+class _MobileBottomNavState extends State<MobileBottomNav1> {
   late int _currentIndex; // ✅ late variable
 
   final List<Widget> _pages = [
-    const DashboardMobilePage(),
-    const PointsScreenMobile(),
-    MobileHistoryList(),
-    const BenefitsScreenMobile(),
-    const PointsCalculationScreenMobile(),
-    // AdminDashboardMobileView(),
+   
+    AdminDashboardMobileView(),
   ];
 
   final List<_NavItem> _items = const [
     _NavItem("Home", "assets/logo/home_icon.png"),
-    _NavItem("Points", "assets/logo/points_icon.png"),
-    _NavItem("History", "assets/logo/history_icon.png"),
-    _NavItem("Benefits", "assets/logo/benefits_icon.png"),
-    _NavItem("Calculation", "assets/logo/calculation_icon.png"),
-    // _NavItem("Admin", "assets/logo/admin_icon.png"),
+   
   ];
 
   @override

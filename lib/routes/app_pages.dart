@@ -12,7 +12,7 @@ import 'package:sm_reward_app/features/calculation/view/calculation_mobile_view.
 import 'package:sm_reward_app/features/dashboard/view/dashboard_desktop_view.dart';
 import 'package:sm_reward_app/features/dashboard/view/dashboard_mobile_view.dart';
 import 'package:sm_reward_app/features/history/view/history_desktop_view.dart';
-import 'package:sm_reward_app/features/otp_verification/view/otp_desktop_view.dart';
+import 'package:sm_reward_app/features/otp_verification/view/otp_desktop_view.dart' hide OtpMobileView;
 import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
 import 'package:sm_reward_app/features/points/view/points_desktop_view.dart';
 import 'package:sm_reward_app/features/points/view/points_mobile_view.dart';
@@ -33,11 +33,11 @@ class AppPages {
     ),
    GetPage(
       name: AppRoutes.otpdesktop.toName,
-      page: () => OtpPage(),
+      page: () => OtpPage(email: '', isCustomer: true, isAdmin: false,),
     ), 
     GetPage(
       name: AppRoutes.otpmobile.toName,
-      page: () => OtpMobileView(),
+      page: () => OtpMobileView(email: '', isCustomer: true, isAdmin: false,),
     ),   
     GetPage(
       name: AppRoutes.dashboarddesktop.toName,
