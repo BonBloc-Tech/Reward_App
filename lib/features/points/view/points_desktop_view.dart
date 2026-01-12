@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/global_widgets/header.dart';
+import 'package:sm_reward_app/core/appbar/header.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
 import '../../../core/global_widgets/tier_progress_card.dart';

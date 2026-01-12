@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
+import 'package:sm_reward_app/core/appbar/header_mobile.dart';
 import 'package:sm_reward_app/features/dashboard/widget/donutcard_widget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/pointswidget.dart';
 import 'package:sm_reward_app/features/dashboard/widget/recentactivity_widget.dart';
@@ -12,11 +12,7 @@ class DashboardMobilePage extends StatefulWidget {
 }
  
 class _DashboardMobilePageState extends State<DashboardMobilePage> {
-  final List<Widget> _sections = [
-    const Pointswidget(key: ValueKey('points')),
-    const DonutcardWidget(key: ValueKey('donut')),
-    const RecentactivityWidget(key: ValueKey('recent')),
-  ];
+ 
  
 @override
 Widget build(BuildContext context) {

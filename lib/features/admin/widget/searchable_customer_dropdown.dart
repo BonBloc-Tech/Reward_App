@@ -40,8 +40,6 @@ class _SearchableCustomerDropdownState
           )
           .toList(),
       onChanged: (v) => setState(() => selected = v),
-
-      /// 🔴 IMPORTANT: remove default border & background
       decoration: const InputDecoration(
         isDense: true,
         border: InputBorder.none,

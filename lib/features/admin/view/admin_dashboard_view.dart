@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sm_reward_app/features/admin/controller/admin_controller.dart';
-import '../../../core/global_widgets/nav_menu.dart';
 import '../widget/customer_search_bar.dart';
 import '../widget/customer_vehicle_section.dart';
 import '../widget/points_summary_row.dart';

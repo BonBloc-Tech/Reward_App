@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/global_widgets/header.dart';
+import 'package:sm_reward_app/core/appbar/header.dart';
 import 'package:sm_reward_app/features/calculation/widget/invoice_table_widget.dart';
 import 'package:sm_reward_app/features/calculation/widget/points_summary_overview_card_widget.dart';
 import 'package:sm_reward_app/features/calculation/widget/rules_card_widget.dart';

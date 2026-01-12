@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/global_widgets/nav_menu.dart';
-import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
+import 'package:sm_reward_app/core/navigation/nav_menu.dart';
 import 'package:sm_reward_app/features/otp_verification/controller/admin_password.dart';
 
 

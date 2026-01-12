@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
+import 'package:sm_reward_app/core/appbar/header_mobile.dart';
 
 class AccountPageMobile extends StatefulWidget {
   const AccountPageMobile({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/config/textstyle.dart';
-import 'package:sm_reward_app/core/global_widgets/header.dart';
+import 'package:sm_reward_app/core/appbar/header.dart';
 import '../controller/history_controller.dart';
 import '../widget/history_table_widget.dart';
 

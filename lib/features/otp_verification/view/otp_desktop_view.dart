@@ -5,7 +5,6 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import 'package:sm_reward_app/features/otp_verification/controller/otp_controller.dart';
 import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';

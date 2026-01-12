@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sm_reward_app/config/textstyle.dart';
 import 'package:sm_reward_app/features/auth/controller/login_controller.dart';
-import 'package:sm_reward_app/features/otp_verification/view/otp_mobile_view.dart';
+
 
 class LoginPageMobile extends StatelessWidget {
   LoginPageMobile({super.key});

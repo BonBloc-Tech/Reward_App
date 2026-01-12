@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/features/admin/view/admin_dashboard_view.dart';
 import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_desktop_view.dart';

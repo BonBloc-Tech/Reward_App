@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
+import 'package:sm_reward_app/core/appbar/header_mobile.dart';
 import '../controller/history_controller.dart';
 import '../widget/history_table_widget.dart';
 

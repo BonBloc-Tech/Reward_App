@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-import 'package:sm_reward_app/core/global_widgets/header_mobile.dart';
+import 'package:sm_reward_app/core/appbar/header_mobile.dart';
 import '../controller/points_controller.dart';
 import '../../../core/global_widgets/stat_card.dart';
 

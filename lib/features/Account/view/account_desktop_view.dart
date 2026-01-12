@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sm_reward_app/core/global_widgets/header.dart';
+import 'package:sm_reward_app/core/appbar/header.dart';
 
 
 
