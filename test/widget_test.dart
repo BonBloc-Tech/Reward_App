@@ -5,7 +5,7 @@ import 'package:sm_reward_app/main.dart';
 void main() {
   testWidgets('App launches without crashing', (WidgetTester tester) async {
     // Build the app (mobile mode)
-    await tester.pumpWidget(const MyApp(isMobile: true));
+    await tester.pumpWidget(const MyApp(isMobile: true, isLoggedIn: true,));
 
     // Let all frames settle
     await tester.pumpAndSettle();

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:sm_reward_app/core/global_widgets/custom_alertbox.dart';
+import 'package:sm_reward_app/core/global_widgets/snack_bar.dart';
 import 'package:sm_reward_app/features/admin/view/admin_dashboard_view.dart';
-import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
-
+import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
 
 class NavMenuLayout extends StatefulWidget {
   const NavMenuLayout({super.key});
@@ -30,7 +31,7 @@ class _NavMenuLayoutState extends State<NavMenuLayout> {
   final List<Widget> screens = [
     AdminDashboardView(),
    
-    Container(), // Logout placeholder
+    Container(), 
   ];
 
   @override
@@ -55,12 +56,25 @@ class _NavMenuLayoutState extends State<NavMenuLayout> {
                     label: labels[index],
                     assetPath: icons[index],
                     isSelected: isSelected,
-                    onTap: () {
-                     if (labels[index] == "Logout") {
-  Get.offAll(() => AdminPasswordPage(email: '')); // clears history & goes to login
-}
+                     onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) => CustomAlertDialog(
+                  title: "Logout",
+                  message: "Are you sure you want to exit this app?",
+                  onConfirm: () {
+                    Get.back();
+                    AppSnackBar.success(message: "Logged out successfully");
 
-                    },
+                    Get.offAll(() => LoginPage());
+                  },
+
+                  onCancel: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              );
+            },
                   );
                 }),
 

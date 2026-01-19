@@ -5,6 +5,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:sm_reward_app/core/global_widgets/snack_bar.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_desktop.dart';
 import 'package:sm_reward_app/features/otp_verification/controller/otp_controller.dart';
 import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
@@ -96,7 +97,7 @@ class OtpPage extends StatelessWidget {
                             TextButton(
                               onPressed: () async {
                                 await controller.resendOtp(email);
-                                Get.snackbar("Success", "OTP Resent");
+                               AppSnackBar.success(message: 'OTP Resent Succesfully');
                               },
                             
                               child: const Text( "Didn’t receive OTP? Resend",
@@ -118,7 +119,7 @@ class OtpPage extends StatelessWidget {
                 );
 
                 if (response["status"] != "SUCCESS") {
-                  Get.snackbar("Error", "Invalid OTP");
+                 AppSnackBar.alert(message: 'Invalid Otp');
                   return;
                 }
 

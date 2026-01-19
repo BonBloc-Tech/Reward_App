@@ -2,11 +2,13 @@ class OtpVerifyResponse {
   final String status;
   final bool isCustomer;
   final bool isAdmin;
+  final String token;
   final String message;
 
   OtpVerifyResponse({
     required this.status,
     required this.isCustomer,
+    required this.token,
     required this.isAdmin,
     required this.message,
   });
@@ -15,6 +17,7 @@ class OtpVerifyResponse {
     return OtpVerifyResponse(
       status: json['status'] ?? '',
       isCustomer: json['iscustomer'] ?? false,
+      token: json['token']??'',
       isAdmin: json['isadmin'] ?? false,
       message: json['message'] ?? '',
     );

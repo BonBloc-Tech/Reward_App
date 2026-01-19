@@ -32,7 +32,7 @@ class GlobalAppBar extends StatelessWidget
       ),
       child: Row(
         children: [
-          /// 🔙 BACK BUTTON (if enabled)
+         
           if (showBackButton)
             InkWell(
               onTap: () => Navigator.pop(context),
@@ -43,7 +43,7 @@ class GlobalAppBar extends StatelessWidget
               ),
             ),
 
-          /// TITLE
+        
           Text(
             title,
             style: AppTextStyles.titleMedium(context).copyWith(
@@ -56,7 +56,7 @@ class GlobalAppBar extends StatelessWidget
 
           const Spacer(),
 
-          /// PROFILE → ACCOUNT PAGE
+        
           InkWell(
             onTap: () {
               Get.to(() => const AccountPage());

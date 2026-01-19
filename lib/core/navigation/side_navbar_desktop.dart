@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/core/global_widgets/custom_alertbox.dart';
+import 'package:sm_reward_app/core/global_widgets/snack_bar.dart';
 import 'package:sm_reward_app/features/auth/view/login_desktop_view.dart';
 import 'package:sm_reward_app/features/benefits/view/benefits_desktop_view.dart';
 import 'package:sm_reward_app/features/calculation/view/calculation_desktop_view.dart';
@@ -91,15 +93,37 @@ Widget build(BuildContext context) {
                   label: labels[index],
                   assetPath: icons[index],
                   isSelected: isSelected,
-                  onTap: () {
-                   if (labels[index] == "Logout") {
-  Navigator.of(context).pushAndRemoveUntil(
-    MaterialPageRoute(
-      builder: (_) => LoginPage(), // replace with your login page
-    ),
-    (route) => false, // remove all previous routes
-  );
-} else {
+
+onTap: () {
+  if (labels[index] == "Logout") {
+    showDialog(
+      context: context,
+      builder: (_) => CustomAlertDialog(
+        title: "Logout",
+        message: "Are you sure you want to logout?",
+        onConfirm: () {
+          Navigator.pop(context); // close dialog
+
+          AppSnackBar.success(
+            message: "Logged out successfully",
+          );
+
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (_) => LoginPage(), // your login page
+            ),
+            (route) => false, // clear all previous routes
+          );
+        },
+        onCancel: () {
+          Navigator.pop(context); // close dialog
+        },
+      ),
+    );
+  } 
+
+
+else {
   setState(() {
     selectedIndex = index;
   });

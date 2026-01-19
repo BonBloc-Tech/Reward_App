@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sm_reward_app/features/admin/view/admin_dashboard_mobile_view.dart';
+import 'package:sm_reward_app/features/auth/view/login_mobile_view.dart';
+
 
 class MobileBottomNav1 extends StatefulWidget {
   final int initialIndex;
@@ -14,22 +17,21 @@ class MobileBottomNav1 extends StatefulWidget {
 }
 
 class _MobileBottomNavState extends State<MobileBottomNav1> {
-  late int _currentIndex; // ✅ late variable
+  late int _currentIndex;
 
-  final List<Widget> _pages = [
-   
+  final List<Widget> _pages = const [
     AdminDashboardMobileView(),
   ];
 
   final List<_NavItem> _items = const [
     _NavItem("Home", "assets/logo/home_icon.png"),
-   
+    // _NavItem("Logout", "assets/logo/logout_icon.png"),
   ];
 
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.initialIndex; // ✅ initialize here
+    _currentIndex = widget.initialIndex;
   }
 
   @override
@@ -68,7 +70,11 @@ class _MobileBottomNavState extends State<MobileBottomNav1> {
 
     return GestureDetector(
       onTap: () {
-        if (_currentIndex == index) return;
+        if (_items[index].label == "Logout") {
+          Get.offAll(() =>  LoginPageMobile());
+          return;
+        }
+
         setState(() => _currentIndex = index);
       },
       child: Column(
@@ -112,6 +118,7 @@ class _MobileBottomNavState extends State<MobileBottomNav1> {
     );
   }
 }
+
 class _NavItem {
   final String label;
   final String icon;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sm_reward_app/core/appbar/admin_header_mobile.dart';
 import 'package:sm_reward_app/features/admin/widget/points_summary_mobile.dart';
 import '../controller/admin_controller.dart';
 import '../widget/customer_search_bar.dart';
@@ -16,31 +17,9 @@ class AdminDashboardMobileView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF9FAFB),
 
-      /// 🔹 MOBILE APP BAR
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
-        title: const Text(
-          'Admin Dashboard',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
-        centerTitle: false,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: CircleAvatar(
-              radius: 16,
-              backgroundColor: Colors.grey.shade200,
-              backgroundImage:
-                  const AssetImage('assets/logo/profile_logo.png'),
-            ),
-          ),
-        ],
-      ),
+     appBar: AdminHeaderMobile(
+  title: "Dashboard",
+),
 
       
       body: SingleChildScrollView(

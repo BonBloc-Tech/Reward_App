@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
+import 'package:sm_reward_app/core/global_widgets/snack_bar.dart';
 import 'package:sm_reward_app/core/navigation/side_navbar_mobile.dart';
 import 'package:sm_reward_app/features/otp_verification/controller/otp_controller.dart';
 import 'package:sm_reward_app/features/otp_verification/view/admin_pass_desktop_view.dart';
@@ -115,15 +116,12 @@ class OtpMobileView extends StatelessWidget {
 
                               const SizedBox(height: 20),
 
-                              /// RESEND OTP
+                              
                               TextButton(
                                 onPressed: () async {
                                   await controller.resendOtp(email);
-                                  Get.snackbar(
-                                    "Success",
-                                    "OTP Resent",
-                                    snackPosition:
-                                        SnackPosition.BOTTOM,
+                                 AppSnackBar.success(message: 'OTP Sent Successfully'
+                                  
                                   );
                                 },
                                 child: const Text(

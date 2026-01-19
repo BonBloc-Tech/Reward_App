@@ -18,6 +18,7 @@ class MobileHistoryList extends StatelessWidget {
       /// 🔹 APP BAR
       appBar: GlobalAppBarMobile(
         title: 'History',
+       
       ),
       body: Column(
         children: [

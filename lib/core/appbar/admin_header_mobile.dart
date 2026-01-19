@@ -3,22 +3,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:sm_reward_app/core/global_widgets/custom_alertbox.dart';
 import 'package:sm_reward_app/core/global_widgets/snack_bar.dart';
-import 'package:sm_reward_app/features/Account/view/account_mobile_view.dart';
 import 'package:sm_reward_app/features/auth/view/login_mobile_view.dart';
 
-class GlobalAppBarMobile extends StatelessWidget
-    implements PreferredSizeWidget {
-
+class AdminHeaderMobile extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final VoidCallback? onProfileTap;
-  final bool showBack;
 
-  const GlobalAppBarMobile({
-    super.key,
-    required this.title,
-    this.onProfileTap,
-    this.showBack = false,
-  });
+  const AdminHeaderMobile({super.key, required this.title});
 
   @override
   Size get preferredSize => const Size.fromHeight(72);
@@ -33,9 +23,7 @@ class GlobalAppBarMobile extends StatelessWidget
       padding: EdgeInsets.fromLTRB(12, statusBarHeight + 12, 12, 12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(18),
-        ),
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(18)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
@@ -44,27 +32,11 @@ class GlobalAppBarMobile extends StatelessWidget
           ),
         ],
       ),
-
       child: Row(
         children: [
-
-        
-          if (showBack)
-            _circleIcon(
-              icon: Icons.arrow_back,
-              onTap: () => Get.back(),
-              isDarkMode: isDarkMode,
-             
-            )
-          else
-            const SizedBox(width: 32),
-
-          const SizedBox(width: 8),
-
           Expanded(
             child: Text(
               title,
-              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -72,27 +44,6 @@ class GlobalAppBarMobile extends StatelessWidget
               ),
             ),
           ),
-
-          const SizedBox(width: 8),
-
-         
-          _circleIcon(
-            icon: Icons.person,
-            onTap: onProfileTap ??
-                () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const AccountPageMobile(),
-                    ),
-                  );
-                },
-            isDarkMode: isDarkMode,
-          ),
-
-          const SizedBox(width: 8),
-
-          /// 🚪 LOGOUT ICON
           _circleIcon(
             icon: Icons.logout,
             onTap: () {
@@ -114,6 +65,7 @@ class GlobalAppBarMobile extends StatelessWidget
                 ),
               );
             },
+
             isDarkMode: isDarkMode,
           ),
         ],
@@ -121,7 +73,7 @@ class GlobalAppBarMobile extends StatelessWidget
     );
   }
 
-  /// 🔘 COMMON ICON BUTTON
+
   Widget _circleIcon({
     required IconData icon,
     required VoidCallback onTap,
@@ -135,9 +87,7 @@ class GlobalAppBarMobile extends StatelessWidget
         height: 32,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isDarkMode
-              ? Colors.grey.shade900
-              : const Color(0xFFF1F3F6),
+          color: isDarkMode ? Colors.grey.shade900 : const Color(0xFFF1F3F6),
         ),
         child: Icon(
           icon,
@@ -147,5 +97,4 @@ class GlobalAppBarMobile extends StatelessWidget
       ),
     );
   }
-
-    }
+}
