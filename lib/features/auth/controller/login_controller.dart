@@ -43,11 +43,12 @@ class LoginController extends GetxController {
       ); 
       debugPrint("OTP RESPONSE: $response"); 
       if (response["status"] == "SUCCESS") {
-       AppSnackBar.success(message: 'OTP Sent Successfully'); 
+     
         final bool isAdmin = response["isadmin"] == true;
         final bool isCustomer = response["iscustomer"] == true;
         final bool isDesktop = GetPlatform.isDesktop; 
           if (isAdmin) {
+             AppSnackBar.success(message: 'Admin Identified');
           if (isDesktop) {
             Get.offAll(() => AdminPasswordPage(email: email));
           } else {
@@ -57,6 +58,7 @@ class LoginController extends GetxController {
           return;
         } 
         if (isCustomer) {
+            AppSnackBar.success(message: 'OTP Sent Successfully'); 
           if (isDesktop) {
             Get.offAll(() => OtpPage(
                   email: email,
